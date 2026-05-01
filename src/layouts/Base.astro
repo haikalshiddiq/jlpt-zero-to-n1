@@ -1,0 +1,37 @@
+---
+const { title = 'JLPT Zero to N1' } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <a class="brand" href="/"><span>日本語</span><strong>JLPT Zero→N1</strong></a>
+        <nav>
+          <a href="/daily-lesson">Daily Lesson</a><a href="/roadmap">Roadmap</a><a href="/vocabulary">Vocabulary</a><a href="/kanji">Kanji</a><a href="/grammar">Grammar</a><a href="/reading">Reading</a><a href="/listening">Listening</a><a href="/practice">Practice</a><a href="/jlpt-practice">JLPT Practice</a><a href="/review">Review</a><a href="/progress">Progress</a>
+        </nav>
+      </aside>
+      <main><slot /></main>
+    </div>
+    <script is:inline>
+      window.jlptStore={
+        get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},
+        set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+      };
+      document.addEventListener('click',e=>{
+        const t=e.target;
+        if(t.matches('[data-toggle]')) document.querySelector(t.dataset.toggle)?.classList.toggle('hidden');
+        if(t.matches('[data-flip]')) t.closest('.flashcard')?.classList.toggle('flipped');
+        if(t.matches('[data-review]')){
+          const q=jlptStore.get('reviewQueue',[]); q.push({item:t.dataset.item,result:t.dataset.review,date:new Date().toISOString()}); jlptStore.set('reviewQueue',q); t.textContent='Saved ✓';
+        }
+        if(t.matches('[data-answer]')){const ok=t.dataset.answer==='true'; t.closest('.quiz-item').querySelector('.feedback').textContent=ok?'Correct ✓':'Review this one — try again.';}
+      });
+    </script>
+  </body>
+</html>

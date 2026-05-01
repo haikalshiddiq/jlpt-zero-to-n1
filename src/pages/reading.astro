@@ -1,0 +1,5 @@
+---
+import Base from '../layouts/Base.astro';
+import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+---
+<Base title="Reading"><div class="glass"><h1>Reading Practice</h1></div><section class="grid">{lessons.map(l=><div class="card"><span class="badge">{l.level}</span><h2>{l.title}</h2><pre>{l.reading}</pre><button class="btn" data-toggle={`#q-${l.id}`}>Show Questions</button><div id={`q-${l.id}`} class="hidden">{l.questions.map(q=><p>• {q}</p>)}</div></div>)}</section></Base>

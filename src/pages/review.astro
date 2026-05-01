@@ -1,0 +1,5 @@
+---
+import Base from '../layouts/Base.astro';
+import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+---
+<Base title="Review"><div class="glass"><h1>Spaced Repetition Review</h1><p class="lead">Cadence: 1 day, 3 days, 7 days, 14 days, 30 days.</p></div><section class="grid"><div class="card"><h2>Due Today</h2><p class="stat">{vocabulary.slice(0,5).length}</p><p>Starter items from Day 1 are due.</p></div><div class="card"><h2>Review Queue</h2><div id="queue">Local review history will appear after using flashcards.</div></div></section><script is:inline>const q=jlptStore.get('reviewQueue',[]);document.querySelector('#queue').innerHTML=q.length?q.map(x=>`<p>${x.item}: ${x.result}</p>`).join(''):'No saved review results yet.';</script></Base>

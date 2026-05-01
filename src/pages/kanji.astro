@@ -1,0 +1,5 @@
+---
+import Base from '../layouts/Base.astro';
+import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+---
+<Base title="Kanji"><div class="glass"><h1>Kanji Mastery</h1></div><section class="grid">{kanji.map(k=><div class="card"><div class="jp">{k.char}</div><h2>{k.meaning}</h2><p><b>Onyomi:</b> {k.onyomi}<br/><b>Kunyomi:</b> {k.kunyomi}</p><p>{k.words.join(' • ')}</p><p class="muted">{k.example}</p><button class="btn" data-review="good" data-item={k.char}>Mark Reviewed</button></div>)}</section></Base>

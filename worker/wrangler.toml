@@ -1,0 +1,6 @@
+name = "jlpt-zero-to-n1-api"
+main = "src/index.ts"
+compatibility_date = "2026-05-01"
+
+[vars]
+APP_NAME = "JLPT Zero to N1"

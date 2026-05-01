@@ -1,0 +1,5 @@
+---
+import Base from '../layouts/Base.astro';
+import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+---
+<Base title="JLPT Roadmap"><div class="glass"><p class="eyebrow">Roadmap</p><h1>Pre-N5 → N1 Mastery Path</h1></div><section class="card road">{roadmap.map(r=><div class="road-item"><h2>{r.level}</h2><p><b>Vocabulary:</b> {r.vocab} • <b>Kanji:</b> {r.kanji}</p><p>{r.goal}</p><div class="progress"><div class="bar" style={`width:${r.ready}%`}></div></div><p class="muted">Readiness: {r.ready}%</p></div>)}</section></Base>

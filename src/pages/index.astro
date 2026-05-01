@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+---
+<Base title="JLPT Zero to N1">
+  <section class="hero">
+    <div class="glass"><p class="eyebrow">Daily Japanese Mastery</p><h1>Learn Japanese from Zero to JLPT N1</h1><p class="lead">Interactive daily lessons, flashcards, kanji mastery, grammar builders, reviews, and JLPT-style practice built for long-term progress.</p><p><a class="btn" href="/daily-lesson">Start Today’s Lesson</a> <a class="btn secondary" href="/roadmap">View JLPT Roadmap</a></p></div>
+    <div class="card"><h2>Today</h2><p class="badge">{lessons[1].level}</p><div class="jp">{lessons[1].title}</div><p>{lessons[1].time} • {lessons[1].difficulty}</p><div class="progress"><div class="bar" style="width:5%"></div></div><p class="muted">Pre-N5 readiness: 5%</p></div>
+  </section>
+  <section class="grid" style="margin-top:24px">{['Daily Lessons','Vocabulary Flashcards','Kanji Mastery','Grammar Builder','Reading Practice','Listening Simulation','Writing Practice','Spaced Review'].map(x=><div class="card"><h3>{x}</h3><p class="muted">Interactive module designed for active recall and cumulative review.</p></div>)}</section>
+</Base>

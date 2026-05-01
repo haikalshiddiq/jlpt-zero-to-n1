@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+---
+<Base title="Daily Lesson"><div class="glass"><p class="eyebrow">Day {lessons[1].day} • {lessons[1].level}</p><h1>{lessons[1].title}</h1><p class="lead">{lessons[1].time} • {lessons[1].difficulty}</p></div>
+{lessons[1].review.length>0 && <section class="lesson-section card"><h2>Review From Previous Lessons</h2><ul>{lessons[1].review.map(r=><li>{r}</li>)}</ul></section>}
+<section class="lesson-section two"><div class="card"><h2>New Vocabulary</h2>{lessons[1].vocab.map(v=><p><span class="jp">{v.jp}</span><br/><b>{v.reading}</b> — {v.meaning}<br/><span class="muted">{v.example} • {v.note}</span></p>)}</div><div class="card"><h2>Kanji Study</h2>{lessons[1].kanji.map(k=><p><span class="jp">{k.char}</span> <b>{k.meaning}</b><br/>On: {k.onyomi} • Kun: {k.kunyomi}<br/><span class="muted">{k.words.join(' / ')} — {k.example}</span></p>)}</div></section>
+<section class="lesson-section card"><h2>Grammar Lesson</h2>{lessons[1].grammar.map(g=><div><h3>{g.pattern}</h3><p><b>{g.meaning}</b> {g.use}</p><p class="muted">Common mistake: {g.mistake}</p><ul>{g.examples.map(e=><li>{e}</li>)}</ul></div>)}</section>
+<section class="lesson-section two"><div class="card"><h2>Reading Practice</h2><pre>{lessons[1].reading}</pre>{lessons[1].questions.map(q=><p>• {q}</p>)}</div><div class="card"><h2>Listening Simulation</h2><h3>Slow</h3><pre>{lessons[1].listening.slow}</pre><h3>Natural</h3><p>{lessons[1].listening.natural}</p></div></section>
+<section class="lesson-section card"><h2>Homework</h2><ul>{lessons[1].homework.map(h=><li>{h}</li>)}</ul><a class="btn" href="/jlpt-practice">Take JLPT Practice</a></section></Base>

@@ -1,0 +1,5 @@
+---
+import Base from '../layouts/Base.astro';
+import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+---
+<Base title="JLPT Practice"><div class="glass"><h1>JLPT N5-Style Practice</h1></div><section class="grid">{quiz.map((x,i)=><div class="card quiz-item"><span class="badge">Question {i+1}</span><h2>{x.q}</h2>{x.choices.map((c,ci)=><button data-answer={String(ci===x.answer)}>{c}</button>)}<p class="feedback"></p></div>)}</section></Base>
