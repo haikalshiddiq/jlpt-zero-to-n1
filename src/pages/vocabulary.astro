@@ -1,5 +1,29 @@
 ---
 import Base from '../layouts/Base.astro';
-import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+import { vocabulary } from '../data/curriculum';
+import { toRomaji } from '../utils/romaji';
 ---
-<Base title="Vocabulary"><div class="glass"><h1>Vocabulary Flashcards</h1><p class="lead">Click a card to reveal the answer, then save a review result.</p></div><section class="grid">{vocabulary.map(v=><div class="card flashcard"><div class="front"><p class="badge">{v.level}</p><div class="jp">{v.jp}</div><p>{v.reading}</p><button class="btn" data-flip>Show Meaning</button></div><div class="back"><h2>{v.meaning}</h2><p>{v.example}</p><p class="muted">{v.note}</p>{v.tags.map(t=><span class="badge">{t}</span>)}<p><button class="btn" data-review="easy" data-item={v.jp}>Easy</button> <button class="btn secondary" data-review="forgot" data-item={v.jp}>I Forgot</button></p></div></div>)}</section></Base>
+<Base title="Vocabulary">
+  <div class="glass">
+    <h1>Vocabulary Flashcards</h1>
+    <p class="lead">Click a card to reveal the answer, then practice with romaji pronunciation for every Japanese item.</p>
+  </div>
+  <section class="grid">
+    {vocabulary.map((v) => <div class="card flashcard">
+      <div class="front">
+        <p class="badge">{v.level}</p>
+        <div class="jp">{v.jp}</div>
+        <p class="pronunciation"><span>Romaji pronunciation</span>{v.reading || toRomaji(v.jp)}</p>
+        <button class="btn" data-flip>Show Meaning</button>
+      </div>
+      <div class="back">
+        <h2>{v.meaning}</h2>
+        <p class="jp-example">{v.example}</p>
+        <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(v.example)}</p>
+        <p class="muted">{v.note}</p>
+        {v.tags.map((t) => <span class="badge">{t}</span>)}
+        <p><button class="btn" data-review="easy" data-item={v.jp}>Easy</button> <button class="btn secondary" data-review="forgot" data-item={v.jp}>I Forgot</button></p>
+      </div>
+    </div>)}
+  </section>
+</Base>

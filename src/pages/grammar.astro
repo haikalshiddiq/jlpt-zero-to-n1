@@ -1,5 +1,24 @@
 ---
 import Base from '../layouts/Base.astro';
-import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+import { grammar } from '../data/curriculum';
+import { toRomaji } from '../utils/romaji';
 ---
-<Base title="Grammar"><div class="glass"><h1>Grammar Builder</h1></div><section class="grid">{grammar.map(g=><div class="card"><span class="badge">{g.level}</span><h2>{g.pattern}</h2><h3>{g.meaning}</h3><p>{g.use}</p><p class="muted">Mistake: {g.mistake}</p><ul>{g.examples.map(e=><li>{e}</li>)}</ul></div>)}</section></Base>
+<Base title="Grammar">
+  <div class="glass">
+    <h1>Grammar Builder</h1>
+    <p class="lead">Grammar examples now include romaji pronunciation so beginners can read aloud while learning the pattern.</p>
+  </div>
+  <section class="grid">
+    {grammar.map((g) => <div class="card">
+      <span class="badge">{g.level}</span>
+      <h2>{g.pattern}</h2>
+      <p class="pronunciation compact"><span>Pattern pronunciation</span>{toRomaji(g.pattern)}</p>
+      <h3>{g.meaning}</h3>
+      <p>{g.use}</p>
+      <p class="muted">Mistake: {g.mistake}</p>
+      <ul class="example-list">
+        {g.examples.map((e) => <li><span class="jp-example">{e}</span><br/><span class="pronunciation inline">{toRomaji(e)}</span></li>)}
+      </ul>
+    </div>)}
+  </section>
+</Base>

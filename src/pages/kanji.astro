@@ -1,5 +1,25 @@
 ---
 import Base from '../layouts/Base.astro';
-import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+import { kanji } from '../data/curriculum';
+import { toRomaji } from '../utils/romaji';
 ---
-<Base title="Kanji"><div class="glass"><h1>Kanji Mastery</h1></div><section class="grid">{kanji.map(k=><div class="card"><div class="jp">{k.char}</div><h2>{k.meaning}</h2><p><b>Onyomi:</b> {k.onyomi}<br/><b>Kunyomi:</b> {k.kunyomi}</p><p>{k.words.join(' • ')}</p><p class="muted">{k.example}</p><button class="btn" data-review="good" data-item={k.char}>Mark Reviewed</button></div>)}</section></Base>
+<Base title="Kanji">
+  <div class="glass">
+    <h1>Kanji Mastery</h1>
+    <p class="lead">Each kanji now includes romaji support for readings, sample words, and example sentences.</p>
+  </div>
+  <section class="grid">
+    {kanji.map((k) => <div class="card">
+      <div class="jp">{k.char}</div>
+      <h2>{k.meaning}</h2>
+      <p><b>Onyomi:</b> {k.onyomi}<br/><span class="pronunciation inline">{toRomaji(k.onyomi)}</span></p>
+      <p><b>Kunyomi:</b> {k.kunyomi}<br/><span class="pronunciation inline">{toRomaji(k.kunyomi)}</span></p>
+      <div class="word-list">
+        {k.words.map((word) => <span class="word-chip"><b>{word}</b><small>{toRomaji(word)}</small></span>)}
+      </div>
+      <p class="jp-example">{k.example}</p>
+      <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(k.example)}</p>
+      <button class="btn" data-review="good" data-item={k.char}>Mark Reviewed</button>
+    </div>)}
+  </section>
+</Base>
