@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-05",
+    "dueDate": "2026-05-05",
+    "title": "Question Sentences with か",
+    "level": "N5",
+    "focus": "grammar",
+    "objective": "Turn polite statements into simple questions using か.",
+    "activity": "Write 6 yes/no questions using ですか.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Question Sentences with か?",
+        "a": "grammar"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Write 6 yes/no questions using ですか."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-03T11:38:56.711Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-04",
     "dueDate": "2026-05-04",
     "title": "Particle は vs です",
