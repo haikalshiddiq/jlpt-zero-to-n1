@@ -9,6 +9,14 @@ const json=(data:unknown,status=200)=>new Response(JSON.stringify(data,null,2),{
 export default { async fetch(req:Request){
   if(req.method==='OPTIONS') return new Response(null,{headers});
   const url=new URL(req.url); const path=url.pathname;
+  const available=['/api/lesson/today','/api/lessons','/api/vocabulary','/api/kanji','/api/grammar','/api/progress','/api/review','/api/review/due'];
+  if(path==='/' || path==='/api') return json({
+    name:'JLPT Zero to N1 API',
+    status:'online',
+    website:'https://jlpt-zero-to-n1.pages.dev/',
+    message:'Use one of the available API endpoints below.',
+    available
+  });
   if(path==='/api/lesson/today') return json({today:lessons[1],sections:['review','vocabulary','kanji','grammar','reading','listening','practice','jlpt','homework']});
   if(path==='/api/lessons') return json({lessons});
   if(path==='/api/vocabulary') return json({items:vocabulary.filter(v=>!url.searchParams.get('level')||v.level===url.searchParams.get('level'))});
@@ -18,5 +26,5 @@ export default { async fetch(req:Request){
   if(path==='/api/progress' && req.method==='POST') return json({ok:true,saved:await req.json().catch(()=>({}))});
   if(path==='/api/review' && req.method==='POST') return json({ok:true,nextReview:'scheduled',input:await req.json().catch(()=>({}))});
   if(path==='/api/review/due') return json({due:vocabulary.slice(0,3)});
-  return json({error:'Not found',available:['/api/lesson/today','/api/lessons','/api/vocabulary','/api/kanji','/api/grammar','/api/progress','/api/review','/api/review/due']},404);
+  return json({error:'Not found',available},404);
 }};
