@@ -1,0 +1,24 @@
+[
+  {
+    "id": "daily-2026-05-04",
+    "dueDate": "2026-05-04",
+    "title": "Particle は vs です",
+    "level": "N5",
+    "focus": "grammar",
+    "objective": "Understand how は marks the topic and です closes a polite sentence.",
+    "activity": "Read 5 self-introduction sentences and identify the topic marker.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Particle は vs です?",
+        "a": "grammar"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Read 5 self-introduction sentences and identify the topic marker."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-03T11:37:37.039Z",
+    "pipeline": "daily-content-pipeline"
+  }
+]

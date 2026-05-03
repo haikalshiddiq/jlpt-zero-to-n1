@@ -1,20 +1,36 @@
 ---
 const { title = 'JLPT Zero to N1' } = Astro.props;
+const navItems = [
+  ['Daily Lesson','/daily-lesson'],['Roadmap','/roadmap'],['Vocabulary','/vocabulary'],['Kanji','/kanji'],['Grammar','/grammar'],['Reading','/reading'],['Listening','/listening'],['Practice','/practice'],['JLPT Practice','/jlpt-practice'],['Review','/review'],['Progress','/progress']
+];
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles/global.css" />
   </head>
   <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
     <div class="shell">
       <aside class="sidebar">
-        <a class="brand" href="/"><span>日本語</span><strong>JLPT Zero→N1</strong></a>
+        <a class="brand" href="/" aria-label="JLPT Zero to N1 home">
+          <span class="brand-mark">日本語</span>
+          <strong>JLPT Zero→N1</strong>
+          <small>Daily mastery quest</small>
+        </a>
         <nav>
-          <a href="/daily-lesson">Daily Lesson</a><a href="/roadmap">Roadmap</a><a href="/vocabulary">Vocabulary</a><a href="/kanji">Kanji</a><a href="/grammar">Grammar</a><a href="/reading">Reading</a><a href="/listening">Listening</a><a href="/practice">Practice</a><a href="/jlpt-practice">JLPT Practice</a><a href="/review">Review</a><a href="/progress">Progress</a>
+          {navItems.map(([label, href]) => <a href={href}>{label}</a>)}
         </nav>
+        <div class="side-mission">
+          <span class="badge pulse">Live</span>
+          <p>Daily CI/CD adds new quests and deploys through GitHub Actions.</p>
+        </div>
       </aside>
       <main><slot /></main>
     </div>
@@ -31,6 +47,11 @@ const { title = 'JLPT Zero to N1' } = Astro.props;
           const q=jlptStore.get('reviewQueue',[]); q.push({item:t.dataset.item,result:t.dataset.review,date:new Date().toISOString()}); jlptStore.set('reviewQueue',q); t.textContent='Saved ✓';
         }
         if(t.matches('[data-answer]')){const ok=t.dataset.answer==='true'; t.closest('.quiz-item').querySelector('.feedback').textContent=ok?'Correct ✓':'Review this one — try again.';}
+        if(t.matches('[data-power]')){
+          const card=t.closest('.quest-card,.card');
+          card?.classList.add('celebrate');
+          setTimeout(()=>card?.classList.remove('celebrate'),900);
+        }
       });
     </script>
   </body>

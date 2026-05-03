@@ -1,0 +1,41 @@
+name: Daily Content Pipeline
+on:
+  schedule:
+    # 07:10 Asia/Jakarta
+    - cron: '10 0 * * *'
+  workflow_dispatch:
+    inputs:
+      content_date:
+        description: Optional YYYY-MM-DD content date override
+        required: false
+permissions:
+  contents: write
+jobs:
+  publish-daily-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Publish next queued JLPT content
+        env:
+          CONTENT_DATE: ${{ github.event.inputs.content_date }}
+        run: npm run content:daily
+      - name: Validate generated site
+        run: npm run build
+      - name: Commit daily content package
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/daily-additions.json automation/daily-content-queue/queue.json
+          if git diff --cached --quiet; then
+            echo "No daily content changes to commit."
+            exit 0
+          fi
+          git commit -m "Publish daily JLPT content"
+          git push

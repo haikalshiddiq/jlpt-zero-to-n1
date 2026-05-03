@@ -1,0 +1,282 @@
+[
+  {
+    "id": "daily-2026-05-04",
+    "dueDate": "2026-05-04",
+    "title": "Particle は vs です",
+    "level": "N5",
+    "focus": "grammar",
+    "objective": "Understand how は marks the topic and です closes a polite sentence.",
+    "activity": "Read 5 self-introduction sentences and identify the topic marker.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Particle は vs です?",
+        "a": "grammar"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Read 5 self-introduction sentences and identify the topic marker."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-05",
+    "dueDate": "2026-05-05",
+    "title": "Question Sentences with か",
+    "level": "N5",
+    "focus": "grammar",
+    "objective": "Turn polite statements into simple questions using か.",
+    "activity": "Write 6 yes/no questions using ですか.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Question Sentences with か?",
+        "a": "grammar"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Write 6 yes/no questions using ですか."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-06",
+    "dueDate": "2026-05-06",
+    "title": "Country + 人 / 語",
+    "level": "N5",
+    "focus": "vocabulary",
+    "objective": "Build nationality and language words for Indonesia, Japan, America, and Korea.",
+    "activity": "Create a mini profile: name, nationality, language.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Country + 人 / 語?",
+        "a": "vocabulary"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Create a mini profile: name, nationality, language."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-07",
+    "dueDate": "2026-05-07",
+    "title": "日・本・人・語 Kanji Web",
+    "level": "N5",
+    "focus": "kanji",
+    "objective": "Connect the first 4 kanji into meaningful vocabulary networks.",
+    "activity": "Make 4 kanji flashcards with one compound each.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: 日・本・人・語 Kanji Web?",
+        "a": "kanji"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Make 4 kanji flashcards with one compound each."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-08",
+    "dueDate": "2026-05-08",
+    "title": "Polite Correction: ちがいます",
+    "level": "N5",
+    "focus": "speaking",
+    "objective": "Practice saying “no, that is not correct” politely.",
+    "activity": "Record or read aloud 5 correction dialogues.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Polite Correction: ちがいます?",
+        "a": "speaking"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Record or read aloud 5 correction dialogues."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-09",
+    "dueDate": "2026-05-09",
+    "title": "Greetings by Time of Day",
+    "level": "N5",
+    "focus": "listening",
+    "objective": "Choose natural greetings for morning, afternoon, and evening.",
+    "activity": "Listen to or read the greeting prompts twice, slow then natural.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Greetings by Time of Day?",
+        "a": "listening"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Listen to or read the greeting prompts twice, slow then natural."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-10",
+    "dueDate": "2026-05-10",
+    "title": "Mini Reading: Self Introduction",
+    "level": "Pre-N5",
+    "focus": "reading",
+    "objective": "Read a short paragraph and answer who/what/where questions.",
+    "activity": "Underline every です and translate the sentence endings.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Mini Reading: Self Introduction?",
+        "a": "reading"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Underline every です and translate the sentence endings."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-11",
+    "dueDate": "2026-05-11",
+    "title": "Numbers 1–10 Launchpad",
+    "level": "N5",
+    "focus": "vocabulary",
+    "objective": "Recognize and pronounce ichi to juu with rhythm.",
+    "activity": "Count 10 classroom objects in Japanese.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Numbers 1–10 Launchpad?",
+        "a": "vocabulary"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Count 10 classroom objects in Japanese."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-12",
+    "dueDate": "2026-05-12",
+    "title": "This/That/Over There: これ・それ・あれ",
+    "level": "N5",
+    "focus": "grammar",
+    "objective": "Use demonstratives to point to objects in context.",
+    "activity": "Write 6 object sentences using これ/それ/あれ.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: This/That/Over There: これ・それ・あれ?",
+        "a": "grammar"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Write 6 object sentences using これ/それ/あれ."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-13",
+    "dueDate": "2026-05-13",
+    "title": "Classroom Nouns Pack",
+    "level": "N5",
+    "focus": "vocabulary",
+    "objective": "Learn book, notebook, pencil, desk, chair, and classroom.",
+    "activity": "Label 6 items around you in Japanese.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Classroom Nouns Pack?",
+        "a": "vocabulary"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Label 6 items around you in Japanese."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-14",
+    "dueDate": "2026-05-14",
+    "title": "Particle の for Possession",
+    "level": "N5",
+    "focus": "grammar",
+    "objective": "Say “my book”, “teacher’s notebook”, and simple relationships.",
+    "activity": "Create 8 の phrases and read them aloud.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Particle の for Possession?",
+        "a": "grammar"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Create 8 の phrases and read them aloud."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-15",
+    "dueDate": "2026-05-15",
+    "title": "Review Sprint: First Sentences",
+    "level": "Pre-N5",
+    "focus": "review",
+    "objective": "Combine greetings, identity, nationality, and questions.",
+    "activity": "Complete a 10-question self-check and mark weak patterns.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Review Sprint: First Sentences?",
+        "a": "review"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Complete a 10-question self-check and mark weak patterns."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-16",
+    "dueDate": "2026-05-16",
+    "title": "Kanji Stroke Awareness",
+    "level": "N5",
+    "focus": "kanji",
+    "objective": "Notice stroke order logic for 日 and 人.",
+    "activity": "Trace each kanji 10 times with correct direction.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Kanji Stroke Awareness?",
+        "a": "kanji"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Trace each kanji 10 times with correct direction."
+      }
+    ],
+    "status": "queued"
+  },
+  {
+    "id": "daily-2026-05-17",
+    "dueDate": "2026-05-17",
+    "title": "JLPT Micro Quiz Day",
+    "level": "N5",
+    "focus": "jlpt",
+    "objective": "Practice multiple-choice recognition under light time pressure.",
+    "activity": "Answer 8 questions in 4 minutes, then review mistakes.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: JLPT Micro Quiz Day?",
+        "a": "jlpt"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Answer 8 questions in 4 minutes, then review mistakes."
+      }
+    ],
+    "status": "queued"
+  }
+]

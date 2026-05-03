@@ -1,11 +1,70 @@
 ---
 import Base from '../layouts/Base.astro';
 import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+import dailyAdditions from '../data/daily-additions.json';
+const latest = dailyAdditions.slice(0, 6);
+const stats = [
+  ['12', 'interactive rooms'],
+  [String(vocabulary.length), 'vocab cards'],
+  [String(kanji.length), 'kanji seeds'],
+  [String(latest.length), 'CI/CD drops']
+];
 ---
 <Base title="JLPT Zero to N1">
   <section class="hero">
-    <div class="glass"><p class="eyebrow">Daily Japanese Mastery</p><h1>Learn Japanese from Zero to JLPT N1</h1><p class="lead">Interactive daily lessons, flashcards, kanji mastery, grammar builders, reviews, and JLPT-style practice built for long-term progress.</p><p><a class="btn" href="/daily-lesson">Start Today’s Lesson</a> <a class="btn secondary" href="/roadmap">View JLPT Roadmap</a></p></div>
-    <div class="card"><h2>Today</h2><p class="badge">{lessons[1].level}</p><div class="jp">{lessons[1].title}</div><p>{lessons[1].time} • {lessons[1].difficulty}</p><div class="progress"><div class="bar" style="width:5%"></div></div><p class="muted">Pre-N5 readiness: 5%</p></div>
+    <div class="glass">
+      <p class="eyebrow">Wayground-inspired learning arena</p>
+      <h1>Learn Japanese from Zero to JLPT N1 through daily quests.</h1>
+      <p class="lead">A playful, high-energy JLPT platform with lesson missions, flashcards, kanji power-ups, grammar battles, spaced review, and automated daily content growth through CI/CD.</p>
+      <div class="mission-row">
+        <a class="btn" href="/daily-lesson">Start Today’s Quest</a>
+        <a class="btn secondary" href="/roadmap">View JLPT Roadmap</a>
+        <a class="btn secondary" href="https://jlpt-zero-to-n1-api.hicall.workers.dev/api" target="_blank">Open API</a>
+      </div>
+    </div>
+    <div class="quest-card">
+      <span class="badge hot">Today</span>
+      <h2>{lessons[1].title}</h2>
+      <p><strong>{lessons[1].time}</strong> • {lessons[1].difficulty}</p>
+      <div class="progress"><div class="bar" style="width:8%"></div></div>
+      <p class="muted">Pre-N5 readiness: 8% after the first automated growth cycle.</p>
+      <button class="btn" data-power>Mark quest energy ✓</button>
+    </div>
   </section>
-  <section class="grid" style="margin-top:24px">{['Daily Lessons','Vocabulary Flashcards','Kanji Mastery','Grammar Builder','Reading Practice','Listening Simulation','Writing Practice','Spaced Review'].map(x=><div class="card"><h3>{x}</h3><p class="muted">Interactive module designed for active recall and cumulative review.</p></div>)}</section>
+
+  <section class="grid" style="margin-top:24px">
+    {stats.map(([number,label]) => <div class="card"><div class="big-number">{number}</div><p class="muted">{label}</p></div>)}
+  </section>
+
+  <section class="lesson-section glass">
+    <p class="eyebrow dark">Automated daily content</p>
+    <h2>Fresh JLPT drops published by GitHub Actions</h2>
+    <p class="lead">Every day at 07:10 Asia/Jakarta, the pipeline publishes the next queued learning pack, validates the Astro build, commits the new content, and lets CI/CD deploy it to Cloudflare Pages.</p>
+    {latest.length === 0 ? (
+      <div class="quest-card wayground-note">
+        <h3>Pipeline is ready</h3>
+        <p>The first automated content drop will appear here after the scheduled workflow runs, or immediately when the workflow is triggered manually.</p>
+      </div>
+    ) : (
+      <div class="ticker">
+        {latest.map((item) => <article class="quest-card">
+          <span class="badge green">{item.level} • {item.focus}</span>
+          <h3>{item.title}</h3>
+          <p>{item.objective}</p>
+          <p class="muted"><strong>Activity:</strong> {item.activity}</p>
+        </article>)}
+      </div>
+    )}
+  </section>
+
+  <section class="quest-grid lesson-section">
+    {[
+      ['🎯','Daily Lessons','Guided missions with review, input, output, and homework.'],
+      ['⚡','Vocabulary Flashcards','Click-to-reveal cards for fast active recall.'],
+      ['🧩','Kanji Mastery','Radical-aware kanji packs and compound vocabulary.'],
+      ['🏆','JLPT Practice','Quiz-style drills inspired by playful classroom platforms.'],
+      ['🔁','Spaced Review','Local review queue for repeated mastery.'],
+      ['📈','Progress Arena','Track readiness and unlock the next stage.']
+    ].map(([icon,title,desc]) => <div class="quest-card stage"><div class="stage-icon">{icon}</div><div><h3>{title}</h3><p class="muted">{desc}</p></div></div>)}
+  </section>
 </Base>
