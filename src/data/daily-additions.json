@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-07",
+    "dueDate": "2026-05-07",
+    "title": "日・本・人・語 Kanji Web",
+    "level": "N5",
+    "focus": "kanji",
+    "objective": "Connect the first 4 kanji into meaningful vocabulary networks.",
+    "activity": "Make 4 kanji flashcards with one compound each.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: 日・本・人・語 Kanji Web?",
+        "a": "kanji"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Make 4 kanji flashcards with one compound each."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-04T04:03:20.459Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-06",
     "dueDate": "2026-05-06",
     "title": "Country + 人 / 語",
