@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-08",
+    "dueDate": "2026-05-08",
+    "title": "Polite Correction: ちがいます",
+    "level": "N5",
+    "focus": "speaking",
+    "objective": "Practice saying “no, that is not correct” politely.",
+    "activity": "Record or read aloud 5 correction dialogues.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Polite Correction: ちがいます?",
+        "a": "speaking"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Record or read aloud 5 correction dialogues."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-05T03:48:14.371Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-07",
     "dueDate": "2026-05-07",
     "title": "日・本・人・語 Kanji Web",
