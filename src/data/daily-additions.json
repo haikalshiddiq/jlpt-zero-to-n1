@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-09",
+    "dueDate": "2026-05-09",
+    "title": "Greetings by Time of Day",
+    "level": "N5",
+    "focus": "listening",
+    "objective": "Choose natural greetings for morning, afternoon, and evening.",
+    "activity": "Listen to or read the greeting prompts twice, slow then natural.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Greetings by Time of Day?",
+        "a": "listening"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Listen to or read the greeting prompts twice, slow then natural."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-06T03:59:29.519Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-08",
     "dueDate": "2026-05-08",
     "title": "Polite Correction: ちがいます",
