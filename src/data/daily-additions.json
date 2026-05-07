@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-10",
+    "dueDate": "2026-05-10",
+    "title": "Mini Reading: Self Introduction",
+    "level": "Pre-N5",
+    "focus": "reading",
+    "objective": "Read a short paragraph and answer who/what/where questions.",
+    "activity": "Underline every です and translate the sentence endings.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Mini Reading: Self Introduction?",
+        "a": "reading"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Underline every です and translate the sentence endings."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-07T03:58:38.075Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-09",
     "dueDate": "2026-05-09",
     "title": "Greetings by Time of Day",
