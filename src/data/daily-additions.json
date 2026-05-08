@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-11",
+    "dueDate": "2026-05-11",
+    "title": "Numbers 1–10 Launchpad",
+    "level": "N5",
+    "focus": "vocabulary",
+    "objective": "Recognize and pronounce ichi to juu with rhythm.",
+    "activity": "Count 10 classroom objects in Japanese.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Numbers 1–10 Launchpad?",
+        "a": "vocabulary"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Count 10 classroom objects in Japanese."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-08T03:49:34.654Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-10",
     "dueDate": "2026-05-10",
     "title": "Mini Reading: Self Introduction",
