@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-12",
+    "dueDate": "2026-05-12",
+    "title": "This/That/Over There: これ・それ・あれ",
+    "level": "N5",
+    "focus": "grammar",
+    "objective": "Use demonstratives to point to objects in context.",
+    "activity": "Write 6 object sentences using これ/それ/あれ.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: This/That/Over There: これ・それ・あれ?",
+        "a": "grammar"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Write 6 object sentences using これ/それ/あれ."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-09T03:50:53.484Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-11",
     "dueDate": "2026-05-11",
     "title": "Numbers 1–10 Launchpad",
