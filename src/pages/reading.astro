@@ -1,5 +1,24 @@
 ---
 import Base from '../layouts/Base.astro';
-import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+import { lessons } from '../lib/curriculum';
+import { toRomaji } from '../utils/romaji';
 ---
-<Base title="Reading"><div class="glass"><h1>Reading Practice</h1></div><section class="grid">{lessons.map(l=><div class="card"><span class="badge">{l.level}</span><h2>{l.title}</h2><pre>{l.reading}</pre><button class="btn" data-toggle={`#q-${l.id}`}>Show Questions</button><div id={`q-${l.id}`} class="hidden">{l.questions.map(q=><p>• {q}</p>)}</div></div>)}</section></Base>
+<Base title="Reading">
+  <div class="glass">
+    <h1>Reading Practice</h1>
+  </div>
+  <section class="grid">
+    {lessons.map((lesson) => (
+      <div class="card">
+        <span class="badge">{lesson.level}</span>
+        <h2>{lesson.title}</h2>
+        <pre>{lesson.reading}</pre>
+        <pre class="romaji-block">{toRomaji(lesson.reading)}</pre>
+        <button class="btn" data-toggle={`#q-${lesson.id}`}>Show Questions</button>
+        <div id={`q-${lesson.id}`} class="hidden">
+          {lesson.questions.map((question: string) => <p>• {question}</p>)}
+        </div>
+      </div>
+    ))}
+  </section>
+</Base>

@@ -1,10 +1,30 @@
 ---
 import Base from '../layouts/Base.astro';
-import { lessons } from '../data/curriculum';
-import dailyAdditions from '../data/daily-additions.json';
+import { activeLesson as lesson, latestDailyDrops } from '../lib/curriculum';
 import { toRomaji } from '../utils/romaji';
-const lesson = lessons[1];
-const todaysDrop = dailyAdditions[0];
+const todaysDrop = latestDailyDrops[0];
+type LessonVocab = {
+  jp: string;
+  reading?: string;
+  meaning: string;
+  example: string;
+  note: string;
+};
+type LessonKanji = {
+  char: string;
+  meaning: string;
+  onyomi: string;
+  kunyomi: string;
+  words: readonly string[];
+  example: string;
+};
+type LessonGrammar = {
+  pattern: string;
+  meaning: string;
+  use: string;
+  mistake: string;
+  examples: readonly string[];
+};
 ---
 <Base title="Daily Lesson">
   <section class="glass">
@@ -25,39 +45,39 @@ const todaysDrop = dailyAdditions[0];
     <button class="btn" data-power>Complete power-up</button>
   </section>}
 
-  {lesson.review.length > 0 && <section class="lesson-section card"><h2>Review From Previous Lessons</h2><ul>{lesson.review.map((r) => <li>{r}</li>)}</ul></section>}
+  {lesson.review.length > 0 && <section class="lesson-section card"><h2>Review From Previous Lessons</h2><ul>{lesson.review.map((reviewItem: string) => <li>{reviewItem}</li>)}</ul></section>}
   <section class="lesson-section two">
     <div class="card">
       <h2>New Vocabulary</h2>
-      {lesson.vocab.map((v) => <article class="mini-study-card">
-        <span class="jp">{v.jp}</span>
-        <p class="pronunciation"><span>Romaji pronunciation</span>{v.reading || toRomaji(v.jp)}</p>
-        <p><b>{v.meaning}</b></p>
-        <p class="jp-example">{v.example}</p>
-        <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(v.example)}</p>
-        <p class="muted">{v.note}</p>
+      {lesson.vocab.map((vocabItem: LessonVocab) => <article class="mini-study-card">
+        <span class="jp">{vocabItem.jp}</span>
+        <p class="pronunciation"><span>Romaji pronunciation</span>{vocabItem.reading || toRomaji(vocabItem.jp)}</p>
+        <p><b>{vocabItem.meaning}</b></p>
+        <p class="jp-example">{vocabItem.example}</p>
+        <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(vocabItem.example)}</p>
+        <p class="muted">{vocabItem.note}</p>
       </article>)}
     </div>
     <div class="card">
       <h2>Kanji Study</h2>
-      {lesson.kanji.map((k) => <article class="mini-study-card">
-        <span class="jp">{k.char}</span> <b>{k.meaning}</b>
-        <p>On: {k.onyomi} <span class="pronunciation inline">{toRomaji(k.onyomi)}</span></p>
-        <p>Kun: {k.kunyomi} <span class="pronunciation inline">{toRomaji(k.kunyomi)}</span></p>
-        <div class="word-list">{k.words.map((word) => <span class="word-chip"><b>{word}</b><small>{toRomaji(word)}</small></span>)}</div>
-        <p class="jp-example">{k.example}</p>
-        <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(k.example)}</p>
+      {lesson.kanji.map((kanjiItem: LessonKanji) => <article class="mini-study-card">
+        <span class="jp">{kanjiItem.char}</span> <b>{kanjiItem.meaning}</b>
+        <p>On: {kanjiItem.onyomi} <span class="pronunciation inline">{toRomaji(kanjiItem.onyomi)}</span></p>
+        <p>Kun: {kanjiItem.kunyomi} <span class="pronunciation inline">{toRomaji(kanjiItem.kunyomi)}</span></p>
+        <div class="word-list">{kanjiItem.words.map((word: string) => <span class="word-chip"><b>{word}</b><small>{toRomaji(word)}</small></span>)}</div>
+        <p class="jp-example">{kanjiItem.example}</p>
+        <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(kanjiItem.example)}</p>
       </article>)}
     </div>
   </section>
   <section class="lesson-section card">
     <h2>Grammar Lesson</h2>
-    {lesson.grammar.map((g) => <div class="mini-study-card">
-      <h3>{g.pattern}</h3>
-      <p class="pronunciation compact"><span>Pattern pronunciation</span>{toRomaji(g.pattern)}</p>
-      <p><b>{g.meaning}</b> {g.use}</p>
-      <p class="muted">Common mistake: {g.mistake}</p>
-      <ul>{g.examples.map((e) => <li><span class="jp-example">{e}</span><br/><span class="pronunciation inline">{toRomaji(e)}</span></li>)}</ul>
+    {lesson.grammar.map((grammarItem: LessonGrammar) => <div class="mini-study-card">
+      <h3>{grammarItem.pattern}</h3>
+      <p class="pronunciation compact"><span>Pattern pronunciation</span>{toRomaji(grammarItem.pattern)}</p>
+      <p><b>{grammarItem.meaning}</b> {grammarItem.use}</p>
+      <p class="muted">Common mistake: {grammarItem.mistake}</p>
+      <ul>{grammarItem.examples.map((example: string) => <li><span class="jp-example">{example}</span><br/><span class="pronunciation inline">{toRomaji(example)}</span></li>)}</ul>
     </div>)}
   </section>
   <section class="lesson-section two">
@@ -65,7 +85,7 @@ const todaysDrop = dailyAdditions[0];
       <h2>Reading Practice</h2>
       <pre>{lesson.reading}</pre>
       <pre class="romaji-block">{toRomaji(lesson.reading)}</pre>
-      {lesson.questions.map((q) => <p>• {q}</p>)}
+      {lesson.questions.map((question: string) => <p>• {question}</p>)}
     </div>
     <div class="card">
       <h2>Listening Simulation</h2>
@@ -77,5 +97,5 @@ const todaysDrop = dailyAdditions[0];
       <p class="pronunciation compact"><span>Natural pronunciation</span>{toRomaji(lesson.listening.natural)}</p>
     </div>
   </section>
-  <section class="lesson-section card"><h2>Homework</h2><ul>{lesson.homework.map((h) => <li>{h}</li>)}</ul><a class="btn" href="/jlpt-practice">Take JLPT Practice</a></section>
+  <section class="lesson-section card"><h2>Homework</h2><ul>{lesson.homework.map((homeworkItem: string) => <li>{homeworkItem}</li>)}</ul><a class="btn" href="/jlpt-practice">Take JLPT Practice</a></section>
 </Base>

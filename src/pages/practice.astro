@@ -1,13 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
-import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
----
-<Base title="Speaking and Writing"><div class="glass"><h1>Speaking / Writing Practice</h1></div><section class="two"><div class="card"><h2>Today’s Prompt</h2><p>Write your self-introduction in Japanese.</p><pre>はじめまして。
+import { toRomaji } from '../utils/romaji';
+const selfIntroduction = `はじめまして。
 わたしは＿＿です。
 わたしは＿＿人です。
 わたしは＿＿です。
-よろしくおねがいします。</pre></div><div class="card"><h2>Your Answer</h2><textarea placeholder="Type your Japanese answer here..."></textarea><p><button class="btn" data-toggle="#sample">Show Sample</button></p><div id="sample" class="hidden"><pre>はじめまして。
+よろしくおねがいします。`;
+const sampleIntroduction = `はじめまして。
 わたしはハイカル・シディックです。
 わたしはインドネシア人です。
 わたしはせんせいです。
-よろしくおねがいします。</pre></div></div></section></Base>
+よろしくおねがいします。`;
+---
+<Base title="Speaking and Writing">
+  <div class="glass">
+    <h1>Speaking / Writing Practice</h1>
+  </div>
+  <section class="two">
+    <div class="card">
+      <h2>Today’s Prompt</h2>
+      <p>Write your self-introduction in Japanese.</p>
+      <pre>{selfIntroduction}</pre>
+      <pre class="romaji-block">{toRomaji(selfIntroduction)}</pre>
+    </div>
+    <div class="card">
+      <h2>Your Answer</h2>
+      <textarea placeholder="Type your Japanese answer here..."></textarea>
+      <p><button class="btn" data-toggle="#sample">Show Sample</button></p>
+      <div id="sample" class="hidden">
+        <pre>{sampleIntroduction}</pre>
+        <pre class="romaji-block">{toRomaji(sampleIntroduction)}</pre>
+      </div>
+    </div>
+  </section>
+</Base>

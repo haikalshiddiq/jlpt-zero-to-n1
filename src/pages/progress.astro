@@ -1,5 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
-import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+import { progressAreas } from '../lib/curriculum';
 ---
-<Base title="Progress"><div class="glass"><h1>Progress Tracker</h1></div><section class="grid">{['Hiragana/Katakana','Vocabulary','Kanji','Grammar','Reading','Listening','Writing','Speaking','JLPT N5 Readiness'].map((s,i)=><div class="card"><h2>{s}</h2><div class="progress"><div class="bar" style={`width:${[5,20,4,4,2,2,2,2,1][i]}%`}></div></div><p class="muted">{[5,20,4,4,2,2,2,2,1][i]}% / current foundation baseline</p></div>)}</section></Base>
+<Base title="Progress">
+  <div class="glass">
+    <h1>Progress Tracker</h1>
+  </div>
+  <section class="grid">
+    {progressAreas.map(([area, readiness]) => (
+      <div class="card">
+        <h2>{area}</h2>
+        <div class="progress"><div class="bar" style={`width:${readiness}%`}></div></div>
+        <p class="muted">{readiness}% / current foundation baseline</p>
+      </div>
+    ))}
+  </section>
+</Base>

@@ -1,5 +1,25 @@
 ---
 import Base from '../layouts/Base.astro';
-import { lessons, vocabulary, kanji, grammar, quiz, roadmap } from '../data/curriculum';
+import { lessons } from '../lib/curriculum';
+import { toRomaji } from '../utils/romaji';
 ---
-<Base title="Listening"><div class="glass"><h1>Listening Simulation</h1><p class="lead">Read the slow version, then test yourself with natural-speed dialogue.</p></div><section class="grid">{lessons.map(l=><div class="card"><h2>{l.title}</h2><h3>Slow version</h3><pre>{l.listening.slow}</pre><h3>Natural version</h3><p>{l.listening.natural}</p><p class="muted">Tip: listen for particles は/か and confirmation phrases like はい、そうです。</p></div>)}</section></Base>
+<Base title="Listening">
+  <div class="glass">
+    <h1>Listening Simulation</h1>
+    <p class="lead">Read the slow version, then test yourself with natural-speed dialogue and romaji support.</p>
+  </div>
+  <section class="grid">
+    {lessons.map((lesson) => (
+      <div class="card">
+        <h2>{lesson.title}</h2>
+        <h3>Slow version</h3>
+        <pre>{lesson.listening.slow}</pre>
+        <pre class="romaji-block">{toRomaji(lesson.listening.slow)}</pre>
+        <h3>Natural version</h3>
+        <p>{lesson.listening.natural}</p>
+        <p class="pronunciation compact"><span>Natural pronunciation</span>{toRomaji(lesson.listening.natural)}</p>
+        <p class="muted">Tip: listen for particles は/か and confirmation phrases like はい、そうです。</p>
+      </div>
+    ))}
+  </section>
+</Base>
