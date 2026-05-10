@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-13",
+    "dueDate": "2026-05-13",
+    "title": "Classroom Nouns Pack",
+    "level": "N5",
+    "focus": "vocabulary",
+    "objective": "Learn book, notebook, pencil, desk, chair, and classroom.",
+    "activity": "Label 6 items around you in Japanese.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Classroom Nouns Pack?",
+        "a": "vocabulary"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Label 6 items around you in Japanese."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-10T04:08:51.711Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-12",
     "dueDate": "2026-05-12",
     "title": "This/That/Over There: これ・それ・あれ",
