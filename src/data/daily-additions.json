@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-14",
+    "dueDate": "2026-05-14",
+    "title": "Particle の for Possession",
+    "level": "N5",
+    "focus": "grammar",
+    "objective": "Say “my book”, “teacher’s notebook”, and simple relationships.",
+    "activity": "Create 8 の phrases and read them aloud.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Particle の for Possession?",
+        "a": "grammar"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Create 8 の phrases and read them aloud."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-10T18:39:17.984Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-13",
     "dueDate": "2026-05-13",
     "title": "Classroom Nouns Pack",
