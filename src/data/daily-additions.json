@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-15",
+    "dueDate": "2026-05-15",
+    "title": "Review Sprint: First Sentences",
+    "level": "Pre-N5",
+    "focus": "review",
+    "objective": "Combine greetings, identity, nationality, and questions.",
+    "activity": "Complete a 10-question self-check and mark weak patterns.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Review Sprint: First Sentences?",
+        "a": "review"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Complete a 10-question self-check and mark weak patterns."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-11T04:19:13.218Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-14",
     "dueDate": "2026-05-14",
     "title": "Particle の for Possession",
