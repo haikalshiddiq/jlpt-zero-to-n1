@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-16",
+    "dueDate": "2026-05-16",
+    "title": "Kanji Stroke Awareness",
+    "level": "N5",
+    "focus": "kanji",
+    "objective": "Notice stroke order logic for 日 and 人.",
+    "activity": "Trace each kanji 10 times with correct direction.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: Kanji Stroke Awareness?",
+        "a": "kanji"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Trace each kanji 10 times with correct direction."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-12T04:01:18.242Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-15",
     "dueDate": "2026-05-15",
     "title": "Review Sprint: First Sentences",
