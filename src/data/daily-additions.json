@@ -1,5 +1,27 @@
 [
   {
+    "id": "daily-2026-05-17",
+    "dueDate": "2026-05-17",
+    "title": "JLPT Micro Quiz Day",
+    "level": "N5",
+    "focus": "jlpt",
+    "objective": "Practice multiple-choice recognition under light time pressure.",
+    "activity": "Answer 8 questions in 4 minutes, then review mistakes.",
+    "microQuiz": [
+      {
+        "q": "What is today’s main focus: JLPT Micro Quiz Day?",
+        "a": "jlpt"
+      },
+      {
+        "q": "How should you finish the study session?",
+        "a": "Answer 8 questions in 4 minutes, then review mistakes."
+      }
+    ],
+    "status": "queued",
+    "publishedAt": "2026-05-13T04:09:17.232Z",
+    "pipeline": "daily-content-pipeline"
+  },
+  {
     "id": "daily-2026-05-16",
     "dueDate": "2026-05-16",
     "title": "Kanji Stroke Awareness",
