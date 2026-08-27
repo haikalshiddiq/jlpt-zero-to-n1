@@ -5,20 +5,20 @@ import { toRomaji } from '../utils/romaji';
 ---
 <Base title="Listening">
   <div class="glass">
-    <h1>Listening Simulation</h1>
+    <h1 style="margin:0 0 8px;font-size:1.75rem;font-weight:800">Listening Simulation</h1>
     <p class="lead">Read the slow version, then test yourself with natural-speed dialogue and romaji support.</p>
   </div>
   <section class="grid">
     {lessons.map((lesson) => (
       <div class="card">
-        <h2>{lesson.title}</h2>
-        <h3>Slow version</h3>
+        <h2 style="margin:0 0 8px;font-weight:700">{lesson.title}</h2>
+        <h3 style="font-size:1rem;font-weight:700;margin:12px 0 4px">Slow version</h3>
         <pre>{lesson.listening.slow}</pre>
         <pre class="romaji-block">{toRomaji(lesson.listening.slow)}</pre>
-        <h3>Natural version</h3>
+        <h3 style="font-size:1rem;font-weight:700;margin:12px 0 4px">Natural version</h3>
         <p>{lesson.listening.natural}</p>
         <p class="pronunciation compact"><span>Natural pronunciation</span>{toRomaji(lesson.listening.natural)}</p>
-        <p class="muted">Tip: listen for particles は/か and confirmation phrases like はい、そうです。</p>
+        <p class="muted">Tip: listen for particles and confirmation phrases like はい、そうです。</p>
       </div>
     ))}
   </section>

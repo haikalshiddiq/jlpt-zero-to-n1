@@ -5,13 +5,14 @@ import { roadmap } from '../lib/curriculum';
 <Base title="JLPT Roadmap">
   <div class="glass">
     <p class="eyebrow">Roadmap</p>
-    <h1>Pre-N5 → N1 Mastery Path</h1>
+    <h1 style="margin:0 0 8px;font-size:1.75rem;font-weight:800">Pre-N5 to N1 Mastery Path</h1>
+    <p class="lead">Your guided journey through the JLPT levels.</p>
   </div>
   <section class="card road">
     {roadmap.map((stage) => (
       <div class="road-item">
-        <h2>{stage.level}</h2>
-        <p><b>Vocabulary:</b> {stage.vocab} • <b>Kanji:</b> {stage.kanji}</p>
+        <h2 style="margin:0 0 6px;font-weight:700">{stage.level}</h2>
+        <p style="color:var(--color-ink-secondary)"><b>Vocabulary:</b> {stage.vocab} &middot; <b>Kanji:</b> {stage.kanji}</p>
         <p>{stage.goal}</p>
         <div class="progress"><div class="bar" style={`width:${stage.ready}%`}></div></div>
         <p class="muted">Readiness: {stage.ready}%</p>

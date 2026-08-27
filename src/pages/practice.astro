@@ -14,19 +14,20 @@ const sampleIntroduction = `はじめまして。
 ---
 <Base title="Speaking and Writing">
   <div class="glass">
-    <h1>Speaking / Writing Practice</h1>
+    <h1 style="margin:0 0 8px;font-size:1.75rem;font-weight:800">Speaking / Writing Practice</h1>
+    <p class="lead">Practice self-introduction in Japanese.</p>
   </div>
   <section class="two">
     <div class="card">
-      <h2>Today’s Prompt</h2>
-      <p>Write your self-introduction in Japanese.</p>
+      <h2 style="margin:0 0 8px;font-weight:700">Today's Prompt</h2>
+      <p style="color:var(--color-ink-secondary)">Write your self-introduction in Japanese.</p>
       <pre>{selfIntroduction}</pre>
       <pre class="romaji-block">{toRomaji(selfIntroduction)}</pre>
     </div>
     <div class="card">
-      <h2>Your Answer</h2>
+      <h2 style="margin:0 0 8px;font-weight:700">Your Answer</h2>
       <textarea placeholder="Type your Japanese answer here..."></textarea>
-      <p><button class="btn" data-toggle="#sample">Show Sample</button></p>
+      <p style="margin-top:8px"><button class="btn" data-toggle="#sample">Show Sample</button></p>
       <div id="sample" class="hidden">
         <pre>{sampleIntroduction}</pre>
         <pre class="romaji-block">{toRomaji(sampleIntroduction)}</pre>

@@ -5,22 +5,22 @@ import { activeLesson, featureCards, homeStats, latestDailyDrops } from '../lib/
 <Base title="JLPT Zero to N1">
   <section class="hero">
     <div class="glass">
-      <p class="eyebrow">Wayground-inspired learning arena</p>
-      <h1>Learn Japanese from Zero to JLPT N1 through daily quests.</h1>
-      <p class="lead">A playful, high-energy JLPT platform with lesson missions, romaji pronunciation support, flashcards, kanji power-ups, grammar battles, spaced review, and automated daily content growth through CI/CD.</p>
+      <p class="eyebrow">Structured JLPT learning platform</p>
+      <h1>Learn Japanese from Zero to JLPT N1 through daily guided lessons.</h1>
+      <p class="lead">A focused, high-signal JLPT platform with lesson missions, romaji pronunciation support, flashcards, kanji study, grammar patterns, spaced review, and automated daily content growth through CI/CD.</p>
       <div class="mission-row">
-        <a class="btn" href="/daily-lesson">Start Today’s Quest</a>
+        <a class="btn" href="/daily-lesson">Start Today's Lesson</a>
         <a class="btn secondary" href="/roadmap">View JLPT Roadmap</a>
         <a class="btn secondary" href="https://jlpt-zero-to-n1-api.hicall.workers.dev/api" target="_blank">Open API</a>
       </div>
     </div>
     <div class="quest-card">
       <span class="badge hot">Today</span>
-      <h2>{activeLesson.title}</h2>
-      <p><strong>{activeLesson.time}</strong> • {activeLesson.difficulty}</p>
+      <h2 style="margin:8px 0 4px">{activeLesson.title}</h2>
+      <p style="color:var(--color-ink-secondary);margin:0 0 12px"><strong>{activeLesson.time}</strong> &middot; {activeLesson.difficulty}</p>
       <div class="progress"><div class="bar" style="width:8%"></div></div>
       <p class="muted">Pre-N5 readiness: 8% after the first automated growth cycle.</p>
-      <button class="btn" data-power>Mark quest energy ✓</button>
+      <button class="btn" data-power>Mark quest energy</button>
     </div>
   </section>
 
@@ -30,7 +30,7 @@ import { activeLesson, featureCards, homeStats, latestDailyDrops } from '../lib/
 
   <section class="lesson-section glass">
     <p class="eyebrow dark">Automated daily content</p>
-    <h2>Fresh JLPT drops published by GitHub Actions</h2>
+    <h2 style="font-size:1.35rem;font-weight:700;margin:0 0 8px">Fresh JLPT drops published by GitHub Actions</h2>
     <p class="lead">Every day at 07:10 Asia/Jakarta, the pipeline publishes the next queued learning pack, validates the Astro build, commits the new content, and lets CI/CD deploy it to Cloudflare Pages.</p>
     {latestDailyDrops.length === 0 ? (
       <div class="quest-card wayground-note">
@@ -40,9 +40,9 @@ import { activeLesson, featureCards, homeStats, latestDailyDrops } from '../lib/
     ) : (
       <div class="ticker">
         {latestDailyDrops.map((item) => <article class="quest-card">
-          <span class="badge green">{item.level} • {item.focus}</span>
-          <h3>{item.title}</h3>
-          <p>{item.objective}</p>
+          <span class="badge green">{item.level} &middot; {item.focus}</span>
+          <h3 style="margin:8px 0 4px">{item.title}</h3>
+          <p style="color:var(--color-ink-secondary)">{item.objective}</p>
           <p class="muted"><strong>Activity:</strong> {item.activity}</p>
         </article>)}
       </div>
@@ -53,7 +53,7 @@ import { activeLesson, featureCards, homeStats, latestDailyDrops } from '../lib/
     {featureCards.map(([icon, title, description]) => (
       <div class="quest-card stage">
         <div class="stage-icon">{icon}</div>
-        <div><h3>{title}</h3><p class="muted">{description}</p></div>
+        <div><h3 style="margin:0 0 4px">{title}</h3><p class="muted">{description}</p></div>
       </div>
     ))}
   </section>

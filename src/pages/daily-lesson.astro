@@ -28,74 +28,95 @@ type LessonGrammar = {
 ---
 <Base title="Daily Lesson">
   <section class="glass">
-    <p class="eyebrow">Day {lesson.day} • {lesson.level}</p>
-    <h1>{lesson.title}</h1>
-    <p class="lead">{lesson.time} • {lesson.difficulty}</p>
+    <p class="eyebrow">Day {lesson.day} &middot; {lesson.level}</p>
+    <h1 style="margin:0 0 8px;font-size:1.75rem;font-weight:800">{lesson.title}</h1>
+    <p class="lead">{lesson.time} &middot; {lesson.difficulty}</p>
     <div class="mission-row">
       <span class="api-pill">review</span><span class="api-pill">vocabulary</span><span class="api-pill">kanji</span><span class="api-pill">grammar</span><span class="api-pill">practice</span>
     </div>
   </section>
 
-  {todaysDrop && <section class="lesson-section quest-card wayground-note">
-    <span class="badge hot">Automated CI/CD drop</span>
-    <h2>{todaysDrop.title}</h2>
-    <p>{todaysDrop.objective}</p>
-    <p><strong>Activity:</strong> {todaysDrop.activity}</p>
-    <p class="pronunciation compact"><span>Pronunciation support</span>Romaji has been added to vocabulary, kanji, grammar, reading, and listening practice.</p>
-    <button class="btn" data-power>Complete power-up</button>
-  </section>}
+  {todaysDrop && (
+    <section class="lesson-section quest-card wayground-note">
+      <span class="badge hot">Automated CI/CD drop</span>
+      <h2 style="margin:8px 0 4px;font-weight:700">{todaysDrop.title}</h2>
+      <p style="color:var(--color-ink-secondary)">{todaysDrop.objective}</p>
+      <p style="color:var(--color-ink-secondary)"><strong>Activity:</strong> {todaysDrop.activity}</p>
+      <p class="pronunciation compact"><span>Pronunciation support</span>Romaji has been added to vocabulary, kanji, grammar, reading, and listening practice.</p>
+      <button class="btn" data-power>Complete power-up</button>
+    </section>
+  )}
 
-  {lesson.review.length > 0 && <section class="lesson-section card"><h2>Review From Previous Lessons</h2><ul>{lesson.review.map((reviewItem: string) => <li>{reviewItem}</li>)}</ul></section>}
+  {lesson.review.length > 0 && (
+    <section class="lesson-section card">
+      <h2>Review From Previous Lessons</h2>
+      <ul>{lesson.review.map((reviewItem: string) => <li>{reviewItem}</li>)}</ul>
+    </section>
+  )}
+
   <section class="lesson-section two">
     <div class="card">
-      <h2>New Vocabulary</h2>
-      {lesson.vocab.map((vocabItem: LessonVocab) => <article class="mini-study-card">
-        <span class="jp">{vocabItem.jp}</span>
-        <p class="pronunciation"><span>Romaji pronunciation</span>{vocabItem.reading || toRomaji(vocabItem.jp)}</p>
-        <p><b>{vocabItem.meaning}</b></p>
-        <p class="jp-example">{vocabItem.example}</p>
-        <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(vocabItem.example)}</p>
-        <p class="muted">{vocabItem.note}</p>
-      </article>)}
+      <h2 style="font-weight:700">New Vocabulary</h2>
+      {lesson.vocab.map((vocabItem: LessonVocab) => (
+        <article class="mini-study-card">
+          <span class="jp">{vocabItem.jp}</span>
+          <p class="pronunciation"><span>Romaji pronunciation</span>{vocabItem.reading || toRomaji(vocabItem.jp)}</p>
+          <p style="font-weight:700">{vocabItem.meaning}</p>
+          <p class="jp-example">{vocabItem.example}</p>
+          <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(vocabItem.example)}</p>
+          <p class="muted">{vocabItem.note}</p>
+        </article>
+      ))}
     </div>
     <div class="card">
-      <h2>Kanji Study</h2>
-      {lesson.kanji.map((kanjiItem: LessonKanji) => <article class="mini-study-card">
-        <span class="jp">{kanjiItem.char}</span> <b>{kanjiItem.meaning}</b>
-        <p>On: {kanjiItem.onyomi} <span class="pronunciation inline">{toRomaji(kanjiItem.onyomi)}</span></p>
-        <p>Kun: {kanjiItem.kunyomi} <span class="pronunciation inline">{toRomaji(kanjiItem.kunyomi)}</span></p>
-        <div class="word-list">{kanjiItem.words.map((word: string) => <span class="word-chip"><b>{word}</b><small>{toRomaji(word)}</small></span>)}</div>
-        <p class="jp-example">{kanjiItem.example}</p>
-        <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(kanjiItem.example)}</p>
-      </article>)}
+      <h2 style="font-weight:700">Kanji Study</h2>
+      {lesson.kanji.map((kanjiItem: LessonKanji) => (
+        <article class="mini-study-card">
+          <span class="jp">{kanjiItem.char}</span> <b>{kanjiItem.meaning}</b>
+          <p style="margin:4px 0 2px">On: {kanjiItem.onyomi} <span class="pronunciation inline">{toRomaji(kanjiItem.onyomi)}</span></p>
+          <p style="margin:2px 0">Kun: {kanjiItem.kunyomi} <span class="pronunciation inline">{toRomaji(kanjiItem.kunyomi)}</span></p>
+          <div class="word-list">{kanjiItem.words.map((word: string) => <span class="word-chip"><b>{word}</b><small>{toRomaji(word)}</small></span>)}</div>
+          <p class="jp-example">{kanjiItem.example}</p>
+          <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(kanjiItem.example)}</p>
+        </article>
+      ))}
     </div>
   </section>
+
   <section class="lesson-section card">
-    <h2>Grammar Lesson</h2>
-    {lesson.grammar.map((grammarItem: LessonGrammar) => <div class="mini-study-card">
-      <h3>{grammarItem.pattern}</h3>
-      <p class="pronunciation compact"><span>Pattern pronunciation</span>{toRomaji(grammarItem.pattern)}</p>
-      <p><b>{grammarItem.meaning}</b> {grammarItem.use}</p>
-      <p class="muted">Common mistake: {grammarItem.mistake}</p>
-      <ul>{grammarItem.examples.map((example: string) => <li><span class="jp-example">{example}</span><br/><span class="pronunciation inline">{toRomaji(example)}</span></li>)}</ul>
-    </div>)}
+    <h2 style="font-weight:700">Grammar Lesson</h2>
+    {lesson.grammar.map((grammarItem: LessonGrammar) => (
+      <div class="mini-study-card">
+        <h3 style="margin:0 0 6px;font-weight:700">{grammarItem.pattern}</h3>
+        <p class="pronunciation compact"><span>Pattern pronunciation</span>{toRomaji(grammarItem.pattern)}</p>
+        <p style="color:var(--color-ink-secondary)"><b>{grammarItem.meaning}</b> {grammarItem.use}</p>
+        <p class="muted">Common mistake: {grammarItem.mistake}</p>
+        <ul>{grammarItem.examples.map((example: string) => <li><span class="jp-example">{example}</span><br/><span class="pronunciation inline">{toRomaji(example)}</span></li>)}</ul>
+      </div>
+    ))}
   </section>
+
   <section class="lesson-section two">
     <div class="card">
-      <h2>Reading Practice</h2>
+      <h2 style="font-weight:700">Reading Practice</h2>
       <pre>{lesson.reading}</pre>
       <pre class="romaji-block">{toRomaji(lesson.reading)}</pre>
-      {lesson.questions.map((question: string) => <p>• {question}</p>)}
+      {lesson.questions.map((question: string) => <p>&bull; {question}</p>)}
     </div>
     <div class="card">
-      <h2>Listening Simulation</h2>
-      <h3>Slow</h3>
+      <h2 style="font-weight:700">Listening Simulation</h2>
+      <h3 style="font-size:1rem;font-weight:700;margin:12px 0 4px">Slow</h3>
       <pre>{lesson.listening.slow}</pre>
       <pre class="romaji-block">{toRomaji(lesson.listening.slow)}</pre>
-      <h3>Natural</h3>
+      <h3 style="font-size:1rem;font-weight:700;margin:12px 0 4px">Natural</h3>
       <p>{lesson.listening.natural}</p>
       <p class="pronunciation compact"><span>Natural pronunciation</span>{toRomaji(lesson.listening.natural)}</p>
     </div>
   </section>
-  <section class="lesson-section card"><h2>Homework</h2><ul>{lesson.homework.map((homeworkItem: string) => <li>{homeworkItem}</li>)}</ul><a class="btn" href="/jlpt-practice">Take JLPT Practice</a></section>
+
+  <section class="lesson-section card">
+    <h2 style="font-weight:700">Homework</h2>
+    <ul>{lesson.homework.map((homeworkItem: string) => <li>{homeworkItem}</li>)}</ul>
+    <a class="btn" href="/jlpt-practice" style="margin-top:12px">Take JLPT Practice</a>
+  </section>
 </Base>

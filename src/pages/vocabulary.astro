@@ -5,25 +5,43 @@ import { toRomaji } from '../utils/romaji';
 ---
 <Base title="Vocabulary">
   <div class="glass">
-    <h1>Vocabulary Flashcards</h1>
-    <p class="lead">Click a card to reveal the answer, then practice with romaji pronunciation for every Japanese item.</p>
+    <h1 style="margin:0 0 8px;font-size:1.75rem;font-weight:800">Vocabulary Flashcards</h1>
+    <p class="lead">Click a card to flip and reveal the answer. Romaji pronunciation for every item.</p>
   </div>
   <section class="grid">
-    {vocabulary.map((vocabItem) => <div class="card flashcard">
-      <div class="front">
-        <p class="badge">{vocabItem.level}</p>
-        <div class="jp">{vocabItem.jp}</div>
-        <p class="pronunciation"><span>Romaji pronunciation</span>{vocabItem.reading || toRomaji(vocabItem.jp)}</p>
-        <button class="btn" data-flip>Show Meaning</button>
+    {vocabulary.map((vocabItem: any) => (
+      <div class="flashcard">
+        <div class="flashcard-inner">
+          <div class="front">
+            <span class="badge">{vocabItem.level}</span>
+            <div class="jp">{vocabItem.jp}</div>
+            <div class="pronunciation">
+              <span>Romaji</span>
+              {vocabItem.reading || toRomaji(vocabItem.jp)}
+            </div>
+            <button class="btn" data-flip>Flip Card</button>
+            <span class="flip-hint">Click card or button to flip</span>
+          </div>
+          <div class="back">
+            <span class="badge">{vocabItem.level}</span>
+            <h2 style="margin:4px 0;font-size:1.5rem;font-weight:800">{vocabItem.meaning}</h2>
+            <p class="jp-example">{vocabItem.example}</p>
+            <p class="pronunciation compact">
+              <span>Example reading</span>
+              {toRomaji(vocabItem.example)}
+            </p>
+            <p class="muted">{vocabItem.note}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:4px">
+              {vocabItem.tags.map((tag: string) => <span class="badge">{tag}</span>)}
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn" data-review="easy" data-item={vocabItem.jp}>Easy</button>
+              <button class="btn secondary" data-flip>Back</button>
+              <button class="btn secondary" data-review="forgot" data-item={vocabItem.jp}>Forgot</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="back">
-        <h2>{vocabItem.meaning}</h2>
-        <p class="jp-example">{vocabItem.example}</p>
-        <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(vocabItem.example)}</p>
-        <p class="muted">{vocabItem.note}</p>
-        {vocabItem.tags.map((tag: string) => <span class="badge">{tag}</span>)}
-        <p><button class="btn" data-review="easy" data-item={vocabItem.jp}>Easy</button> <button class="btn secondary" data-review="forgot" data-item={vocabItem.jp}>I Forgot</button></p>
-      </div>
-    </div>)}
+    ))}
   </section>
 </Base>

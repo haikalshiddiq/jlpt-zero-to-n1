@@ -1,21 +1,262 @@
 ---
 import Base from '../layouts/Base.astro';
-import { quiz } from '../lib/curriculum';
+import {
+  grammarPracticeQuestions,
+  grammarPracticeSources,
+  questionTypeLabels
+} from '../data/jlpt-grammar-practice';
+
+const levelCounts = {
+  N5: grammarPracticeQuestions.filter((question) => question.level === 'N5').length,
+  N4: grammarPracticeQuestions.filter((question) => question.level === 'N4').length
+};
 ---
-<Base title="JLPT Practice">
-  <div class="glass">
-    <h1>JLPT N5-Style Practice</h1>
-  </div>
-  <section class="grid">
-    {quiz.map((question, questionIndex) => (
-      <div class="card quiz-item">
-        <span class="badge">Question {questionIndex + 1}</span>
-        <h2>{question.q}</h2>
-        {question.choices.map((choice: string, choiceIndex: number) => (
-          <button data-answer={String(choiceIndex === question.answer)}>{choice}</button>
-        ))}
-        <p class="feedback"></p>
+<Base title="JLPT Grammar Practice | IRODORI-Informed">
+  <header class="glass practice-hero">
+    <div>
+      <p class="eyebrow">IRODORI-informed grammar testing</p>
+      <h1>JLPT Grammar Practice</h1>
+      <p class="lead">
+        Original N5 and N4 foundation questions based on grammar points from The Japan Foundation Jakarta's
+        IRODORI worksheets, presented in JLPT-style item formats.
+      </p>
+    </div>
+    <dl class="practice-stats" aria-label="Question bank summary">
+      <div><dt>{levelCounts.N5}</dt><dd>N5 foundation</dd></div>
+      <div><dt>{levelCounts.N4}</dt><dd>N4 bridge</dd></div>
+      <div><dt>3</dt><dd>item formats</dd></div>
+    </dl>
+  </header>
+
+  <section class="practice-setup card" aria-labelledby="practice-setup-title">
+    <div>
+      <h2 id="practice-setup-title">Build a 10-question session</h2>
+      <p class="muted">Choose a level and item format. A fresh set is shuffled each time.</p>
+    </div>
+    <div class="practice-controls">
+      <label>
+        <span>JLPT level</span>
+        <select id="practice-level">
+          <option value="all">Mixed N5 + N4</option>
+          <option value="N5">N5 foundation</option>
+          <option value="N4">N4 bridge</option>
+        </select>
+      </label>
+      <label>
+        <span>Item format</span>
+        <select id="practice-type">
+          <option value="all">All formats</option>
+          <option value="form">Choose the grammar form</option>
+          <option value="composition">Sentence composition</option>
+          <option value="text">Grammar in context</option>
+        </select>
+      </label>
+      <button class="btn" id="start-practice" type="button">Start 10 questions</button>
+    </div>
+    <p class="practice-error hidden" id="practice-error" role="alert"></p>
+  </section>
+
+  <section class="session-panel hidden" id="session-panel" aria-live="polite">
+    <div class="session-toolbar card">
+      <div>
+        <span class="muted">Session score</span>
+        <strong><span id="score-correct">0</span>/<span id="score-answered">0</span></strong>
       </div>
-    ))}
+      <div>
+        <span class="muted">Progress</span>
+        <strong><span id="score-progress">0</span>/<span id="score-total">10</span></strong>
+      </div>
+      <button class="btn secondary" id="restart-practice" type="button">New session</button>
+    </div>
+
+    <div class="practice-question-list" id="practice-question-list">
+      {grammarPracticeQuestions.map((question) => (
+        <article
+          class="card practice-question hidden"
+          data-question-id={question.id}
+          data-level={question.level}
+          data-type={question.type}
+          data-correct={question.answer}
+        >
+          <div class="question-meta">
+            <span class="badge">{question.level}</span>
+            <span>{questionTypeLabels[question.type]}</span>
+            <span>{question.sourceLevel}</span>
+          </div>
+          <p class="question-pattern">Target: <strong>{question.pattern}</strong></p>
+          {question.context && <p class="question-context">{question.context}</p>}
+          <h2>{question.prompt}</h2>
+          <div class="choice-list" role="group" aria-label={`Answers for ${question.id}`}>
+            {question.choices.map((choice, choiceIndex) => (
+              <button type="button" data-choice={choiceIndex}>
+                <span class="choice-letter">{String.fromCharCode(65 + choiceIndex)}</span>
+                <span>{choice}</span>
+              </button>
+            ))}
+          </div>
+          <div class="answer-explanation hidden" role="status">
+            <strong class="answer-result"></strong>
+            <p><span>Explanation (Bahasa Indonesia):</span> {question.explanation}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="card session-result hidden" id="session-result">
+      <p class="eyebrow">Session complete</p>
+      <h2 id="result-heading">Review your result</h2>
+      <p id="result-message"></p>
+      <button class="btn" id="result-restart" type="button">Try another set</button>
+    </div>
+  </section>
+
+  <section class="source-note card" aria-labelledby="source-note-title">
+    <div>
+      <h2 id="source-note-title">Source and scope</h2>
+      <p>
+        IRODORI uses the JF Standard at A1-A2 and is not an official JLPT syllabus. This practice maps its
+        beginner grammar to an N5 foundation and N4 bridge. It does not claim Japan Foundation endorsement.
+      </p>
+    </div>
+    <div class="source-links">
+      {grammarPracticeSources.map((source) => (
+        <a href={source.url} target="_blank" rel="noreferrer">
+          <strong>{source.label}</strong>
+          <span>{source.use}</span>
+        </a>
+      ))}
+    </div>
   </section>
 </Base>
+
+<script>
+  const levelSelect = document.querySelector<HTMLSelectElement>('#practice-level');
+  const typeSelect = document.querySelector<HTMLSelectElement>('#practice-type');
+  const startButton = document.querySelector<HTMLButtonElement>('#start-practice');
+  const restartButton = document.querySelector<HTMLButtonElement>('#restart-practice');
+  const resultRestartButton = document.querySelector<HTMLButtonElement>('#result-restart');
+  const sessionPanel = document.querySelector<HTMLElement>('#session-panel');
+  const resultPanel = document.querySelector<HTMLElement>('#session-result');
+  const errorPanel = document.querySelector<HTMLElement>('#practice-error');
+  const allQuestions = Array.from(document.querySelectorAll<HTMLElement>('.practice-question'));
+  const correctScore = document.querySelector<HTMLElement>('#score-correct');
+  const answeredScore = document.querySelector<HTMLElement>('#score-answered');
+  const progressScore = document.querySelector<HTMLElement>('#score-progress');
+  const totalScore = document.querySelector<HTMLElement>('#score-total');
+  const resultHeading = document.querySelector<HTMLElement>('#result-heading');
+  const resultMessage = document.querySelector<HTMLElement>('#result-message');
+
+  let activeQuestions: HTMLElement[] = [];
+  let answered = 0;
+  let correct = 0;
+
+  function shuffle<T>(items: T[]): T[] {
+    const copy = [...items];
+    for (let index = copy.length - 1; index > 0; index -= 1) {
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+    }
+    return copy;
+  }
+
+  function resetQuestion(question: HTMLElement) {
+    question.classList.add('hidden');
+    question.dataset.answered = 'false';
+    question.querySelectorAll<HTMLButtonElement>('[data-choice]').forEach((button) => {
+      button.disabled = false;
+      button.classList.remove('correct-choice', 'wrong-choice');
+      button.removeAttribute('aria-pressed');
+    });
+    question.querySelector('.answer-explanation')?.classList.add('hidden');
+    const result = question.querySelector('.answer-result');
+    if (result) result.textContent = '';
+  }
+
+  function updateScore() {
+    if (correctScore) correctScore.textContent = String(correct);
+    if (answeredScore) answeredScore.textContent = String(answered);
+    if (progressScore) progressScore.textContent = String(answered);
+    if (totalScore) totalScore.textContent = String(activeQuestions.length);
+  }
+
+  function finishSession() {
+    if (!resultPanel || !resultHeading || !resultMessage) return;
+    const percentage = Math.round((correct / activeQuestions.length) * 100);
+    resultHeading.textContent = `${correct} correct out of ${activeQuestions.length}`;
+    resultMessage.textContent = percentage >= 80
+      ? `${percentage}% mastery. Strong result. Review the explanations before moving to the next set.`
+      : percentage >= 60
+        ? `${percentage}% mastery. Good foundation. Repeat the patterns you missed.`
+        : `${percentage}% mastery. Revisit the target patterns, then generate a fresh session.`;
+    resultPanel.classList.remove('hidden');
+    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function startSession() {
+    const selectedLevel = levelSelect?.value || 'all';
+    const selectedType = typeSelect?.value || 'all';
+    const pool = allQuestions.filter((question) => {
+      const levelMatches = selectedLevel === 'all' || question.dataset.level === selectedLevel;
+      const typeMatches = selectedType === 'all' || question.dataset.type === selectedType;
+      return levelMatches && typeMatches;
+    });
+
+    allQuestions.forEach(resetQuestion);
+    resultPanel?.classList.add('hidden');
+    errorPanel?.classList.add('hidden');
+    answered = 0;
+    correct = 0;
+    activeQuestions = shuffle(pool).slice(0, Math.min(10, pool.length));
+
+    if (activeQuestions.length === 0) {
+      if (errorPanel) {
+        errorPanel.textContent = 'No questions match this combination. Choose another level or format.';
+        errorPanel.classList.remove('hidden');
+      }
+      sessionPanel?.classList.add('hidden');
+      return;
+    }
+
+    activeQuestions.forEach((question, index) => {
+      question.classList.remove('hidden');
+      question.style.order = String(index);
+    });
+    sessionPanel?.classList.remove('hidden');
+    updateScore();
+    activeQuestions[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.querySelector('#practice-question-list')?.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+    const button = event.target.closest<HTMLButtonElement>('[data-choice]');
+    if (!button) return;
+    const question = button.closest<HTMLElement>('.practice-question');
+    if (!question || question.dataset.answered === 'true') return;
+
+    const selectedIndex = Number(button.dataset.choice);
+    const correctIndex = Number(question.dataset.correct);
+    const isCorrect = selectedIndex === correctIndex;
+    question.dataset.answered = 'true';
+    answered += 1;
+    if (isCorrect) correct += 1;
+
+    question.querySelectorAll<HTMLButtonElement>('[data-choice]').forEach((choiceButton) => {
+      const choiceIndex = Number(choiceButton.dataset.choice);
+      choiceButton.disabled = true;
+      choiceButton.setAttribute('aria-pressed', String(choiceIndex === selectedIndex));
+      if (choiceIndex === correctIndex) choiceButton.classList.add('correct-choice');
+      if (choiceIndex === selectedIndex && !isCorrect) choiceButton.classList.add('wrong-choice');
+    });
+
+    const explanation = question.querySelector('.answer-explanation');
+    const result = question.querySelector('.answer-result');
+    if (result) result.textContent = isCorrect ? 'Correct' : 'Not yet. Review the highlighted answer.';
+    explanation?.classList.remove('hidden');
+    updateScore();
+    if (answered === activeQuestions.length) finishSession();
+  });
+
+  startButton?.addEventListener('click', startSession);
+  restartButton?.addEventListener('click', startSession);
+  resultRestartButton?.addEventListener('click', startSession);
+</script>

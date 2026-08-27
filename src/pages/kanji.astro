@@ -5,21 +5,27 @@ import { toRomaji } from '../utils/romaji';
 ---
 <Base title="Kanji">
   <div class="glass">
-    <h1>Kanji Mastery</h1>
-    <p class="lead">Each kanji now includes romaji support for readings, sample words, and example sentences.</p>
+    <h1 style="margin:0 0 8px;font-size:1.75rem;font-weight:800">Kanji Mastery</h1>
+    <p class="lead">Each kanji includes onyomi/kunyomi readings, sample words, and example sentences with romaji support.</p>
   </div>
   <section class="grid">
-    {kanji.map((kanjiItem) => <div class="card">
-      <div class="jp">{kanjiItem.char}</div>
-      <h2>{kanjiItem.meaning}</h2>
-      <p><b>Onyomi:</b> {kanjiItem.onyomi}<br/><span class="pronunciation inline">{toRomaji(kanjiItem.onyomi)}</span></p>
-      <p><b>Kunyomi:</b> {kanjiItem.kunyomi}<br/><span class="pronunciation inline">{toRomaji(kanjiItem.kunyomi)}</span></p>
-      <div class="word-list">
-        {kanjiItem.words.map((word: string) => <span class="word-chip"><b>{word}</b><small>{toRomaji(word)}</small></span>)}
+    {kanji.map((kanjiItem) => (
+      <div class="card">
+        <div class="jp">{kanjiItem.char}</div>
+        <h2 style="margin:8px 0 4px;font-weight:700">{kanjiItem.meaning}</h2>
+        <p style="margin:6px 0 2px"><b>Onyomi:</b> {kanjiItem.onyomi}</p>
+        <p class="pronunciation inline">{toRomaji(kanjiItem.onyomi)}</p>
+        <p style="margin:6px 0 2px"><b>Kunyomi:</b> {kanjiItem.kunyomi}</p>
+        <p class="pronunciation inline">{toRomaji(kanjiItem.kunyomi)}</p>
+        <div class="word-list">
+          {kanjiItem.words.map((word: string) => (
+            <span class="word-chip"><b>{word}</b><small>{toRomaji(word)}</small></span>
+          ))}
+        </div>
+        <p class="jp-example">{kanjiItem.example}</p>
+        <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(kanjiItem.example)}</p>
+        <button class="btn" data-review="good" data-item={kanjiItem.char} style="margin-top:8px">Mark Reviewed</button>
       </div>
-      <p class="jp-example">{kanjiItem.example}</p>
-      <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(kanjiItem.example)}</p>
-      <button class="btn" data-review="good" data-item={kanjiItem.char}>Mark Reviewed</button>
-    </div>)}
+    ))}
   </section>
 </Base>

@@ -4,12 +4,13 @@ import { progressAreas } from '../lib/curriculum';
 ---
 <Base title="Progress">
   <div class="glass">
-    <h1>Progress Tracker</h1>
+    <h1 style="margin:0 0 8px;font-size:1.75rem;font-weight:800">Progress Tracker</h1>
+    <p class="lead">Track your mastery across all JLPT skill areas.</p>
   </div>
   <section class="grid">
     {progressAreas.map(([area, readiness]) => (
       <div class="card">
-        <h2>{area}</h2>
+        <h2 style="margin:0 0 8px;font-weight:700">{area}</h2>
         <div class="progress"><div class="bar" style={`width:${readiness}%`}></div></div>
         <p class="muted">{readiness}% / current foundation baseline</p>
       </div>

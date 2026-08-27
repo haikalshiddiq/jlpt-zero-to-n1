@@ -1,7 +1,19 @@
 ---
+import '../styles/global.css';
+
 const { title = 'JLPT Zero to N1' } = Astro.props;
 const navItems = [
-  ['Daily Lesson','/daily-lesson'],['Roadmap','/roadmap'],['Vocabulary','/vocabulary'],['Kanji','/kanji'],['Grammar','/grammar'],['Reading','/reading'],['Listening','/listening'],['Practice','/practice'],['JLPT Practice','/jlpt-practice'],['Review','/review'],['Progress','/progress']
+  ['Daily Lesson','/daily-lesson'],
+  ['Roadmap','/roadmap'],
+  ['Vocabulary','/vocabulary'],
+  ['Kanji','/kanji'],
+  ['Grammar','/grammar'],
+  ['Reading','/reading'],
+  ['Listening','/listening'],
+  ['Practice','/practice'],
+  ['JLPT Practice','/jlpt-practice'],
+  ['Review','/review'],
+  ['Progress','/progress']
 ];
 ---
 <html lang="en">
@@ -9,10 +21,14 @@ const navItems = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/styles/global.css" />
+    <script is:inline>
+      (function() {
+        const stored = localStorage.getItem('jlpt-theme');
+        if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div class="ambient ambient-one"></div>
@@ -20,9 +36,9 @@ const navItems = [
     <div class="shell">
       <aside class="sidebar">
         <a class="brand" href="/" aria-label="JLPT Zero to N1 home">
-          <span class="brand-mark">日本語</span>
-          <strong>JLPT Zero→N1</strong>
-          <small>Daily mastery quest</small>
+          <span class="brand-mark">日</span>
+          <strong>JLPT Zero to N1</strong>
+          <small>Daily mastery path</small>
         </a>
         <nav>
           {navItems.map(([label, href]) => <a href={href}>{label}</a>)}
@@ -31,6 +47,10 @@ const navItems = [
           <span class="badge pulse">Live</span>
           <p>Daily CI/CD adds new quests and deploys through GitHub Actions.</p>
         </div>
+        <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+          <span class="light-icon">🌙</span>
+          <span class="dark-icon hidden">☀️</span>
+        </button>
       </aside>
       <main><slot /></main>
     </div>
@@ -39,18 +59,55 @@ const navItems = [
         get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},
         set(k,v){localStorage.setItem(k,JSON.stringify(v))}
       };
-      document.addEventListener('click',e=>{
-        const t=e.target;
-        if(t.matches('[data-toggle]')) document.querySelector(t.dataset.toggle)?.classList.toggle('hidden');
-        if(t.matches('[data-flip]')) t.closest('.flashcard')?.classList.toggle('flipped');
-        if(t.matches('[data-review]')){
-          const q=jlptStore.get('reviewQueue',[]); q.push({item:t.dataset.item,result:t.dataset.review,date:new Date().toISOString()}); jlptStore.set('reviewQueue',q); t.textContent='Saved ✓';
+
+      // Theme toggle
+      const toggle = document.getElementById('theme-toggle');
+      const lightIcon = toggle?.querySelector('.light-icon');
+      const darkIcon = toggle?.querySelector('.dark-icon');
+      function updateThemeUI() {
+        const isDark = document.documentElement.classList.contains('dark');
+        if (lightIcon) lightIcon.classList.toggle('hidden', isDark);
+        if (darkIcon) darkIcon.classList.toggle('hidden', !isDark);
+      }
+      updateThemeUI();
+      toggle?.addEventListener('click', () => {
+        const html = document.documentElement;
+        if (html.classList.contains('dark')) {
+          html.classList.remove('dark');
+          localStorage.setItem('jlpt-theme', 'light');
+        } else {
+          html.classList.add('dark');
+          localStorage.setItem('jlpt-theme', 'dark');
         }
-        if(t.matches('[data-answer]')){const ok=t.dataset.answer==='true'; t.closest('.quiz-item').querySelector('.feedback').textContent=ok?'Correct ✓':'Review this one — try again.';}
-        if(t.matches('[data-power]')){
-          const card=t.closest('.quest-card,.card');
+        updateThemeUI();
+      });
+
+      // Delegate events
+      document.addEventListener('click', e => {
+        const t = e.target;
+        if (t.matches('[data-toggle]')) {
+          const el = document.querySelector(t.dataset.toggle);
+          el?.classList.toggle('hidden');
+        }
+        if (t.matches('[data-flip]')) {
+          const card = t.closest('.flashcard');
+          card?.classList.toggle('flipped');
+        }
+        if (t.matches('[data-review]')) {
+          const q = jlptStore.get('reviewQueue', []);
+          q.push({ item: t.dataset.item, result: t.dataset.review, date: new Date().toISOString() });
+          jlptStore.set('reviewQueue', q);
+          t.textContent = 'Saved';
+        }
+        if (t.matches('[data-answer]')) {
+          const ok = t.dataset.answer === 'true';
+          const fb = t.closest('.quiz-item')?.querySelector('.feedback');
+          if (fb) fb.textContent = ok ? 'Correct!' : 'Review this one, try again.';
+        }
+        if (t.matches('[data-power]')) {
+          const card = t.closest('.quest-card,.card');
           card?.classList.add('celebrate');
-          setTimeout(()=>card?.classList.remove('celebrate'),900);
+          setTimeout(() => card?.classList.remove('celebrate'), 900);
         }
       });
     </script>

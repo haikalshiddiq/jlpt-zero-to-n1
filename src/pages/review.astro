@@ -4,18 +4,18 @@ import { reviewDueCount } from '../lib/curriculum';
 ---
 <Base title="Review">
   <div class="glass">
-    <h1>Spaced Repetition Review</h1>
+    <h1 style="margin:0 0 8px;font-size:1.75rem;font-weight:800">Spaced Repetition Review</h1>
     <p class="lead">Cadence: 1 day, 3 days, 7 days, 14 days, 30 days.</p>
   </div>
   <section class="grid">
     <div class="card">
-      <h2>Due Today</h2>
+      <h2 style="margin:0 0 8px;font-weight:700">Due Today</h2>
       <p class="stat">{reviewDueCount}</p>
-      <p>Starter items from Day 1 are due.</p>
+      <p style="color:var(--color-ink-secondary)">Starter items from Day 1 are due for review.</p>
     </div>
     <div class="card">
-      <h2>Review Queue</h2>
-      <div id="queue">Local review history will appear after using flashcards.</div>
+      <h2 style="margin:0 0 8px;font-weight:700">Review Queue</h2>
+      <div id="queue" style="color:var(--color-ink-secondary)">Local review history will appear after using flashcards.</div>
     </div>
   </section>
   <script is:inline>
@@ -27,6 +27,8 @@ import { reviewDueCount } from '../lib/curriculum';
       q.forEach((x) => {
         const entry = document.createElement('p');
         entry.textContent = `${x.item}: ${x.result}`;
+        entry.style.margin = '2px 0';
+        entry.style.fontSize = '14px';
         queue.appendChild(entry);
       });
     } else if (queue) {
