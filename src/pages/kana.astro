@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import { kanaCount, kanaRows } from '../data/kana';
+---
+<Base title="Kana Memory Lab | Hiragana and Katakana">
+  <header class="glass memory-hero">
+    <div>
+      <p class="eyebrow">Kana memory lab</p>
+      <h1>Read Hiragana and Katakana</h1>
+      <p class="lead">Memorize the {kanaCount} basic sounds. Hear each character, reveal its reading, and save difficult cards for review.</p>
+    </div>
+    <div class="memory-summary" aria-label="Kana learning summary">
+      <strong>{kanaCount}</strong>
+      <span>basic sounds in each script</span>
+    </div>
+  </header>
+
+  <section class="card memory-guide">
+    <div><b>Hiragana</b><span>Native words and grammar</span></div>
+    <div><b>Katakana</b><span>Loanwords, names, and emphasis</span></div>
+    <div><b>Daily target</b><span>One sound row, then cumulative review</span></div>
+  </section>
+
+  <div class="kana-toolbar card" role="group" aria-label="Kana display controls">
+    <button class="btn kana-view active" type="button" data-kana-view="both">Both</button>
+    <button class="btn secondary kana-view" type="button" data-kana-view="hiragana">Hiragana</button>
+    <button class="btn secondary kana-view" type="button" data-kana-view="katakana">Katakana</button>
+    <button class="btn secondary" id="toggle-readings" type="button" aria-pressed="false">Hide readings</button>
+  </div>
+
+  <section class="kana-groups" id="kana-board">
+    {kanaRows.map((row) => (
+      <article class="kana-group card">
+        <header><span>{row.group}</span><small>{row.entries.length} sounds</small></header>
+        <div class="kana-grid">
+          {row.entries.map((entry) => (
+            <div class="kana-card" data-kana-card>
+              <button class="kana-sound" type="button" data-speak={entry.hiragana} data-rate="0.72" aria-label={`Play ${entry.romaji}`}>
+                <span class="hiragana-char">{entry.hiragana}</span>
+                <span class="katakana-char">{entry.katakana}</span>
+              </button>
+              <b class="kana-reading">{entry.romaji}</b>
+              <button class="memory-mark" type="button" data-review="kana" data-item={`${entry.hiragana}/${entry.katakana}`} aria-label={`Save ${entry.romaji} for review`}>Review</button>
+            </div>
+          ))}
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <p class="audio-status" data-audio-status aria-live="polite">Tap a character to hear its Japanese pronunciation.</p>
+
+  <script is:inline>
+    const board = document.getElementById('kana-board');
+    const readingsButton = document.getElementById('toggle-readings');
+    document.querySelectorAll('[data-kana-view]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const view = button.dataset.kanaView;
+        board?.setAttribute('data-view', view);
+        document.querySelectorAll('[data-kana-view]').forEach((item) => {
+          const selected = item === button;
+          item.classList.toggle('active', selected);
+          item.classList.toggle('secondary', !selected);
+        });
+      });
+    });
+    readingsButton?.addEventListener('click', () => {
+      const hidden = board?.classList.toggle('readings-hidden') ?? false;
+      readingsButton.textContent = hidden ? 'Show readings' : 'Hide readings';
+      readingsButton.setAttribute('aria-pressed', String(hidden));
+    });
+  </script>
+</Base>

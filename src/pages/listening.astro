@@ -2,24 +2,67 @@
 import Base from '../layouts/Base.astro';
 import { lessons } from '../lib/curriculum';
 import { toRomaji } from '../utils/romaji';
+
+const audioForLesson = (id: string) => ({
+  slow: `/audio/listening/${id}-slow.mp3`,
+  natural: `/audio/listening/${id}-natural.mp3`
+});
 ---
-<Base title="Listening">
-  <div class="glass">
-    <h1 style="margin:0 0 8px;font-size:1.75rem;font-weight:800">Listening Simulation</h1>
-    <p class="lead">Read the slow version, then test yourself with natural-speed dialogue and romaji support.</p>
-  </div>
-  <section class="grid">
-    {lessons.map((lesson) => (
-      <div class="card">
-        <h2 style="margin:0 0 8px;font-weight:700">{lesson.title}</h2>
-        <h3 style="font-size:1rem;font-weight:700;margin:12px 0 4px">Slow version</h3>
-        <pre>{lesson.listening.slow}</pre>
-        <pre class="romaji-block">{toRomaji(lesson.listening.slow)}</pre>
-        <h3 style="font-size:1rem;font-weight:700;margin:12px 0 4px">Natural version</h3>
-        <p>{lesson.listening.natural}</p>
-        <p class="pronunciation compact"><span>Natural pronunciation</span>{toRomaji(lesson.listening.natural)}</p>
-        <p class="muted">Tip: listen for particles and confirmation phrases like はい、そうです。</p>
-      </div>
-    ))}
+<Base title="Japanese Listening and Pronunciation">
+  <header class="glass memory-hero">
+    <div>
+      <p class="eyebrow">Listening and shadowing</p>
+      <h1>Hear Real Japanese Audio</h1>
+      <p class="lead">Play studio-quality Japanese speech at slow or natural speed, follow the transcript, then shadow every line aloud.</p>
+    </div>
+    <div class="memory-summary" aria-label="Listening tracks">
+      <strong>{lessons.length * 2}</strong>
+      <span>playable MP3 tracks</span>
+    </div>
+  </header>
+
+  <section class="card shadowing-guide">
+    <div><b>1. Listen</b><span>Play once without reading the transcript.</span></div>
+    <div><b>2. Check</b><span>Listen again while following kana and romaji.</span></div>
+    <div><b>3. Shadow</b><span>Replay and speak just behind the Japanese voice.</span></div>
   </section>
+
+  <section class="listening-stack">
+    {lessons.map((lesson, index) => {
+      const audio = audioForLesson(lesson.id);
+      return (
+        <article class="card listening-card">
+          <header>
+            <div><span class="badge">Lesson {index + 1}</span><h2>{lesson.title}</h2></div>
+            <span class="listening-level">{lesson.level}</span>
+          </header>
+          <div class="audio-grid">
+            <div class="audio-track">
+              <div><b>Slow practice</b><span>Clear spacing for first listening</span></div>
+              <audio controls preload="metadata">
+                <source src={audio.slow} type="audio/mpeg" />
+                Your browser does not support audio playback.
+              </audio>
+            </div>
+            <div class="audio-track">
+              <div><b>Natural speed</b><span>Use this for shadowing practice</span></div>
+              <audio controls preload="metadata">
+                <source src={audio.natural} type="audio/mpeg" />
+                Your browser does not support audio playback.
+              </audio>
+            </div>
+          </div>
+          <details class="transcript-panel">
+            <summary>Open transcript and pronunciation</summary>
+            <div class="transcript-grid">
+              <div><h3>Japanese</h3><pre>{lesson.listening.slow}</pre></div>
+              <div><h3>Romaji</h3><pre class="romaji-block">{toRomaji(lesson.listening.slow)}</pre></div>
+            </div>
+          </details>
+          <button class="btn secondary" type="button" data-speak={lesson.listening.natural} data-rate="0.82">Device voice fallback</button>
+        </article>
+      );
+    })}
+  </section>
+  <p class="audio-status" data-audio-status aria-live="polite">The MP3 controls work independently. “Device voice fallback” uses Japanese text-to-speech on your phone or computer.</p>
 </Base>

@@ -1,31 +1,58 @@
 ---
 import Base from '../layouts/Base.astro';
-import { kanji } from '../lib/curriculum';
+import { foundationKanji } from '../data/kanji-memory';
 import { toRomaji } from '../utils/romaji';
 ---
-<Base title="Kanji">
-  <div class="glass">
-    <h1 style="margin:0 0 8px;font-size:1.75rem;font-weight:800">Kanji Mastery</h1>
-    <p class="lead">Each kanji includes onyomi/kunyomi readings, sample words, and example sentences with romaji support.</p>
-  </div>
-  <section class="grid">
-    {kanji.map((kanjiItem) => (
-      <div class="card">
-        <div class="jp">{kanjiItem.char}</div>
-        <h2 style="margin:8px 0 4px;font-weight:700">{kanjiItem.meaning}</h2>
-        <p style="margin:6px 0 2px"><b>Onyomi:</b> {kanjiItem.onyomi}</p>
-        <p class="pronunciation inline">{toRomaji(kanjiItem.onyomi)}</p>
-        <p style="margin:6px 0 2px"><b>Kunyomi:</b> {kanjiItem.kunyomi}</p>
-        <p class="pronunciation inline">{toRomaji(kanjiItem.kunyomi)}</p>
-        <div class="word-list">
-          {kanjiItem.words.map((word: string) => (
-            <span class="word-chip"><b>{word}</b><small>{toRomaji(word)}</small></span>
+<Base title="Kanji Memory | Readings and Vocabulary">
+  <header class="glass memory-hero">
+    <div>
+      <p class="eyebrow">Kanji memory deck</p>
+      <h1>Memorize Kanji Readings</h1>
+      <p class="lead">Study 20 foundation kanji with onyomi, kunyomi, useful compounds, stroke counts, and playable examples.</p>
+    </div>
+    <div class="memory-summary" aria-label="Kanji total">
+      <strong>{foundationKanji.length}</strong>
+      <span>N5 foundation kanji</span>
+    </div>
+  </header>
+
+  <section class="card memory-guide">
+    <div><b>Character</b><span>Recognize the shape and core meaning</span></div>
+    <div><b>Readings</b><span>Learn readings through real compound words</span></div>
+    <div><b>Audio</b><span>Hear words and sentences, then shadow them</span></div>
+  </section>
+
+  <section class="grid kanji-memory-grid">
+    {foundationKanji.map((kanjiItem) => (
+      <article class="card kanji-memory-card">
+        <div class="kanji-heading">
+          <button class="kanji-glyph" type="button" data-speak={kanjiItem.exampleReading} data-rate="0.7" aria-label={`Play example for ${kanjiItem.char}`}>{kanjiItem.char}</button>
+          <div><h2>{kanjiItem.meaning}</h2><span>{kanjiItem.strokes} strokes</span></div>
+        </div>
+        <div class="reading-pair">
+          <p><b>Onyomi</b><span>{kanjiItem.onyomi}</span></p>
+          <p><b>Kunyomi</b><span>{kanjiItem.kunyomi}</span></p>
+        </div>
+        <div class="kanji-words">
+          {kanjiItem.words.map((entry) => (
+            <button type="button" data-speak={entry.reading} data-rate="0.72">
+              <b>{entry.word}</b>
+              <span>{entry.reading}</span>
+              <small>{entry.meaning}</small>
+            </button>
           ))}
         </div>
-        <p class="jp-example">{kanjiItem.example}</p>
-        <p class="pronunciation compact"><span>Example pronunciation</span>{toRomaji(kanjiItem.example)}</p>
-        <button class="btn" data-review="good" data-item={kanjiItem.char} style="margin-top:8px">Mark Reviewed</button>
-      </div>
+        <div class="kanji-example">
+          <p>{kanjiItem.example}</p>
+          <span>{kanjiItem.exampleReading}</span>
+          <small>{toRomaji(kanjiItem.exampleReading)}</small>
+        </div>
+        <div class="memory-actions">
+          <button class="btn audio-button" type="button" data-speak={kanjiItem.exampleReading} data-rate="0.7">Play sentence</button>
+          <button class="btn secondary" type="button" data-review="kanji" data-item={kanjiItem.char}>Save for review</button>
+        </div>
+      </article>
     ))}
   </section>
+  <p class="audio-status" data-audio-status aria-live="polite">Tap a kanji word or “Play sentence” to hear Japanese audio.</p>
 </Base>
