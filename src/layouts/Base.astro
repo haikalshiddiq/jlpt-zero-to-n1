@@ -1,10 +1,16 @@
 ---
 import '../styles/global.css';
 
-const { title = 'JLPT Zero to N1' } = Astro.props;
+const {
+  title = 'JLPT Zero to N1',
+  description = 'Daily Japanese learning from absolute beginner to JLPT N1.'
+} = Astro.props;
+const currentPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
 const navItems = [
   ['Daily Lesson','/daily-lesson'],
   ['Roadmap','/roadmap'],
+  ['Japan Travel','/japan-travel'],
+  ['Work in Japan','/work-in-japan'],
   ['Kotoba','/vocabulary'],
   ['Kana','/kana'],
   ['Kanji','/kanji'],
@@ -29,6 +35,7 @@ const navItems = [
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="description" content={description} />
     <title>{title}</title>
     <script is:inline>
       (function() {
@@ -40,17 +47,18 @@ const navItems = [
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="ambient ambient-one"></div>
     <div class="ambient ambient-two"></div>
     <div class="shell">
       <aside class="sidebar">
-        <a class="brand" href="/" aria-label="JLPT Zero to N1 home">
+        <a class="brand" href="/">
           <span class="brand-mark">日</span>
           <strong>JLPT Zero to N1</strong>
           <small>Daily mastery path</small>
         </a>
         <nav>
-          {navItems.map(([label, href]) => <a href={href}>{label}</a>)}
+          {navItems.map(([label, href]) => <a href={href} aria-current={currentPath === href ? 'page' : undefined}>{label}</a>)}
         </nav>
         <div class="side-mission">
           <span class="badge pulse">Live</span>
@@ -61,7 +69,7 @@ const navItems = [
           <span class="dark-icon hidden">☀️</span>
         </button>
       </aside>
-      <main><slot /></main>
+      <main id="main-content"><slot /></main>
     </div>
     <script is:inline>
       window.jlptStore={

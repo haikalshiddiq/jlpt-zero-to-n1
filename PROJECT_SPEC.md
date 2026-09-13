@@ -31,6 +31,8 @@ Build a premium interactive Japanese learning website for Haikal Shiddiq S.Kom.,
 - `/jlpt-practice`: multiple-choice JLPT-style questions with feedback
 - `/review`: spaced repetition dashboard using 1/3/7/14/30 day cadence
 - `/progress`: progress bars and JLPT readiness tracking
+- `/japan-travel`: seven-day itinerary, Muslim-friendly planning notes, and Tokyo/Osaka shopping filters
+- `/work-in-japan`: source-backed visa and job-search guide with a persistent application checklist
 
 ## 5. Worker API
 - `GET /api/lesson/today`

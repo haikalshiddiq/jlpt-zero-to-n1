@@ -1,0 +1,127 @@
+---
+import Base from '../layouts/Base.astro';
+import { itinerary, shoppingSpots } from '../data/japan-life';
+import '../styles/japan-life.css';
+
+const mapLink = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query + ', Japan')}`;
+const typeLabels = { visit: 'Visit', food: 'Food check', prayer: 'Prayer', transfer: 'Transfer' } as const;
+---
+<Base title="Japan Travel Planner | JLPT Zero to N1" description="A seven-day Tokyo, Mount Fuji, Osaka, Kyoto, and Nara itinerary with Muslim-friendly planning notes and interest-based shopping areas.">
+  <header class="japan-hero travel-hero">
+    <div>
+      <p class="japan-kicker">Japan Travel</p>
+      <h1>Turn a Japan wishlist into a route you can actually follow.</h1>
+      <p class="japan-intro">A seven-day Tokyo to Kansai starter plan, plus Muslim-friendly checks and shopping areas grouped by interest.</p>
+      <div class="mission-row">
+        <a class="btn" href="#itinerary">Open the 7-day plan</a>
+        <a class="text-action" href="#shopping">Find shopping areas</a>
+      </div>
+    </div>
+    <aside class="route-board" aria-label="Route overview">
+      <span>東京</span>
+      <strong>Tokyo</strong>
+      <i aria-hidden="true"></i>
+      <span>富士</span>
+      <strong>Mount Fuji</strong>
+      <i aria-hidden="true"></i>
+      <span>大阪</span>
+      <strong>Osaka</strong>
+      <i aria-hidden="true"></i>
+      <span>京都</span>
+      <strong>Kyoto and Nara</strong>
+    </aside>
+  </header>
+
+  <section class="travel-notice" aria-labelledby="before-you-go">
+    <div>
+      <h2 id="before-you-go">Check before you go</h2>
+      <p>Prayer spaces, restaurants, menus, and opening hours can change. Confirm each venue directly and keep a backup option near your hotel or station.</p>
+    </div>
+    <a href="https://www.japan.travel/en/my/muslim-guide/travel-ideas/japans-muslim-friendly-tourism-what-travelers-need-to-know/" target="_blank" rel="noreferrer">Read JNTO’s Muslim-friendly guide</a>
+  </section>
+
+  <section id="itinerary" class="japan-section" aria-labelledby="itinerary-title">
+    <div class="section-heading">
+      <h2 id="itinerary-title">Seven days, paced by area</h2>
+      <p>This plan normalizes place names from the screenshots and flags recommendations that need current verification.</p>
+    </div>
+    <div class="day-list">
+      {itinerary.map((item, index) => (
+        <details class="day-panel" open={index === 0}>
+          <summary>
+            <span class="day-number">Day {item.day}</span>
+            <span><strong>{item.title}</strong><small>{item.base}</small></span>
+            <span class="summary-action">View plan</span>
+          </summary>
+          <ol class="stop-list">
+            {item.stops.map((stop) => (
+              <li>
+                <span class={`stop-type ${stop.type}`}>{typeLabels[stop.type]}</span>
+                <div>
+                  <h3>{stop.place}</h3>
+                  <p>{stop.note}</p>
+                </div>
+                <a href={mapLink(`${stop.place} ${stop.area}`)} target="_blank" rel="noreferrer" aria-label={`Find ${stop.place} on Google Maps`}>Map</a>
+              </li>
+            ))}
+          </ol>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section id="shopping" class="japan-section shopping-section" aria-labelledby="shopping-title">
+    <div class="section-heading">
+      <h2 id="shopping-title">Shop by interest, not by accident</h2>
+      <p>Choose a city to narrow the list. Each result opens a live map search so you can confirm the latest shops.</p>
+    </div>
+    <div class="city-filter" role="group" aria-label="Filter shopping areas by city">
+      <button type="button" class="city-filter-button active" data-city-filter="All" aria-pressed="true">All areas</button>
+      <button type="button" class="city-filter-button" data-city-filter="Tokyo" aria-pressed="false">Tokyo</button>
+      <button type="button" class="city-filter-button" data-city-filter="Osaka" aria-pressed="false">Osaka</button>
+    </div>
+    <p class="filter-status" data-filter-status aria-live="polite">Showing all {shoppingSpots.length} areas.</p>
+    <div class="shopping-grid">
+      {shoppingSpots.map((spot) => (
+        <article class="shopping-item" data-city={spot.city}>
+          <div>
+            <span>{spot.city}</span>
+            <h3>{spot.interest}</h3>
+            <strong>{spot.area}</strong>
+            <p>{spot.note}</p>
+          </div>
+          <a href={mapLink(`${spot.area} ${spot.city}`)} target="_blank" rel="noreferrer">Search map</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="source-strip" aria-label="Content source note">
+    <strong>Source note</strong>
+    <p>The route and shopping ideas come from the screenshots you supplied. Names were corrected where the intended place was clear. Ambiguous restaurant and facility details remain marked for verification.</p>
+  </section>
+
+  <script is:inline>
+    const filterButtons = [...document.querySelectorAll('[data-city-filter]')];
+    const shoppingItems = [...document.querySelectorAll('[data-city]')];
+    const filterStatus = document.querySelector('[data-filter-status]');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const city = button.dataset.cityFilter;
+        let visible = 0;
+        filterButtons.forEach((candidate) => {
+          const selected = candidate === button;
+          candidate.classList.toggle('active', selected);
+          candidate.setAttribute('aria-pressed', String(selected));
+        });
+        shoppingItems.forEach((item) => {
+          const show = city === 'All' || item.dataset.city === city;
+          item.hidden = !show;
+          if (show) visible += 1;
+        });
+        if (filterStatus) filterStatus.textContent = city === 'All' ? `Showing all ${visible} areas.` : `Showing ${visible} areas in ${city}.`;
+      });
+    });
+  </script>
+</Base>

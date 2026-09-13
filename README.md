@@ -2,6 +2,10 @@
 
 A premium interactive Japanese learning website for daily study from absolute zero to JLPT N1.
 
+The platform also includes practical Japan modules:
+- `/japan-travel`: seven-day Tokyo to Kansai itinerary, Muslim-friendly checks, and interest-based shopping areas
+- `/work-in-japan`: legal work-route guide, official sources, employer checks, and a browser-saved application checklist
+
 ## Stack
 - Astro static frontend
 - Cloudflare Pages hosting
@@ -50,4 +54,4 @@ npx wrangler deploy --config worker/wrangler.toml
 ```
 
 ## Content Updates
-Initial content lives in `src/data/curriculum.ts`. Add new daily lessons, vocabulary, kanji, grammar, reading, listening, and JLPT practice items there or migrate to Astro content collections as content volume grows.
+Initial learning content lives in `src/data/curriculum.ts`. Japan travel and work content lives in `src/data/japan-life.ts`. Add new learning items there or migrate to Astro content collections as content volume grows.
