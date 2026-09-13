@@ -95,6 +95,71 @@
 .dark .work-steps > li > a,
 .dark .route-comparison a,
 .dark .text-action:hover { color: #ff9a8f; }
+.reference-gallery {
+  display: grid;
+  grid-template-columns: minmax(12rem, .55fr) minmax(0, 1.45fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+  margin-top: clamp(2.75rem, 7vw, 6rem);
+}
+.reference-gallery-copy {
+  position: sticky;
+  top: 2rem;
+}
+.reference-gallery h2,
+.work-reference h2 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: clamp(1.65rem, 3.2vw, 2.65rem);
+  letter-spacing: -.04em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+.reference-gallery-copy p,
+.work-reference > div p {
+  margin: .9rem 0 0;
+  color: var(--color-ink-secondary);
+  line-height: 1.65;
+}
+.reference-images {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .8rem;
+}
+.reference-images figure,
+.work-reference figure,
+.kanji-visual {
+  margin: 0;
+}
+.reference-images img,
+.work-reference img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 1rem;
+  background: #111;
+  box-shadow: var(--color-shadow);
+}
+.reference-images figcaption,
+.work-reference figcaption {
+  padding: .65rem .25rem 0;
+  color: var(--color-ink-secondary);
+  font-size: .78rem;
+  line-height: 1.45;
+}
+.work-reference {
+  display: grid;
+  grid-template-columns: minmax(15rem, .62fr) minmax(0, 1.38fr);
+  gap: clamp(1.5rem, 5vw, 4.5rem);
+  align-items: center;
+  margin-top: clamp(2.75rem, 7vw, 6rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  background: var(--color-surface);
+}
+.work-reference figure { max-width: 25rem; }
 .japan-section { margin-top: clamp(2.75rem, 7vw, 6rem); }
 .section-heading { max-width: 48rem; margin-bottom: 1.5rem; }
 .section-heading h2 {
@@ -260,10 +325,13 @@
 }
 @media (max-width: 900px) {
   .japan-hero,
+  .reference-gallery,
+  .work-reference,
   .route-comparison,
   .document-groups,
   .fraud-check { grid-template-columns: 1fr; }
   .shopping-grid { grid-template-columns: 1fr; }
+  .reference-gallery-copy { position: static; }
 }
 @media (max-width: 640px) {
   .japan-hero { padding: 1.35rem; border-radius: 1rem; }
@@ -271,6 +339,14 @@
   .travel-notice,
   .source-strip { grid-template-columns: 1fr; }
   .travel-notice a { width: fit-content; }
+  .reference-images {
+    grid-template-columns: repeat(3, minmax(15.5rem, 1fr));
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 0 .75rem;
+  }
+  .reference-images figure { scroll-snap-align: start; }
+  .work-reference figure { max-width: none; }
   .day-panel summary { grid-template-columns: 4.5rem minmax(0, 1fr); gap: .65rem; }
   .summary-action { display: none; }
   .stop-list li { grid-template-columns: 1fr auto; gap: .65rem; }

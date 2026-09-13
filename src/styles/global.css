@@ -1076,9 +1076,22 @@ pre {
 
 .kanji-memory-grid { grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); }
 .kanji-memory-card { display: grid; gap: 15px; }
+.kanji-visual {
+  overflow: hidden;
+  margin: -12px -12px 2px;
+  border-radius: 12px;
+  background: var(--color-surface-raised);
+}
+.kanji-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+}
 .kanji-heading { display: flex; align-items: center; gap: 16px; }
 .kanji-heading h2 { margin: 0 0 4px; }
-.kanji-heading span { color: var(--color-ink-muted); font-size: 12px; }
+.kanji-heading span { color: var(--color-ink-secondary); font-size: 12px; }
 .kanji-glyph {
   width: 76px;
   height: 76px;
@@ -1094,7 +1107,7 @@ pre {
 }
 .reading-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .reading-pair p { display: grid; gap: 3px; margin: 0; padding: 10px; border-radius: 10px; background: var(--color-surface-raised); }
-.reading-pair b { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--color-ink-muted); }
+.reading-pair b { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--color-ink-secondary); }
 .reading-pair span { font-size: 13px; }
 .kanji-words { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .kanji-words button {
@@ -1112,7 +1125,7 @@ pre {
 .kanji-words span,
 .kanji-example span { color: var(--color-accent); font-size: 12px; }
 .kanji-words small,
-.kanji-example small { color: var(--color-ink-muted); }
+.kanji-example small { color: var(--color-ink-secondary); }
 .kanji-example { padding: 12px; border: 1px solid var(--color-accent); border-radius: 10px; background: var(--color-surface-raised); }
 .kanji-example p { margin: 0 0 4px; font-size: 1.05rem; }
 .kanji-example span,

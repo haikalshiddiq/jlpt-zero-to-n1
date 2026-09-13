@@ -1,7 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import { foundationKanji } from '../data/kanji-memory';
+import kanjiVisuals from '../data/kanji-visuals.json';
 import { toRomaji } from '../utils/romaji';
+
+const visualByCharacter = new Map(kanjiVisuals.map((visual) => [visual.char, visual]));
 ---
 <Base title="Kanji Memory | Readings and Vocabulary">
   <header class="glass memory-hero">
@@ -25,6 +28,18 @@ import { toRomaji } from '../utils/romaji';
   <section class="grid kanji-memory-grid">
     {foundationKanji.map((kanjiItem) => (
       <article class="card kanji-memory-card">
+        {visualByCharacter.get(kanjiItem.char) && (
+          <figure class="kanji-visual">
+            <img
+              src={visualByCharacter.get(kanjiItem.char)?.src}
+              alt={visualByCharacter.get(kanjiItem.char)?.alt}
+              width="960"
+              height="600"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        )}
         <div class="kanji-heading">
           <button class="kanji-glyph" type="button" data-speak={kanjiItem.exampleReading} data-rate="0.7" aria-label={`Play example for ${kanjiItem.char}`}>{kanjiItem.char}</button>
           <div><h2>{kanjiItem.meaning}</h2><span>{kanjiItem.strokes} strokes</span></div>
