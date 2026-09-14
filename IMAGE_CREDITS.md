@@ -22,6 +22,11 @@ The Japan Travel Planner and Work in Japan Guide locally host optimized WebP der
 - License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0)
 - Local file: `/images/japan-editorial/travel-shopping.webp`
 
+## travel-secondhand
+- Creator: [Mr.ちゅらさん](https://commons.wikimedia.org/wiki/File:Sofmap_Gameing_PC_Shop_at_Bic_Camera_Namba.jpg)
+- License: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0)
+- Local file: `/images/japan-editorial/travel-secondhand.webp`
+
 ## travel-provenance
 - Creator: [Japanese Government Railways](https://commons.wikimedia.org/wiki/File:1930s_Japanese_Government_Railways_Travel_Poster.jpg)
 - License: Public domain

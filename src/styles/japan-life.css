@@ -157,6 +157,37 @@
 .shopping-item p { margin: 0; color: var(--jp-muted); font-size: .84rem; line-height: 1.5; }
 .shopping-item a { display: inline-flex; min-height: 44px; align-items: center; justify-content: flex-end; color: var(--jp-red-dark); font-size: .8rem; font-weight: 800; }
 
+.secondhand-intro { display: grid; grid-template-columns: minmax(18rem, .7fr) minmax(0, 1.3fr); gap: clamp(2rem, 6vw, 6rem); align-items: end; }
+.secondhand-intro .section-heading { margin: 0; }
+.secondhand-editorial-image { height: clamp(280px, 34vw, 440px); }
+.secondhand-store-grid { display: grid; grid-template-columns: 1.15fr .85fr; margin-top: clamp(2rem, 5vw, 4rem); border-top: 1px solid var(--jp-line); border-bottom: 1px solid var(--jp-line); }
+.secondhand-store { display: grid; align-content: start; gap: .85rem; min-width: 0; padding: clamp(1.5rem, 3.5vw, 3rem); }
+.secondhand-store:first-child { grid-column: 1 / -1; grid-template-columns: minmax(15rem, .8fr) minmax(0, 1.2fr); border-bottom: 1px solid var(--jp-line); }
+.secondhand-store:first-child header { grid-row: 1 / 5; }
+.secondhand-store:first-child > strong,
+.secondhand-store:first-child > small,
+.secondhand-store:first-child > p,
+.secondhand-store:first-child > .secondhand-actions { grid-column: 2; }
+.secondhand-store:nth-child(3) { border-left: 1px solid var(--jp-line); }
+.secondhand-store header { display: flex; gap: 1rem; align-items: start; }
+.secondhand-store header > span { color: var(--jp-red-dark); font-family: Georgia, serif; font-size: 1.6rem; font-weight: 800; }
+.secondhand-store h3 { margin: 0; font-size: clamp(1.35rem, 2.8vw, 2.25rem); letter-spacing: -.04em; }
+.secondhand-store header p { margin: .15rem 0 0; color: var(--jp-muted); font-size: .8rem; }
+.secondhand-store > strong { margin-top: .75rem; color: var(--jp-ink); font-size: 1rem; }
+.secondhand-store > small { color: var(--jp-red-dark); font-weight: 750; line-height: 1.45; }
+.secondhand-store > p { max-width: 58ch; margin: 0; color: var(--jp-muted); font-size: .88rem; line-height: 1.65; }
+.secondhand-actions { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; margin-top: auto; padding-top: .5rem; }
+.secondhand-actions a { display: inline-flex; min-height: 44px; align-items: center; color: var(--jp-red-dark); font-size: .8rem; font-weight: 850; text-underline-offset: .25rem; }
+.secondhand-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(2rem, 5vw, 5rem); margin-top: clamp(2rem, 5vw, 4rem); }
+.secondhand-checks article { padding: 1.5rem 0; }
+.secondhand-checks h3 { margin: 0 0 1rem; font-size: 1.2rem; }
+.secondhand-checks ul { display: grid; gap: .8rem; margin: 0; padding: 0; color: var(--jp-muted); list-style: none; }
+.secondhand-checks li { position: relative; padding-left: 1rem; font-size: .86rem; line-height: 1.5; }
+.secondhand-checks li::before { content: ''; position: absolute; top: .55em; left: 0; width: .35rem; height: .35rem; background: var(--jp-red); }
+.secondhand-checks aside { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(9rem, .3fr) minmax(0, 1.7fr); gap: 1rem; padding: 1.25rem 0; border-top: 1px solid var(--jp-line); border-bottom: 1px solid var(--jp-line); }
+.secondhand-checks aside strong { color: var(--jp-red-dark); }
+.secondhand-checks aside p { max-width: 76ch; margin: 0; color: var(--jp-muted); font-size: .88rem; line-height: 1.6; }
+
 .route-comparison { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--jp-line); border-bottom: 1px solid var(--jp-line); }
 .route-comparison article { padding: clamp(1.5rem, 4vw, 3rem); }
 .route-comparison article + article { border-left: 1px solid var(--jp-line); }
@@ -302,6 +333,21 @@
   .shopping-item > strong,
   .shopping-item p { grid-column: 1 / -1; }
   .shopping-item a { grid-column: 2; grid-row: 1; }
+  .secondhand-intro,
+  .secondhand-store-grid,
+  .secondhand-checks { grid-template-columns: 1fr; }
+  .secondhand-intro { align-items: start; }
+  .secondhand-intro .section-heading { margin-bottom: 1rem; }
+  .secondhand-editorial-image { height: 270px; }
+  .secondhand-store:first-child { grid-column: auto; grid-template-columns: 1fr; }
+  .secondhand-store:first-child header { grid-row: auto; }
+  .secondhand-store:first-child > strong,
+  .secondhand-store:first-child > small,
+  .secondhand-store:first-child > p,
+  .secondhand-store:first-child > .secondhand-actions { grid-column: auto; }
+  .secondhand-store + .secondhand-store { border-top: 1px solid var(--jp-line); }
+  .secondhand-store:nth-child(3) { border-left: 0; }
+  .secondhand-checks aside { grid-column: auto; grid-template-columns: 1fr; }
   .route-comparison,
   .document-groups { grid-template-columns: 1fr; }
   .route-comparison article + article,

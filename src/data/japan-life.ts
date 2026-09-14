@@ -19,6 +19,16 @@ export type ShoppingSpot = {
   note: string;
 };
 
+export type SecondhandStore = {
+  name: string;
+  japaneseName: string;
+  bestFor: string;
+  areas: string;
+  note: string;
+  inventoryUrl: string;
+  mapQuery: string;
+};
+
 export const itinerary: ItineraryDay[] = [
   {
     day: 1,
@@ -132,6 +142,36 @@ export const shoppingSpots: ShoppingSpot[] = [
   { city: 'Osaka', interest: 'Secondhand fashion', area: 'Amerikamura', note: 'Compare independent vintage and resale stores.' },
   { city: 'Osaka', interest: 'Motorcycle goods', area: 'Matsuyamachi-suji', note: 'The screenshot suggests this corridor. Check exact shops before travelling.' },
   { city: 'Osaka', interest: 'Private onsen option', area: 'Solaniwa Onsen', note: 'Confirm private-bath availability, booking rules, and tattoo policy.' }
+];
+
+export const secondhandStores: SecondhandStore[] = [
+  {
+    name: 'Camera no Kitamura',
+    japaneseName: 'カメラのキタムラ',
+    bestFor: 'Used cameras and lenses',
+    areas: 'Nationwide branches, including Tokyo and Osaka',
+    note: 'Search the official used inventory first, then confirm which branch holds the item. Check the sensor, autofocus, lens glass, battery, charger, accessories, and menu languages in person.',
+    inventoryUrl: 'https://www.net-chuko.com/',
+    mapQuery: 'Camera no Kitamura used camera'
+  },
+  {
+    name: 'Sofmap',
+    japaneseName: 'ソフマップ',
+    bestFor: 'Used laptops, desktops, Macs, cameras, and electronics',
+    areas: 'Akihabara and selected Bic Camera or Sofmap locations',
+    note: 'Use the condition rank and item photos to shortlist stock. Before paying, verify battery health, storage, keyboard layout, ports, charger, operating-system activation, included accessories, and the exact return terms.',
+    inventoryUrl: 'https://www.sofmap.com/contents/?id=used&sid=0',
+    mapQuery: 'Sofmap used computer'
+  },
+  {
+    name: 'Janpara',
+    japaneseName: 'じゃんぱら',
+    bestFor: 'Used Windows PCs, MacBooks, desktops, phones, and parts',
+    areas: 'Multiple branches in Akihabara, Tokyo, and Nipponbashi, Osaka',
+    note: 'Compare the same model across branches because condition and included accessories differ by unit. For PCs, check battery and SSD health, ports, Japanese keyboard layout, charger voltage, reset status, and warranty coverage.',
+    inventoryUrl: 'https://www.janpara.co.jp/sale/',
+    mapQuery: 'Janpara used computer'
+  }
 ];
 
 export const workSteps = [

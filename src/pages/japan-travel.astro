@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import EditorialImage from '../components/EditorialImage.astro';
-import { itinerary, shoppingSpots } from '../data/japan-life';
+import { itinerary, secondhandStores, shoppingSpots } from '../data/japan-life';
 import japanImages from '../data/japan-image-credits.json';
 import '../styles/japan-life.css';
 
@@ -9,7 +9,7 @@ const mapLink = (query: string) => `https://www.google.com/maps/search/?api=1&qu
 const typeLabels = { visit: 'Visit', food: 'Food check', prayer: 'Prayer', transfer: 'Transfer' } as const;
 const imageById = Object.fromEntries(japanImages.map((image) => [image.id, image]));
 ---
-<Base pageClass="japan-page travel-page" title="Japan Travel Planner | JLPT Zero to N1" description="A seven-day Tokyo, Mount Fuji, Osaka, Kyoto, and Nara itinerary with Muslim-friendly planning notes and interest-based shopping areas.">
+<Base pageClass="japan-page travel-page" title="Japan Travel Planner | JLPT Zero to N1" description="A seven-day Tokyo, Mount Fuji, Osaka, Kyoto, and Nara itinerary with Muslim-friendly planning, shopping areas, and a second-hand camera and computer guide.">
   <header class="japan-hero travel-hero">
     <div class="hero-copy">
       <p class="japan-kicker"><span>旅</span> Japan Travel / 7 days</p>
@@ -82,10 +82,10 @@ const imageById = Object.fromEntries(japanImages.map((image) => [image.id, image
       </div>
       <p class="filter-status" data-filter-status aria-live="polite">Showing all {shoppingSpots.length} areas</p>
     </div>
-    <div class="shopping-directory" role="list">
+    <div class="shopping-directory">
       <div class="directory-head" aria-hidden="true"><span>Interest</span><span>Area</span><span>Planning note</span><span>Map</span></div>
       {shoppingSpots.map((spot) => (
-        <article class="shopping-item" data-city={spot.city} role="listitem">
+        <article class="shopping-item" data-city={spot.city}>
           <div class="shopping-interest"><small>{spot.city}</small><h3>{spot.interest}</h3></div>
           <strong>{spot.area}</strong>
           <p>{spot.note}</p>
@@ -95,8 +95,57 @@ const imageById = Object.fromEntries(japanImages.map((image) => [image.id, image
     </div>
   </section>
 
+  <section id="secondhand" class="japan-section secondhand-section" aria-labelledby="secondhand-title">
+    <div class="secondhand-intro">
+      <div class="section-heading indexed-heading">
+        <span>03 / Second-hand</span>
+        <h2 id="secondhand-title">Buy used.<br />Check first.</h2>
+        <p>Start with official inventory, inspect the exact unit, and compare the final value after accessories, warranty limits, and transport.</p>
+      </div>
+      <EditorialImage image={imageById['travel-secondhand']} label="Sofmap / Osaka" className="secondhand-editorial-image" position="center 52%" />
+    </div>
+
+    <div class="secondhand-store-grid">
+      {secondhandStores.map((store, index) => (
+        <article class="secondhand-store">
+          <header><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{store.name}</h3><p lang="ja">{store.japaneseName}</p></div></header>
+          <strong>{store.bestFor}</strong>
+          <small>{store.areas}</small>
+          <p>{store.note}</p>
+          <div class="secondhand-actions">
+            <a href={store.inventoryUrl} target="_blank" rel="noreferrer">Official inventory</a>
+            <a href={mapLink(store.mapQuery)} target="_blank" rel="noreferrer">Find branches</a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="secondhand-checks">
+      <article>
+        <h3>Camera check</h3>
+        <ul>
+          <li>Sensor dust, dead pixels, autofocus, stabilization, and shutter operation</li>
+          <li>Lens fungus, haze, scratches, aperture blades, and mount compatibility</li>
+          <li>Battery, charger, caps, cables, menu languages, and stated defects</li>
+        </ul>
+      </article>
+      <article>
+        <h3>Computer check</h3>
+        <ul>
+          <li>Battery and SSD health, screen, keyboard, trackpad, ports, Wi-Fi, and webcam</li>
+          <li>Japanese keyboard layout, charger voltage, OS activation, reset status, and accessories</li>
+          <li>Desktop dimensions, weight, safe packing, baggage limits, and import obligations</li>
+        </ul>
+      </article>
+      <aside>
+        <strong>Before payment</strong>
+        <p>Ask the branch about the condition grade, return window, initial-failure support, warranty outside Japan, and tax-free eligibility. These vary by item and location. Keep the receipt and photograph the serial number.</p>
+      </aside>
+    </div>
+  </section>
+
   <section class="reference-gallery source-appendix" aria-labelledby="travel-reference-title">
-    <div class="section-heading indexed-heading"><span>03 / Source</span><h2 id="travel-reference-title">Original material.</h2><p>These user-supplied screenshots inspired the route and directory. Open any image to compare the source at full size.</p></div>
+    <div class="section-heading indexed-heading"><span>04 / Source</span><h2 id="travel-reference-title">Original material.</h2><p>These user-supplied screenshots inspired the route and directory. Open any image to compare the source at full size.</p></div>
     <div class="reference-images travel-reference-images">
       <EditorialImage image={imageById['travel-provenance']} label="Travel archive / 1930s" className="source-editorial-image" position="center 20%" />
       <figure><a href="/images/japan-source/travel-shopping.webp" target="_blank" aria-label="Open the full shopping screenshot"><img src="/images/japan-source/travel-shopping.webp" alt="Supplied list of Tokyo and Osaka shopping areas" width="591" height="1280" loading="lazy" decoding="async" /></a><figcaption>Shopping list</figcaption></figure>
