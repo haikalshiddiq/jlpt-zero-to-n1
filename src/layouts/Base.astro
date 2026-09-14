@@ -3,7 +3,8 @@ import '../styles/global.css';
 
 const {
   title = 'JLPT Zero to N1',
-  description = 'Daily Japanese learning from absolute beginner to JLPT N1.'
+  description = 'Daily Japanese learning from absolute beginner to JLPT N1.',
+  pageClass = ''
 } = Astro.props;
 const currentPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
 const navItems = [
@@ -46,7 +47,7 @@ const navItems = [
       })();
     </script>
   </head>
-  <body>
+  <body class={pageClass}>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="ambient ambient-one"></div>
     <div class="ambient ambient-two"></div>
@@ -109,9 +110,11 @@ const navItems = [
         const speakButton = t.closest?.('[data-speak]');
         if (speakButton) {
           const status = document.querySelector('[data-audio-status]');
+          const localStatus = speakButton.closest?.('[data-kanji-card]')?.querySelector('[data-card-status]');
           const text = speakButton.dataset.speak?.trim();
           if (!text || !('speechSynthesis' in window)) {
             if (status) status.textContent = 'Japanese speech is not available in this browser. Use the MP3 players on the Listening page.';
+            if (localStatus) localStatus.textContent = 'Japanese speech is not available in this browser.';
             return;
           }
           window.speechSynthesis.cancel();
@@ -124,13 +127,16 @@ const navItems = [
           if (japaneseVoice) utterance.voice = japaneseVoice;
           speakButton.classList.add('is-speaking');
           if (status) status.textContent = `Playing: ${text}`;
+          if (localStatus) localStatus.textContent = `Playing: ${text}`;
           utterance.onend = () => {
             speakButton.classList.remove('is-speaking');
             if (status) status.textContent = 'Playback finished. Repeat it aloud, then play it again.';
+            if (localStatus) localStatus.textContent = 'Playback finished. Repeat it aloud, then play it again.';
           };
           utterance.onerror = () => {
             speakButton.classList.remove('is-speaking');
             if (status) status.textContent = 'Speech playback failed. Check that Japanese text-to-speech is enabled on your device.';
+            if (localStatus) localStatus.textContent = 'Speech playback failed. Check Japanese text-to-speech on your device.';
           };
           window.speechSynthesis.speak(utterance);
           return;
@@ -145,9 +151,12 @@ const navItems = [
         }
         if (t.matches('[data-review]')) {
           const q = jlptStore.get('reviewQueue', []);
-          q.push({ item: t.dataset.item, result: t.dataset.review, date: new Date().toISOString() });
+          if (!q.some((entry) => entry.item === t.dataset.item && entry.result === t.dataset.review)) {
+            q.push({ item: t.dataset.item, result: t.dataset.review, date: new Date().toISOString() });
+          }
           jlptStore.set('reviewQueue', q);
-          t.textContent = 'Saved';
+          t.textContent = 'In review';
+          t.setAttribute('aria-pressed', 'true');
         }
         if (t.matches('[data-answer]')) {
           const ok = t.dataset.answer === 'true';

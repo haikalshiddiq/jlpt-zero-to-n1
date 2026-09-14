@@ -3,140 +3,160 @@
     "char": "日",
     "meaning": "Sun / day",
     "src": "/images/kanji/01-65e5.webp",
-    "alt": "Visual mnemonic for 日, meaning sun / day",
-    "credit": "Original educational illustration"
+    "alt": "A rising sun above the horizon; links 日 to sun and day.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A rising sun above the horizon links 日 to sun and day."
   },
   {
     "char": "月",
     "meaning": "Moon / month",
     "src": "/images/kanji/02-6708.webp",
-    "alt": "Visual mnemonic for 月, meaning moon / month",
-    "credit": "Original educational illustration"
+    "alt": "A crescent moon in the night sky; links 月 to moon and month.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A crescent moon in the night sky links 月 to moon and month."
   },
   {
     "char": "火",
     "meaning": "Fire",
     "src": "/images/kanji/03-706b.webp",
-    "alt": "Visual mnemonic for 火, meaning fire",
-    "credit": "Original educational illustration"
+    "alt": "Two pointed flames mirror the spreading strokes of 火.",
+    "credit": "Original educational illustration",
+    "mnemonic": "Two pointed flames mirror the spreading strokes of 火."
   },
   {
     "char": "水",
     "meaning": "Water",
     "src": "/images/kanji/04-6c34.webp",
-    "alt": "Visual mnemonic for 水, meaning water",
-    "credit": "Original educational illustration"
+    "alt": "Flowing blue ripples link the branching strokes of 水 to water.",
+    "credit": "Original educational illustration",
+    "mnemonic": "Flowing blue ripples link the branching strokes of 水 to water."
   },
   {
     "char": "木",
     "meaning": "Tree / wood",
     "src": "/images/kanji/05-6728.webp",
-    "alt": "Visual mnemonic for 木, meaning tree / wood",
-    "credit": "Original educational illustration"
+    "alt": "A tree with a trunk and crown makes 木 easy to recall as tree or wood.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A tree with a trunk and crown makes 木 easy to recall as tree or wood."
   },
   {
     "char": "金",
     "meaning": "Gold / money",
     "src": "/images/kanji/06-91d1.webp",
-    "alt": "Visual mnemonic for 金, meaning gold / money",
-    "credit": "Original educational illustration"
+    "alt": "Scattered gold coins link 金 to gold and money.",
+    "credit": "Original educational illustration",
+    "mnemonic": "Scattered gold coins link 金 to gold and money."
   },
   {
     "char": "土",
     "meaning": "Earth / soil",
     "src": "/images/kanji/07-571f.webp",
-    "alt": "Visual mnemonic for 土, meaning earth / soil",
-    "credit": "Original educational illustration"
+    "alt": "A sprout rising from layered soil; links 土 to earth and ground.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A sprout rising from layered soil links 土 to earth and ground."
   },
   {
     "char": "人",
     "meaning": "Person",
     "src": "/images/kanji/08-4eba.webp",
-    "alt": "Visual mnemonic for 人, meaning person",
-    "credit": "Original educational illustration"
+    "alt": "Three standing figures echo 人 as a person.",
+    "credit": "Original educational illustration",
+    "mnemonic": "Three standing figures echo 人 as a person."
   },
   {
     "char": "本",
     "meaning": "Book / origin",
     "src": "/images/kanji/09-672c.webp",
-    "alt": "Visual mnemonic for 本, meaning book / origin",
-    "credit": "Original educational illustration"
+    "alt": "A stack of books; links 本 to book, while the marked base; recalls origin.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A stack of books links 本 to book, while the marked base recalls origin."
   },
   {
     "char": "語",
     "meaning": "Language / word",
     "src": "/images/kanji/10-8a9e.webp",
-    "alt": "Visual mnemonic for 語, meaning language / word",
-    "credit": "Original educational illustration"
+    "alt": "Overlapping speech bubbles link 語 to language and words.",
+    "credit": "Original educational illustration",
+    "mnemonic": "Overlapping speech bubbles link 語 to language and words."
   },
   {
     "char": "学",
     "meaning": "Study / learning",
     "src": "/images/kanji/11-5b66.webp",
-    "alt": "Visual mnemonic for 学, meaning study / learning",
-    "credit": "Original educational illustration"
+    "alt": "An open book beneath a school roof; links 学 to study and learning.",
+    "credit": "Original educational illustration",
+    "mnemonic": "An open book beneath a school roof links 学 to study and learning."
   },
   {
     "char": "生",
     "meaning": "Life / birth",
     "src": "/images/kanji/12-751f.webp",
-    "alt": "Visual mnemonic for 生, meaning life / birth",
-    "credit": "Original educational illustration"
+    "alt": "A new sprout emerging from the ground; links 生 to life and birth.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A new sprout emerging from the ground links 生 to life and birth."
   },
   {
     "char": "先",
     "meaning": "Ahead / previous",
     "src": "/images/kanji/13-5148.webp",
-    "alt": "Visual mnemonic for 先, meaning ahead / previous",
-    "credit": "Original educational illustration"
+    "alt": "A figure standing ahead on a path; links 先 to ahead and previous.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A figure standing ahead on a path links 先 to ahead and previous."
   },
   {
     "char": "私",
     "meaning": "I / private",
     "src": "/images/kanji/14-79c1.webp",
-    "alt": "Visual mnemonic for 私, meaning i / private",
-    "credit": "Original educational illustration"
+    "alt": "A single figure inside a boundary; links 私 to I and private.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A single figure inside a boundary links 私 to I and private."
   },
   {
     "char": "山",
     "meaning": "Mountain",
     "src": "/images/kanji/15-5c71.webp",
-    "alt": "Visual mnemonic for 山, meaning mountain",
-    "credit": "Original educational illustration"
+    "alt": "Three mountain peaks mirror the upright strokes of 山.",
+    "credit": "Original educational illustration",
+    "mnemonic": "Three mountain peaks mirror the upright strokes of 山."
   },
   {
     "char": "川",
     "meaning": "River",
     "src": "/images/kanji/16-5ddd.webp",
-    "alt": "Visual mnemonic for 川, meaning river",
-    "credit": "Original educational illustration"
+    "alt": "A winding river channel; recalls the three flowing lines of 川.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A winding river channel recalls the three flowing lines of 川."
   },
   {
     "char": "田",
     "meaning": "Rice field",
     "src": "/images/kanji/17-7530.webp",
-    "alt": "Visual mnemonic for 田, meaning rice field",
-    "credit": "Original educational illustration"
+    "alt": "A divided rice paddy mirrors the four fields inside 田.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A divided rice paddy mirrors the four fields inside 田."
   },
   {
     "char": "口",
     "meaning": "Mouth / opening",
     "src": "/images/kanji/18-53e3.webp",
-    "alt": "Visual mnemonic for 口, meaning mouth / opening",
-    "credit": "Original educational illustration"
+    "alt": "An open mouth forms the square opening of 口.",
+    "credit": "Original educational illustration",
+    "mnemonic": "An open mouth forms the square opening of 口."
   },
   {
     "char": "目",
     "meaning": "Eye",
     "src": "/images/kanji/19-76ee.webp",
-    "alt": "Visual mnemonic for 目, meaning eye",
-    "credit": "Original educational illustration"
+    "alt": "An eye and pupil recall the boxed shape of 目.",
+    "credit": "Original educational illustration",
+    "mnemonic": "An eye and pupil recall the boxed shape of 目."
   },
   {
     "char": "大",
     "meaning": "Big / large",
     "src": "/images/kanji/20-5927.webp",
-    "alt": "Visual mnemonic for 大, meaning big / large",
-    "credit": "Original educational illustration"
+    "alt": "A large circle spreading outward; links 大 to big and large.",
+    "credit": "Original educational illustration",
+    "mnemonic": "A large circle spreading outward links 大 to big and large."
   }
 ]
