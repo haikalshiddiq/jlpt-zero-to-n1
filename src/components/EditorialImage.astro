@@ -1,0 +1,33 @@
+---
+type ImageCredit = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  source: string;
+  creator: string;
+  license: string;
+  license_url?: string;
+};
+
+const {
+  image,
+  label,
+  className = '',
+  loading = 'lazy',
+  position = 'center'
+} = Astro.props as {
+  image: ImageCredit;
+  label: string;
+  className?: string;
+  loading?: 'eager' | 'lazy';
+  position?: string;
+};
+---
+<figure class={`editorial-image ${className}`} style={`--image-position:${position}`}>
+  <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading={loading} decoding="async" />
+  <figcaption>
+    <span>{label}</span>
+    <span>Photo: <a href={image.source} target="_blank" rel="noreferrer">{image.creator}</a> · {image.license_url ? <a href={image.license_url} target="_blank" rel="noreferrer">{image.license}</a> : image.license}</span>
+  </figcaption>
+</figure>

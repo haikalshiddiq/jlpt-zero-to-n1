@@ -1,162 +1,162 @@
 [
   {
     "char": "日",
-    "meaning": "Sun / day",
-    "src": "/images/kanji/01-65e5.webp",
-    "alt": "A rising sun above the horizon; links 日 to sun and day.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A rising sun above the horizon links 日 to sun and day."
+    "meaning": "Sun / Day",
+    "src": "/images/kanji-v2/01-65e5.webp",
+    "alt": "A glowing morning sun seen through a single dark-ink shoji opening; the shoji frame, not a superimposed character, is the shape of 日, while a low horizon glows through its two panes.",
+    "mnemonic": "Day begins when the sun fills the 日-shaped window.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "月",
-    "meaning": "Moon / month",
-    "src": "/images/kanji/02-6708.webp",
-    "alt": "A crescent moon in the night sky; links 月 to moon and month.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A crescent moon in the night sky links 月 to moon and month."
+    "meaning": "Moon / Month",
+    "src": "/images/kanji-v2/02-6708.webp",
+    "alt": "A slim hanging crescent-moon lantern in a quiet night sky; its illuminated rim follows 月 exactly, with two cloud bands crossing the interior like lantern ribs.",
+    "mnemonic": "Two cloud bands cross the 月-shaped moon that marks each month.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "火",
     "meaning": "Fire",
-    "src": "/images/kanji/03-706b.webp",
-    "alt": "Two pointed flames mirror the spreading strokes of 火.",
-    "credit": "Original educational illustration",
-    "mnemonic": "Two pointed flames mirror the spreading strokes of 火."
+    "src": "/images/kanji-v2/03-706b.webp",
+    "alt": "A compact campfire whose four separate tongues of flame are the four strokes of 火; a tiny charcoal bed sits well below the glyph so it cannot read as another stroke.",
+    "mnemonic": "Four spreading flames draw 火 in the heart of the fire.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "水",
     "meaning": "Water",
-    "src": "/images/kanji/04-6c34.webp",
-    "alt": "Flowing blue ripples link the branching strokes of 水 to water.",
-    "credit": "Original educational illustration",
-    "mnemonic": "Flowing blue ripples link the branching strokes of 水 to water."
+    "src": "/images/kanji-v2/04-6c34.webp",
+    "alt": "A waterfall splitting around a central rock into three lively streams; the water ribbons themselves form 水, with no extra wave lines near the main silhouette.",
+    "mnemonic": "One waterfall branches into the four flowing strokes of 水.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "木",
-    "meaning": "Tree / wood",
-    "src": "/images/kanji/05-6728.webp",
-    "alt": "A tree with a trunk and crown makes 木 easy to recall as tree or wood.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A tree with a trunk and crown makes 木 easy to recall as tree or wood."
+    "meaning": "Tree / Wood",
+    "src": "/images/kanji-v2/05-6728.webp",
+    "alt": "A single pruned orchard tree whose trunk, branch, and two roots are literally 木; foliage appears only as sparse pale paper-cut clusters behind the stroke-branches so the silhouette remains dominant.",
+    "mnemonic": "A trunk, one branch, and two roots grow into 木, the tree.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "金",
-    "meaning": "Gold / money",
-    "src": "/images/kanji/06-91d1.webp",
-    "alt": "Scattered gold coins link 金 to gold and money.",
-    "credit": "Original educational illustration",
-    "mnemonic": "Scattered gold coins link 金 to gold and money."
+    "meaning": "Gold / Money",
+    "src": "/images/kanji-v2/06-91d1.webp",
+    "alt": "A cutaway gold mountain built from the exact 金 skeleton: the peaked rock roof, mineral strata, mine shaft, and two exposed nuggets all belong to one coherent geological cross-section.",
+    "mnemonic": "Follow the shaft and strata of 金 to two nuggets and a seam of gold.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "土",
-    "meaning": "Earth / soil",
-    "src": "/images/kanji/07-571f.webp",
-    "alt": "A sprout rising from layered soil; links 土 to earth and ground.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A sprout rising from layered soil links 土 to earth and ground."
+    "meaning": "Earth / Soil",
+    "src": "/images/kanji-v2/07-571f.webp",
+    "alt": "A minimal soil cross-section where a straight seedling root pierces a short surface line and reaches a long bedrock line, making the entire earth diagram read as 土.",
+    "mnemonic": "A root passes through the two layers of 土, the soil.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "人",
     "meaning": "Person",
-    "src": "/images/kanji/08-4eba.webp",
-    "alt": "Three standing figures echo 人 as a person.",
-    "credit": "Original educational illustration",
-    "mnemonic": "Three standing figures echo 人 as a person."
+    "src": "/images/kanji-v2/08-4eba.webp",
+    "alt": "A traveler in a simple kimono takes one long step; the two sweeping sides of the garment and legs are the only two structural marks, meeting at the shoulder to form 人.",
+    "mnemonic": "A person leans forward on two walking legs shaped like 人.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "本",
-    "meaning": "Book / origin",
-    "src": "/images/kanji/09-672c.webp",
-    "alt": "A stack of books; links 本 to book, while the marked base; recalls origin.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A stack of books links 本 to book, while the marked base recalls origin."
+    "meaning": "Book / Origin",
+    "src": "/images/kanji-v2/09-672c.webp",
+    "alt": "A book-tree: a spare 木-shaped tree grows from an open page-like patch of earth, and a bright short band marks the root—the added stroke that turns 木 into 本.",
+    "mnemonic": "Mark the root of the book-tree: 本 means a book and the place of origin.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "語",
-    "meaning": "Language / word",
-    "src": "/images/kanji/10-8a9e.webp",
-    "alt": "Overlapping speech bubbles link 語 to language and words.",
-    "credit": "Original educational illustration",
-    "mnemonic": "Overlapping speech bubbles link 語 to language and words."
+    "meaning": "Language / Word",
+    "src": "/images/kanji-v2/10-8a9e.webp",
+    "alt": "A compact streetside conversation kiosk shaped as 語: the left half is a stack of spoken message strips ending in a square speech opening, and the right half is a five-bar speaking screen above a second mouth opening.",
+    "mnemonic": "Stack spoken signs beside an answering mouth and the whole kiosk becomes 語, language.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "学",
-    "meaning": "Study / learning",
-    "src": "/images/kanji/11-5b66.webp",
-    "alt": "An open book beneath a school roof; links 学 to study and learning.",
-    "credit": "Original educational illustration",
-    "mnemonic": "An open book beneath a school roof links 学 to study and learning."
+    "meaning": "Study / Learning",
+    "src": "/images/kanji-v2/11-5b66.webp",
+    "alt": "A child studies beneath a small school canopy; three chalk sparks hover above the roof, and every architectural or figure edge is assigned to a stroke of 学.",
+    "mnemonic": "A child beneath a roof catches three bright ideas: 学 is learning.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "生",
-    "meaning": "Life / birth",
-    "src": "/images/kanji/12-751f.webp",
-    "alt": "A new sprout emerging from the ground; links 生 to life and birth.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A new sprout emerging from the ground links 生 to life and birth."
+    "meaning": "Life / Birth",
+    "src": "/images/kanji-v2/12-751f.webp",
+    "alt": "A newborn rice shoot rises through two clean earth layers; the plant and ground lines are inseparable from the five-stroke silhouette of 生.",
+    "mnemonic": "A new shoot crosses the soil in the five strokes of 生, life and birth.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "先",
-    "meaning": "Ahead / previous",
-    "src": "/images/kanji/13-5148.webp",
-    "alt": "A figure standing ahead on a path; links 先 to ahead and previous.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A figure standing ahead on a path links 先 to ahead and previous."
+    "meaning": "Ahead / Previous",
+    "src": "/images/kanji-v2/13-5148.webp",
+    "alt": "A trail leader strides at the front carrying a small pennant; the complete figure, belt, and splayed legs form 先 while one faint path recedes behind, never crossing the glyph.",
+    "mnemonic": "The pennant-bearing leader stands 先—first and ahead on the path.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "私",
-    "meaning": "I / private",
-    "src": "/images/kanji/14-79c1.webp",
-    "alt": "A single figure inside a boundary; links 私 to I and private.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A single figure inside a boundary links 私 to I and private."
+    "meaning": "I / Private",
+    "src": "/images/kanji-v2/14-79c1.webp",
+    "alt": "A rice stalk stands beside a tied personal pouch; the stalk is 禾 and the knotted pouch is 厶, joined compositionally as the complete 私 rather than illustrated beside a printed glyph.",
+    "mnemonic": "Beside the grain, a tied pouch is mine alone: 私 means I or private.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "山",
     "meaning": "Mountain",
-    "src": "/images/kanji/15-5c71.webp",
-    "alt": "Three mountain peaks mirror the upright strokes of 山.",
-    "credit": "Original educational illustration",
-    "mnemonic": "Three mountain peaks mirror the upright strokes of 山."
+    "src": "/images/kanji-v2/15-5c71.webp",
+    "alt": "Three sheer Japanese rock pillars rise from one connected ridge; the cliffs use the upright geometry of 山 instead of generic triangular peaks.",
+    "mnemonic": "Three rock pillars share one ridge to become 山, the mountain.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "川",
     "meaning": "River",
-    "src": "/images/kanji/16-5ddd.webp",
-    "alt": "A winding river channel; recalls the three flowing lines of 川.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A winding river channel recalls the three flowing lines of 川."
+    "src": "/images/kanji-v2/16-5ddd.webp",
+    "alt": "An aerial river delta reduced to three parallel ink-blue channels flowing top to bottom; tiny banks and reeds sit outside the channels and never interrupt the clean 川 rhythm.",
+    "mnemonic": "Three parallel currents flow together as 川, the river.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "田",
-    "meaning": "Rice field",
-    "src": "/images/kanji/17-7530.webp",
-    "alt": "A divided rice paddy mirrors the four fields inside 田.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A divided rice paddy mirrors the four fields inside 田."
+    "meaning": "Rice Field",
+    "src": "/images/kanji-v2/17-7530.webp",
+    "alt": "A straight-down aerial view of one rice paddy divided into exactly four flooded plots; the raised perimeter levee and two crossing irrigation dikes are the five strokes of 田.",
+    "mnemonic": "Four flooded plots inside one levee make 田, the rice field.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "口",
-    "meaning": "Mouth / opening",
-    "src": "/images/kanji/18-53e3.webp",
-    "alt": "An open mouth forms the square opening of 口.",
-    "credit": "Original educational illustration",
-    "mnemonic": "An open mouth forms the square opening of 口."
+    "meaning": "Mouth / Opening",
+    "src": "/images/kanji-v2/18-53e3.webp",
+    "alt": "A pale Noh-inspired mask fills the center, but its open dark mouth is an exact square 口 and the sole high-contrast feature; facial details are ghosted far away from the opening.",
+    "mnemonic": "The mask opens one square mouth: 口 is a mouth or opening.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "目",
     "meaning": "Eye",
-    "src": "/images/kanji/19-76ee.webp",
-    "alt": "An eye and pupil recall the boxed shape of 目.",
-    "credit": "Original educational illustration",
-    "mnemonic": "An eye and pupil recall the boxed shape of 目."
+    "src": "/images/kanji-v2/19-76ee.webp",
+    "alt": "A single upright editorial eye, recalling the ancient eye pictograph rotated vertically; its squared eyelid and two iris bands reproduce 目 without a separate pupil mark.",
+    "mnemonic": "Turn the eye upright and its lid and iris bands become 目.",
+    "credit": "Original integrated-shape educational illustration"
   },
   {
     "char": "大",
-    "meaning": "Big / large",
-    "src": "/images/kanji/20-5927.webp",
-    "alt": "A large circle spreading outward; links 大 to big and large.",
-    "credit": "Original educational illustration",
-    "mnemonic": "A large circle spreading outward links 大 to big and large."
+    "meaning": "Big / Large",
+    "src": "/images/kanji-v2/20-5927.webp",
+    "alt": "A sumo-sized festival figure stands frontally with arms stretched wide and legs planted apart; the body gesture itself is the three-stroke 大, with a small head floating just above the junction.",
+    "mnemonic": "A person stretches arms and legs as wide as possible to show 大, big.",
+    "credit": "Original integrated-shape educational illustration"
   }
 ]

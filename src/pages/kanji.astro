@@ -7,6 +7,7 @@ import '../styles/kanji-memory.css';
 
 const visualByCharacter = new Map(kanjiVisuals.map((visual) => [visual.char, visual]));
 const itemByCharacter = new Map(foundationKanji.map((item) => [item.char, item]));
+const heroVisuals = ['日', '山', '語', '大'].map((char) => visualByCharacter.get(char)).filter(Boolean);
 const chapters = [
   { name: 'Week & elements', jp: '曜日と自然', chars: ['日','月','火','水','木','金','土'] },
   { name: 'People & learning', jp: '人と学び', chars: ['人','本','語','学','生','先','私'] },
@@ -16,7 +17,10 @@ const chapters = [
 <Base pageClass="kanji-deck-page" title="Illustrated Kanji Field Guide | JLPT Zero to N1" description="Learn 20 foundation kanji through visual mnemonics, readings, useful words, audio, and review practice.">
   <header class="kanji-deck-hero">
     <div><p class="kanji-eyebrow"><span>漢</span> Illustrated field guide / N5</p><h1>See the picture.<br /><em>Remember the Kanji.</em></h1><p>Twenty foundation characters organized into three visual chapters. Study one at a time, hear it, then save it for review.</p><a href="#study-deck">Start with 日</a></div>
-    <aside aria-label="Deck summary"><strong>20</strong><span>visual mnemonics</span><i></i><small>3 chapters · audio · examples</small></aside>
+    <aside class="kanji-hero-collage" aria-label="Preview of four illustrated Kanji mnemonics">
+      <div>{heroVisuals.map((visual) => visual && <img src={visual.src} alt="" width="960" height="600" loading="eager" decoding="async" />)}</div>
+      <p><strong>20</strong><span>integrated visual mnemonics</span><small>3 chapters · audio · examples</small></p>
+    </aside>
   </header>
 
   <section class="kanji-method" aria-label="Study method"><div><span>01</span><b>See</b><small>Connect shape to picture</small></div><div><span>02</span><b>Hear</b><small>Play the model reading</small></div><div><span>03</span><b>Use</b><small>Read words in context</small></div><div><span>04</span><b>Recall</b><small>Save it for review</small></div></section>

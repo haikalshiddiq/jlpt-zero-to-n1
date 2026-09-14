@@ -47,11 +47,13 @@
 .kanji-deck-hero > div > p:not(.kanji-eyebrow) { max-width: 48ch; margin: 1.5rem 0; color: var(--kd-muted); font-size: clamp(1rem,1.4vw,1.18rem); line-height: 1.65; }
 .kanji-deck-hero > div > a { display: inline-flex; min-height: 48px; align-items: center; padding: .8rem 1.15rem; background: var(--kd-rust); color: white; font-weight: 850; text-decoration: none; }
 .kanji-deck-hero > div > a:hover { background: var(--kd-rust-dark); transform: translateY(-1px); }
-.kanji-deck-hero aside { display: grid; padding: 2rem; border: 1px solid var(--kd-line); background: var(--kd-surface); }
-.kanji-deck-hero aside strong { color: var(--kd-rust); font-family: Georgia,serif; font-size: clamp(5rem,10vw,9rem); line-height: .8; }
-.kanji-deck-hero aside span { margin-top: 1rem; font-size: 1.15rem; font-weight: 850; }
-.kanji-deck-hero aside i { width: 100%; height: 4px; margin: 2rem 0 1rem; background: linear-gradient(90deg,var(--kd-rust) 0 35%,var(--kd-teal) 35% 70%,var(--kd-green) 70%); }
-.kanji-deck-hero aside small { color: var(--kd-muted); }
+.kanji-hero-collage { position: relative; display: grid; padding: 0; border: 1px solid var(--kd-line); background: var(--kd-surface); }
+.kanji-hero-collage > div { display: grid; grid-template-columns: 1fr 1fr; }
+.kanji-hero-collage img { display: block; width: 100%; aspect-ratio: 1.35; object-fit: cover; }
+.kanji-hero-collage > p { position: absolute; right: -1.4rem; bottom: -2rem; display: grid; min-width: 13rem; margin: 0; padding: 1.1rem; background: var(--kd-rust); color: white; box-shadow: 0 18px 40px rgb(20 38 55 / .18); }
+.kanji-hero-collage strong { font-family: Georgia,serif; font-size: 3.8rem; line-height: .8; }
+.kanji-hero-collage span { margin-top: .6rem; font-size: .9rem; font-weight: 850; }
+.kanji-hero-collage small { margin-top: .2rem; color: #fff3ea; font-size: .68rem; }
 
 .kanji-method { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid var(--kd-line); }
 .kanji-method div { display: grid; grid-template-columns: 2rem 1fr; gap: .2rem .75rem; padding: 1.35rem 1rem; }
@@ -89,8 +91,8 @@
 .study-stage { border-top: 1px solid var(--kd-line); border-bottom: 1px solid var(--kd-line); }
 .kanji-study-card { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(22rem,.95fr); min-height: 610px; }
 .kanji-study-card[hidden] { display: none; }
-.kanji-study-card > figure { display: grid; grid-template-rows: minmax(0,1fr) auto; min-width: 0; margin: 0; padding: clamp(1rem,3vw,2rem) clamp(1rem,4vw,3rem) clamp(1rem,3vw,2rem) 0; border-right: 1px solid var(--kd-line); }
-.kanji-study-card figure img { display: block; width: 100%; height: 100%; min-height: 330px; object-fit: contain; background: var(--kd-surface); }
+.kanji-study-card > figure { display: grid; grid-template-rows: auto auto; align-content: center; min-width: 0; margin: 0; padding: clamp(1rem,3vw,2rem) clamp(1rem,4vw,3rem) clamp(1rem,3vw,2rem) 0; border-right: 1px solid var(--kd-line); }
+.kanji-study-card figure img { display: block; width: 100%; height: auto; aspect-ratio: 1.6; object-fit: contain; background: var(--kd-surface); }
 .kanji-study-card figcaption { display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; padding-top: 1rem; }
 .kanji-study-card figcaption span { color: var(--kd-rust-dark); font-size: .68rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
 .kanji-study-card figcaption p { margin: 0; color: var(--kd-muted); font-size: .87rem; line-height: 1.55; }
@@ -142,7 +144,7 @@
   .kanji-deck-page .sidebar { position: relative; width: 100%; height: auto; }
   .kanji-deck-page main { max-width: 100vw; }
   .kanji-deck-hero { grid-template-columns: 1fr; min-height: 0; }
-  .kanji-deck-hero aside { max-width: 27rem; }
+  .kanji-deck-hero aside { max-width: 32rem; }
   .kanji-chapter { grid-template-columns: 1fr; }
   .kanji-thumbnail-row { grid-template-columns: repeat(7,minmax(6.5rem,1fr)); overflow-x: auto; padding: .25rem 0 .75rem; scroll-snap-type: x mandatory; }
   .kanji-thumbnail-row button { scroll-snap-align: start; }
@@ -153,6 +155,7 @@
   .kanji-deck-page main { padding: 2rem 1rem 4rem; }
   .kanji-deck-hero { gap: 2.5rem; padding-block: 2rem 3.5rem; }
   .kanji-deck-hero h1 { font-size: clamp(3rem,15vw,4.8rem); }
+  .kanji-hero-collage > p { right: -.25rem; bottom: -1.5rem; }
   .kanji-method { grid-template-columns: 1fr 1fr; }
   .kanji-method div:nth-child(3) { border-left: 0; border-top: 1px solid var(--kd-line); }
   .kanji-method div:nth-child(4) { border-top: 1px solid var(--kd-line); }

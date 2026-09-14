@@ -1,10 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
+import EditorialImage from '../components/EditorialImage.astro';
 import { itinerary, shoppingSpots } from '../data/japan-life';
+import japanImages from '../data/japan-image-credits.json';
 import '../styles/japan-life.css';
 
 const mapLink = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query + ', Japan')}`;
 const typeLabels = { visit: 'Visit', food: 'Food check', prayer: 'Prayer', transfer: 'Transfer' } as const;
+const imageById = Object.fromEntries(japanImages.map((image) => [image.id, image]));
 ---
 <Base pageClass="japan-page travel-page" title="Japan Travel Planner | JLPT Zero to N1" description="A seven-day Tokyo, Mount Fuji, Osaka, Kyoto, and Nara itinerary with Muslim-friendly planning notes and interest-based shopping areas.">
   <header class="japan-hero travel-hero">
@@ -22,26 +25,29 @@ const typeLabels = { visit: 'Visit', food: 'Food check', prayer: 'Prayer', trans
         <div><dt>Planning</dt><dd>Muslim-friendly checks</dd></div>
       </dl>
     </div>
-    <aside class="route-visual" aria-label="Route from Tokyo to Kansai">
-      <div class="route-stamp" aria-hidden="true">日本<br />旅程</div>
-      <ol>
-        <li><span>01</span><div><b>東京</b><small>Tokyo</small></div></li>
-        <li><span>02</span><div><b>富士</b><small>Mount Fuji</small></div></li>
-        <li><span>03</span><div><b>大阪</b><small>Osaka</small></div></li>
-        <li><span>04</span><div><b>京都・奈良</b><small>Kyoto & Nara</small></div></li>
-      </ol>
-      <p>East to west</p>
-    </aside>
+    <div class="hero-media-stack">
+      <EditorialImage image={imageById['travel-hero']} label="Tokyo / Mount Fuji" className="hero-editorial-image" loading="eager" position="center 45%" />
+      <aside class="route-visual" aria-label="Route from Tokyo to Kansai">
+        <div class="route-stamp" aria-hidden="true">日本<br />旅程</div>
+        <ol>
+          <li><span>01</span><div><b>東京</b><small>Tokyo</small></div></li>
+          <li><span>02</span><div><b>富士</b><small>Mount Fuji</small></div></li>
+          <li><span>03</span><div><b>大阪</b><small>Osaka</small></div></li>
+          <li><span>04</span><div><b>京都・奈良</b><small>Kyoto & Nara</small></div></li>
+        </ol>
+        <p>East to west</p>
+      </aside>
+    </div>
   </header>
 
-  <section class="travel-notice" aria-labelledby="before-you-go">
-    <span class="notice-mark" aria-hidden="true">!</span>
-    <div><h2 id="before-you-go">Verify before departure</h2><p>Prayer spaces, halal menus, and opening hours can change. Confirm each venue and keep a backup near your hotel or station.</p></div>
-    <a href="https://www.japan.travel/en/my/muslim-guide/travel-ideas/japans-muslim-friendly-tourism-what-travelers-need-to-know/" target="_blank" rel="noreferrer">JNTO Muslim guide</a>
+  <section class="travel-notice visual-notice" aria-labelledby="before-you-go">
+    <EditorialImage image={imageById['travel-muslim']} label="Tokyo Camii" className="notice-editorial-image" position="center 35%" />
+    <div class="notice-content"><span class="notice-mark" aria-hidden="true">!</span><div><h2 id="before-you-go">Verify before departure</h2><p>Prayer spaces, halal menus, and opening hours can change. Confirm each venue and keep a backup near your hotel or station.</p></div><a href="https://www.japan.travel/en/my/muslim-guide/travel-ideas/japans-muslim-friendly-tourism-what-travelers-need-to-know/" target="_blank" rel="noreferrer">JNTO Muslim guide</a></div>
   </section>
 
   <section id="itinerary" class="japan-section itinerary-section" aria-labelledby="itinerary-title">
     <div class="section-heading indexed-heading"><span>01 / Route</span><h2 id="itinerary-title">Seven days, paced by area.</h2><p>Open a day to see stops, planning notes, and a direct Google Maps search.</p></div>
+    <EditorialImage image={imageById['travel-rail']} label="Tokaido route / Fuji River" className="section-editorial-image itinerary-image" position="center 44%" />
     <div class="day-list">
       {itinerary.map((item, index) => (
         <details class="day-panel" open={index === 0}>
@@ -67,6 +73,7 @@ const typeLabels = { visit: 'Visit', food: 'Food check', prayer: 'Prayer', trans
 
   <section id="shopping" class="japan-section shopping-section" aria-labelledby="shopping-title">
     <div class="section-heading indexed-heading"><span>02 / Directory</span><h2 id="shopping-title">Shop by interest,<br />not by accident.</h2><p>Filter by city, then use the live map search to verify current stores and opening hours.</p></div>
+    <EditorialImage image={imageById['travel-shopping']} label="Ginza / Tokyo" className="section-editorial-image shopping-image" position="center 52%" />
     <div class="shopping-toolbar">
       <div class="city-filter" role="group" aria-label="Filter shopping areas by city">
         <button type="button" class="city-filter-button active" data-city-filter="All" aria-pressed="true">All</button>
@@ -91,6 +98,7 @@ const typeLabels = { visit: 'Visit', food: 'Food check', prayer: 'Prayer', trans
   <section class="reference-gallery source-appendix" aria-labelledby="travel-reference-title">
     <div class="section-heading indexed-heading"><span>03 / Source</span><h2 id="travel-reference-title">Original material.</h2><p>These user-supplied screenshots inspired the route and directory. Open any image to compare the source at full size.</p></div>
     <div class="reference-images travel-reference-images">
+      <EditorialImage image={imageById['travel-provenance']} label="Travel archive / 1930s" className="source-editorial-image" position="center 20%" />
       <figure><a href="/images/japan-source/travel-shopping.webp" target="_blank" aria-label="Open the full shopping screenshot"><img src="/images/japan-source/travel-shopping.webp" alt="Supplied list of Tokyo and Osaka shopping areas" width="591" height="1280" loading="lazy" decoding="async" /></a><figcaption>Shopping list</figcaption></figure>
       <figure><a href="/images/japan-source/travel-itinerary-1.webp" target="_blank" aria-label="Open the first full itinerary screenshot"><img src="/images/japan-source/travel-itinerary-1.webp" alt="First page of the supplied seven-day Japan itinerary" width="591" height="1280" loading="lazy" decoding="async" /></a><figcaption>Itinerary / page 1</figcaption></figure>
       <figure><a href="/images/japan-source/travel-itinerary-2.webp" target="_blank" aria-label="Open the second full itinerary screenshot"><img src="/images/japan-source/travel-itinerary-2.webp" alt="Second page of the supplied seven-day Japan itinerary" width="591" height="1280" loading="lazy" decoding="async" /></a><figcaption>Itinerary / page 2</figcaption></figure>
