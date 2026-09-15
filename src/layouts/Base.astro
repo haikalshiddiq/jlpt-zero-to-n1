@@ -59,7 +59,10 @@ const navItems = [
           <small>Daily mastery path</small>
         </a>
         <nav>
-          {navItems.map(([label, href]) => <a href={href} aria-current={currentPath === href ? 'page' : undefined}>{label}</a>)}
+          {navItems.map(([label, href]) => {
+            const active = currentPath === href || (href !== '/' && currentPath.startsWith(`${href}/`));
+            return <a href={href} aria-current={active ? 'page' : undefined}>{label}</a>;
+          })}
         </nav>
         <div class="side-mission">
           <span class="badge pulse">Live</span>

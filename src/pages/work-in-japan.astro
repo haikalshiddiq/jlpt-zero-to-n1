@@ -1,100 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
 import EditorialImage from '../components/EditorialImage.astro';
-import { officialSources, sswFieldsFromScreenshot, workSteps } from '../data/japan-life';
+import GuideSubnav from '../components/GuideSubnav.astro';
+import { workNavigation } from '../data/japan-navigation';
 import japanImages from '../data/japan-image-credits.json';
 import '../styles/japan-life.css';
 
-const phases = ['Define route', 'Find employer', 'Verify terms', 'Authorize', 'Depart'];
 const imageById = Object.fromEntries(japanImages.map((image) => [image.id, image]));
+const sections = workNavigation.slice(1).map((section) => ({ ...section, image: imageById[section.imageId ?? 'work-hero'] }));
 ---
-<Base pageClass="japan-page work-page" title="Work in Japan Guide | JLPT Zero to N1" description="A source-backed guide for Indonesians researching legal work routes to Japan, including SSW, employer checks, COE, visa, and KP2MI/BP2MI procedures.">
-  <header class="japan-hero work-hero">
+<Base pageClass="japan-page work-page guide-hub-page" title="Work in Japan Guide | JLPT Zero to N1" description="Open a focused guide to Japan work visa routes, applications, documents, recruitment safety, or official sources.">
+  <GuideSubnav guide="work" />
+  <header class="guide-hub-hero">
     <div class="hero-copy">
-      <p class="japan-kicker"><span>働</span> Work in Japan / Legal route</p>
-      <h1>Plan a legal path<br /><em>to work in Japan.</em></h1>
-      <p class="japan-intro">Choose the right residence status, verify the employer, document every term, and follow official procedures in Japan and Indonesia.</p>
-      <div class="mission-row"><a class="japan-primary" href="#work-path">Start your checklist</a><a class="text-action" href="#official-sources">Verify with official sources</a></div>
+      <p class="japan-kicker"><span>働</span> Work in Japan Guide</p>
+      <h1>One decision<br /><em>at a time.</em></h1>
+      <p class="japan-intro">Use a shorter page for each stage. Start with the legal route, then move through applications, documents, safety, and official verification.</p>
     </div>
-    <div class="hero-media-stack work-hero-media">
-      <EditorialImage image={imageById['work-hero']} label="Working life / Japan" className="hero-editorial-image" loading="eager" position="center 45%" />
-      <aside class="work-route-visual" aria-label="Application route overview">
-        <p>Application route</p>
-        <ol>{phases.map((phase, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><b>{phase}</b></li>)}</ol>
-        <strong>自分で確認<small>Verify it yourself</small></strong>
-      </aside>
-    </div>
+    <EditorialImage image={imageById['work-hero']} label="Working life / Japan" className="guide-hub-image" loading="eager" position="center 45%" />
   </header>
 
-  <section class="travel-notice warning-notice visual-notice" aria-labelledby="not-a-package">
-    <EditorialImage image={imageById['work-legal']} label="Immigration administration / Nagoya" className="notice-editorial-image" position="center 55%" />
-    <div class="notice-content"><span class="notice-mark" aria-hidden="true">!</span><div><h2 id="not-a-package">Guidance, not a placement offer</h2><p>No seller endorsement, price claim, job guarantee, or visa promise. Never pay before the company, role, fees, and written terms are verified.</p></div><a href="https://www.mofa.go.jp/j_info/visit/visa/long/index.html" target="_blank" rel="noreferrer">MOFA visa categories</a></div>
+  <aside class="hub-legal-note"><strong>Guidance, not a placement offer.</strong><p>No seller endorsement, job guarantee, price claim, or visa promise. Verify the employer, role, fees, and written terms independently.</p></aside>
+
+  <section class="guide-menu" aria-label="Work in Japan pages">
+    {sections.map((section, index) => (
+      <article id={section.href.split('/').pop()} class={index === 0 ? 'guide-menu-item featured' : 'guide-menu-item'}>
+        <EditorialImage image={section.image} label={section.title} className="guide-menu-image" position="center" />
+        <div class="guide-menu-copy">
+          <span lang="ja">{section.japanese}</span>
+          <h2>{section.title}</h2>
+          <p>{section.summary}</p>
+          <a href={section.href}>Open {section.label.toLowerCase()}</a>
+        </div>
+      </article>
+    ))}
   </section>
-
-  <nav class="local-nav" aria-label="Work guide sections"><a href="#routes">Routes</a><a href="#work-path">Checklist</a><a href="#documents">Documents</a><a href="#warnings">Warnings</a><a href="#official-sources">Sources</a></nav>
-
-  <section id="routes" class="japan-section route-chooser" aria-labelledby="route-title">
-    <div class="section-heading indexed-heading"><span>01 / Choose</span><h2 id="route-title">Route before job board.</h2><p>Your duties, education, experience, Japanese ability, and exams determine which status of residence may fit.</p></div>
-    <EditorialImage image={imageById['work-routes']} label="Sample residence card / identification only" className="section-editorial-image work-route-image" position="center" />
-    <div class="route-comparison">
-      <article><header><span>特定技能</span><small>Route A</small></header><h3>Specified Skilled Worker</h3><dl><div><dt>Best fit</dt><dd>Eligible field-based work</dd></div><div><dt>Core evidence</dt><dd>Skills and Japanese tests</dd></div><div><dt>Support</dt><dd>Defined support structure</dd></div></dl><p>The official SSW site lists current fields, tests, and support requirements.</p><a href="https://www.ssw.go.jp/en/about/visa/" target="_blank" rel="noreferrer">Check official SSW requirements</a></article>
-      <article><header><span>就労ビザ</span><small>Route B</small></header><h3>Professional work status</h3><dl><div><dt>Best fit</dt><dd>Specialist or professional duties</dd></div><div><dt>Core evidence</dt><dd>Relevant degree or experience</dd></div><div><dt>Match</dt><dd>Duties must fit the status</dd></div></dl><p>Includes engineering, humanities, instruction, academia, and other categories.</p><a href="https://www.mofa.go.jp/j_info/visit/visa/long/visa1.html" target="_blank" rel="noreferrer">Review official work visas</a></article>
-    </div>
-    <details class="field-line"><summary>SSW examples mentioned in the supplied screenshot</summary><ul>{sswFieldsFromScreenshot.map((field) => <li>{field}</li>)}</ul><p>Examples only. Use the official list for current eligible fields.</p></details>
-  </section>
-
-  <section id="work-path" class="japan-section checklist-section" aria-labelledby="work-path-title">
-    <div class="section-heading indexed-heading"><span>02 / Apply</span><h2 id="work-path-title">Your application journey.</h2><p>Check a step only after completing it and saving evidence. Progress stays in this browser.</p></div>
-    <EditorialImage image={imageById['work-checklist']} label="Service work / Akihabara Station" className="section-editorial-image work-checklist-image" position="center 45%" />
-    <div class="checklist-layout">
-      <aside class="checklist-progress" aria-live="polite"><span class="progress-number" data-checklist-number>0%</span><strong data-checklist-count>0 of {workSteps.length} complete</strong><span class="progress-track"><i data-checklist-bar></i></span><small>Stored on this device</small></aside>
-      <ol class="work-steps">
-        {workSteps.map((step, index) => (
-          <li>
-            <label><input type="checkbox" data-work-check={String(index)} /><span class="check-box" aria-hidden="true"></span><span class="step-number">{String(index + 1).padStart(2, '0')}</span><span class="work-step-copy"><strong>{step.title}</strong><small>{step.detail}</small></span></label>
-            <a href={step.href} target="_blank" rel="noreferrer">{step.action}</a>
-          </li>
-        ))}
-      </ol>
-    </div>
-    <button type="button" class="reset-checklist" data-reset-checklist>Reset saved progress</button>
-  </section>
-
-  <section id="documents" class="japan-section document-section" aria-labelledby="document-title">
-    <div class="section-heading indexed-heading"><span>03 / Prepare</span><h2 id="document-title">Build your document pack.</h2><p>Keep originals, translations, submissions, receipts, and written terms organized by purpose.</p></div>
-    <EditorialImage image={imageById['work-documents']} label="Identity documents / contextual example" className="section-editorial-image work-document-image" position="center 52%" />
-    <div class="document-groups">
-      <article><span>Folder 01</span><h3>Application</h3><ul><li>Japanese rirekisho and work history</li><li>Company and vacancy research</li><li>Japanese phone-call preparation</li><li>Short application email</li></ul></article>
-      <article><span>Folder 02</span><h3>Identity & eligibility</h3><ul><li>Passport and civil documents</li><li>Skills and language evidence</li><li>Employment contract and conditions</li><li>Certificate of Eligibility process</li></ul></article>
-      <article><span>Folder 03</span><h3>Protection & departure</h3><ul><li>Official KP2MI/BP2MI registration</li><li>Visa application</li><li>Insurance, housing, emergency contacts</li><li>Arrival and daily-life preparation</li></ul></article>
-    </div>
-  </section>
-
-  <section id="warnings" class="fraud-check" aria-labelledby="fraud-title">
-    <div><EditorialImage image={imageById['work-fraud']} label="Police box / Urawa Station" className="fraud-editorial-image" position="center 45%" /><span class="stop-mark">STOP</span><h2 id="fraud-title">Pause when a recruiter does this.</h2><p>Do not send money or original documents until every claim can be checked independently.</p></div>
-    <ol><li><span>01</span>Guarantees a visa or job before screening</li><li><span>02</span>Hides the employer’s legal name or work location</li><li><span>03</span>Requests payment without an itemized agreement</li><li><span>04</span>Uses only personal chat and refuses official documents</li><li><span>05</span>Asks you to enter as a tourist and work</li></ol>
-  </section>
-
-  <section id="official-sources" class="japan-section" aria-labelledby="sources-title">
-    <div class="section-heading indexed-heading"><span>04 / Verify</span><h2 id="sources-title">Official starting points.</h2><p>Requirements change. Recheck the responsible authority before submitting documents or paying a fee.</p></div>
-    <EditorialImage image={imageById['work-sources']} label="Hello Work / Shinjuku" className="section-editorial-image work-sources-image" position="center 35%" />
-    <div class="official-links">{officialSources.map((source, index) => <a href={source.href} target="_blank" rel="noreferrer"><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{source.name}</strong><small>{source.label}</small></div><b aria-hidden="true">↗</b></a>)}</div>
-  </section>
-
-  <section class="work-reference source-appendix" aria-labelledby="work-reference-title">
-    <div class="section-heading indexed-heading"><span>05 / Provenance</span><h2 id="work-reference-title">What inspired this guide.</h2><p>The supplied promotional screenshot suggested practical topics. This page rebuilt them around official sources and excluded pricing, savings, endorsement, and job-guarantee claims.</p><a class="text-action" href="/images/japan-source/work-guide-source.webp" target="_blank">Open full source screenshot</a></div>
-    <div class="provenance-images"><EditorialImage image={imageById['work-provenance']} label="Labour-policy research / Tokyo" className="provenance-editorial-image" position="center 48%" /><figure><a href="/images/japan-source/work-guide-source.webp" target="_blank" aria-label="Open the full supplied work guide screenshot"><img src="/images/japan-source/work-guide-source.webp" alt="User-supplied promotional outline about independently applying for work in Japan" width="591" height="1280" loading="lazy" decoding="async" /></a><figcaption>User-supplied reference, not an endorsement.</figcaption></figure></div>
-  </section>
-
-  <script is:inline>
-    const storageKey = 'jlpt-work-japan-checklist';
-    const checks = [...document.querySelectorAll('[data-work-check]')];
-    const count = document.querySelector('[data-checklist-count]');
-    const number = document.querySelector('[data-checklist-number]');
-    const bar = document.querySelector('[data-checklist-bar]');
-    function saved(){ try { const value=JSON.parse(localStorage.getItem(storageKey)||'[]'); return Array.isArray(value)?value.map(String):[]; } catch { return []; } }
-    function render(){ const completed=checks.filter((box)=>box.checked).length; const percent=checks.length?Math.round(completed/checks.length*100):0; if(count)count.textContent=`${completed} of ${checks.length} complete`; if(number)number.textContent=`${percent}%`; if(bar)bar.style.width=`${percent}%`; }
-    const restored=saved(); checks.forEach((box)=>{ box.checked=restored.includes(box.dataset.workCheck); box.addEventListener('change',()=>{ localStorage.setItem(storageKey,JSON.stringify(checks.filter((item)=>item.checked).map((item)=>item.dataset.workCheck))); render(); }); });
-    document.querySelector('[data-reset-checklist]')?.addEventListener('click',()=>{ checks.forEach((box)=>{box.checked=false}); localStorage.removeItem(storageKey); render(); }); render();
-  </script>
 </Base>

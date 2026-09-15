@@ -1,169 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
 import EditorialImage from '../components/EditorialImage.astro';
-import { itinerary, secondhandStores, shoppingSpots } from '../data/japan-life';
+import GuideSubnav from '../components/GuideSubnav.astro';
+import { travelNavigation } from '../data/japan-navigation';
 import japanImages from '../data/japan-image-credits.json';
 import '../styles/japan-life.css';
 
-const mapLink = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query + ', Japan')}`;
-const typeLabels = { visit: 'Visit', food: 'Food check', prayer: 'Prayer', transfer: 'Transfer' } as const;
 const imageById = Object.fromEntries(japanImages.map((image) => [image.id, image]));
+const sections = travelNavigation.slice(1).map((section) => ({ ...section, image: imageById[section.imageId ?? 'travel-hero'] }));
 ---
-<Base pageClass="japan-page travel-page" title="Japan Travel Planner | JLPT Zero to N1" description="A seven-day Tokyo, Mount Fuji, Osaka, Kyoto, and Nara itinerary with Muslim-friendly planning, shopping areas, and a second-hand camera and computer guide.">
-  <header class="japan-hero travel-hero">
+<Base pageClass="japan-page travel-page guide-hub-page" title="Japan Travel Planner | JLPT Zero to N1" description="Open a focused Japan travel guide for itinerary, Muslim-friendly planning, shopping, second-hand gear, or source material.">
+  <GuideSubnav guide="travel" />
+  <header class="guide-hub-hero">
     <div class="hero-copy">
-      <p class="japan-kicker"><span>旅</span> Japan Travel / 7 days</p>
-      <h1>Tokyo to Kansai,<br /><em>one clear route.</em></h1>
-      <p class="japan-intro">A first-time Japan plan with realistic area grouping, Muslim-friendly checks, and live map links.</p>
-      <div class="mission-row">
-        <a class="japan-primary" href="#itinerary">Explore the 7-day route</a>
-        <a class="text-action" href="#shopping">Browse 23 shopping areas</a>
-      </div>
-      <dl class="hero-facts" aria-label="Trip overview">
-        <div><dt>Duration</dt><dd>7 days</dd></div>
-        <div><dt>Direction</dt><dd>Tokyo → Kansai</dd></div>
-        <div><dt>Planning</dt><dd>Muslim-friendly checks</dd></div>
-      </dl>
+      <p class="japan-kicker"><span>旅</span> Japan Travel Planner</p>
+      <h1>Choose one part<br /><em>of the journey.</em></h1>
+      <p class="japan-intro">Each topic now has its own shorter page, so you can open what you need without scrolling through the entire guide.</p>
     </div>
-    <div class="hero-media-stack">
-      <EditorialImage image={imageById['travel-hero']} label="Tokyo / Mount Fuji" className="hero-editorial-image" loading="eager" position="center 45%" />
-      <aside class="route-visual" aria-label="Route from Tokyo to Kansai">
-        <div class="route-stamp" aria-hidden="true">日本<br />旅程</div>
-        <ol>
-          <li><span>01</span><div><b>東京</b><small>Tokyo</small></div></li>
-          <li><span>02</span><div><b>富士</b><small>Mount Fuji</small></div></li>
-          <li><span>03</span><div><b>大阪</b><small>Osaka</small></div></li>
-          <li><span>04</span><div><b>京都・奈良</b><small>Kyoto & Nara</small></div></li>
-        </ol>
-        <p>East to west</p>
-      </aside>
-    </div>
+    <EditorialImage image={imageById['travel-hero']} label="Tokyo / Mount Fuji" className="guide-hub-image" loading="eager" position="center 45%" />
   </header>
 
-  <section class="travel-notice visual-notice" aria-labelledby="before-you-go">
-    <EditorialImage image={imageById['travel-muslim']} label="Tokyo Camii" className="notice-editorial-image" position="center 35%" />
-    <div class="notice-content"><span class="notice-mark" aria-hidden="true">!</span><div><h2 id="before-you-go">Verify before departure</h2><p>Prayer spaces, halal menus, and opening hours can change. Confirm each venue and keep a backup near your hotel or station.</p></div><a href="https://www.japan.travel/en/my/muslim-guide/travel-ideas/japans-muslim-friendly-tourism-what-travelers-need-to-know/" target="_blank" rel="noreferrer">JNTO Muslim guide</a></div>
-  </section>
-
-  <section id="itinerary" class="japan-section itinerary-section" aria-labelledby="itinerary-title">
-    <div class="section-heading indexed-heading"><span>01 / Route</span><h2 id="itinerary-title">Seven days, paced by area.</h2><p>Open a day to see stops, planning notes, and a direct Google Maps search.</p></div>
-    <EditorialImage image={imageById['travel-rail']} label="Tokaido route / Fuji River" className="section-editorial-image itinerary-image" position="center 44%" />
-    <div class="day-list">
-      {itinerary.map((item, index) => (
-        <details class="day-panel" open={index === 0}>
-          <summary>
-            <span class="route-node" aria-hidden="true"></span>
-            <span class="day-number">{String(item.day).padStart(2, '0')}</span>
-            <span class="day-title"><strong>{item.title}</strong><small>{item.base}</small></span>
-            <span class="summary-action"><span class="closed-label">Show stops</span><span class="open-label">Hide stops</span><i aria-hidden="true"></i></span>
-          </summary>
-          <ol class="stop-list">
-            {item.stops.map((stop) => (
-              <li>
-                <span class={`stop-type ${stop.type}`}>{typeLabels[stop.type]}</span>
-                <div><h3>{stop.place}</h3><p>{stop.note}</p></div>
-                <a href={mapLink(`${stop.place} ${stop.area}`)} target="_blank" rel="noreferrer" aria-label={`Open map for ${stop.place}`}>Open map</a>
-              </li>
-            ))}
-          </ol>
-        </details>
-      ))}
-    </div>
-  </section>
-
-  <section id="shopping" class="japan-section shopping-section" aria-labelledby="shopping-title">
-    <div class="section-heading indexed-heading"><span>02 / Directory</span><h2 id="shopping-title">Shop by interest,<br />not by accident.</h2><p>Filter by city, then use the live map search to verify current stores and opening hours.</p></div>
-    <EditorialImage image={imageById['travel-shopping']} label="Ginza / Tokyo" className="section-editorial-image shopping-image" position="center 52%" />
-    <div class="shopping-toolbar">
-      <div class="city-filter" role="group" aria-label="Filter shopping areas by city">
-        <button type="button" class="city-filter-button active" data-city-filter="All" aria-pressed="true">All</button>
-        <button type="button" class="city-filter-button" data-city-filter="Tokyo" aria-pressed="false">Tokyo</button>
-        <button type="button" class="city-filter-button" data-city-filter="Osaka" aria-pressed="false">Osaka</button>
-      </div>
-      <p class="filter-status" data-filter-status aria-live="polite">Showing all {shoppingSpots.length} areas</p>
-    </div>
-    <div class="shopping-directory">
-      <div class="directory-head" aria-hidden="true"><span>Interest</span><span>Area</span><span>Planning note</span><span>Map</span></div>
-      {shoppingSpots.map((spot) => (
-        <article class="shopping-item" data-city={spot.city}>
-          <div class="shopping-interest"><small>{spot.city}</small><h3>{spot.interest}</h3></div>
-          <strong>{spot.area}</strong>
-          <p>{spot.note}</p>
-          <a href={mapLink(`${spot.area} ${spot.city}`)} target="_blank" rel="noreferrer" aria-label={`View map for ${spot.area}`}>View map</a>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section id="secondhand" class="japan-section secondhand-section" aria-labelledby="secondhand-title">
-    <div class="secondhand-intro">
-      <div class="section-heading indexed-heading">
-        <span>03 / Second-hand</span>
-        <h2 id="secondhand-title">Buy used.<br />Check first.</h2>
-        <p>Start with official inventory, inspect the exact unit, and compare the final value after accessories, warranty limits, and transport.</p>
-      </div>
-      <EditorialImage image={imageById['travel-secondhand']} label="Sofmap / Osaka" className="secondhand-editorial-image" position="center 52%" />
-    </div>
-
-    <div class="secondhand-store-grid">
-      {secondhandStores.map((store, index) => (
-        <article class="secondhand-store">
-          <header><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{store.name}</h3><p lang="ja">{store.japaneseName}</p></div></header>
-          <strong>{store.bestFor}</strong>
-          <small>{store.areas}</small>
-          <p>{store.note}</p>
-          <div class="secondhand-actions">
-            <a href={store.inventoryUrl} target="_blank" rel="noreferrer">Official inventory</a>
-            <a href={mapLink(store.mapQuery)} target="_blank" rel="noreferrer">Find branches</a>
-          </div>
-        </article>
-      ))}
-    </div>
-
-    <div class="secondhand-checks">
-      <article>
-        <h3>Camera check</h3>
-        <ul>
-          <li>Sensor dust, dead pixels, autofocus, stabilization, and shutter operation</li>
-          <li>Lens fungus, haze, scratches, aperture blades, and mount compatibility</li>
-          <li>Battery, charger, caps, cables, menu languages, and stated defects</li>
-        </ul>
+  <section class="guide-menu" aria-label="Japan Travel pages">
+    {sections.map((section, index) => (
+      <article id={section.href.split('/').pop()} class={index === 0 ? 'guide-menu-item featured' : 'guide-menu-item'}>
+        <EditorialImage image={section.image} label={section.title} className="guide-menu-image" position="center" />
+        <div class="guide-menu-copy">
+          <span lang="ja">{section.japanese}</span>
+          <h2>{section.title}</h2>
+          <p>{section.summary}</p>
+          <a href={section.href}>Open {section.label.toLowerCase()}</a>
+        </div>
       </article>
-      <article>
-        <h3>Computer check</h3>
-        <ul>
-          <li>Battery and SSD health, screen, keyboard, trackpad, ports, Wi-Fi, and webcam</li>
-          <li>Japanese keyboard layout, charger voltage, OS activation, reset status, and accessories</li>
-          <li>Desktop dimensions, weight, safe packing, baggage limits, and import obligations</li>
-        </ul>
-      </article>
-      <aside>
-        <strong>Before payment</strong>
-        <p>Ask the branch about the condition grade, return window, initial-failure support, warranty outside Japan, and tax-free eligibility. These vary by item and location. Keep the receipt and photograph the serial number.</p>
-      </aside>
-    </div>
+    ))}
   </section>
-
-  <section class="reference-gallery source-appendix" aria-labelledby="travel-reference-title">
-    <div class="section-heading indexed-heading"><span>04 / Source</span><h2 id="travel-reference-title">Original material.</h2><p>These user-supplied screenshots inspired the route and directory. Open any image to compare the source at full size.</p></div>
-    <div class="reference-images travel-reference-images">
-      <EditorialImage image={imageById['travel-provenance']} label="Travel archive / 1930s" className="source-editorial-image" position="center 20%" />
-      <figure><a href="/images/japan-source/travel-shopping.webp" target="_blank" aria-label="Open the full shopping screenshot"><img src="/images/japan-source/travel-shopping.webp" alt="Supplied list of Tokyo and Osaka shopping areas" width="591" height="1280" loading="lazy" decoding="async" /></a><figcaption>Shopping list</figcaption></figure>
-      <figure><a href="/images/japan-source/travel-itinerary-1.webp" target="_blank" aria-label="Open the first full itinerary screenshot"><img src="/images/japan-source/travel-itinerary-1.webp" alt="First page of the supplied seven-day Japan itinerary" width="591" height="1280" loading="lazy" decoding="async" /></a><figcaption>Itinerary / page 1</figcaption></figure>
-      <figure><a href="/images/japan-source/travel-itinerary-2.webp" target="_blank" aria-label="Open the second full itinerary screenshot"><img src="/images/japan-source/travel-itinerary-2.webp" alt="Second page of the supplied seven-day Japan itinerary" width="591" height="1280" loading="lazy" decoding="async" /></a><figcaption>Itinerary / page 2</figcaption></figure>
-    </div>
-  </section>
-
-  <script is:inline>
-    const filterButtons = [...document.querySelectorAll('[data-city-filter]')];
-    const shoppingItems = [...document.querySelectorAll('[data-city]')];
-    const filterStatus = document.querySelector('[data-filter-status]');
-    filterButtons.forEach((button) => button.addEventListener('click', () => {
-      const city = button.dataset.cityFilter;
-      let visible = 0;
-      filterButtons.forEach((candidate) => { const selected = candidate === button; candidate.classList.toggle('active', selected); candidate.setAttribute('aria-pressed', String(selected)); });
-      shoppingItems.forEach((item) => { const show = city === 'All' || item.dataset.city === city; item.hidden = !show; if (show) visible += 1; });
-      if (filterStatus) filterStatus.textContent = city === 'All' ? `Showing all ${visible} areas` : `Showing ${visible} areas in ${city}`;
-    }));
-  </script>
 </Base>

@@ -1,0 +1,12 @@
+---
+import { kanjiNavigation, travelNavigation, workNavigation } from '../data/japan-navigation';
+
+const { guide } = Astro.props as { guide: 'travel' | 'work' | 'kanji' };
+const items = guide === 'travel' ? travelNavigation : guide === 'work' ? workNavigation : kanjiNavigation;
+const currentPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
+---
+<nav class="guide-subnav" aria-label={`${guide === 'travel' ? 'Japan Travel' : guide === 'work' ? 'Work in Japan' : 'Kanji Memory'} sections`}>
+  {items.map((item) => (
+    <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>
+  ))}
+</nav>

@@ -1,79 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
-import { foundationKanji } from '../data/kanji-memory';
+import GuideSubnav from '../components/GuideSubnav.astro';
+import { kanjiNavigation } from '../data/japan-navigation';
 import kanjiVisuals from '../data/kanji-visuals.json';
-import { toRomaji } from '../utils/romaji';
 import '../styles/kanji-memory.css';
+import '../styles/japan-life.css';
 
 const visualByCharacter = new Map(kanjiVisuals.map((visual) => [visual.char, visual]));
-const itemByCharacter = new Map(foundationKanji.map((item) => [item.char, item]));
-const heroVisuals = ['日', '山', '語', '大'].map((char) => visualByCharacter.get(char)).filter(Boolean);
-const chapters = [
-  { name: 'Week & elements', jp: '曜日と自然', chars: ['日','月','火','水','木','金','土'] },
-  { name: 'People & learning', jp: '人と学び', chars: ['人','本','語','学','生','先','私'] },
-  { name: 'World & forms', jp: '世界とかたち', chars: ['山','川','田','口','目','大'] }
-];
+const chapterVisuals = ['日', '人', '山'];
+const chapters = kanjiNavigation.slice(1).map((chapter, index) => ({ ...chapter, visual: visualByCharacter.get(chapterVisuals[index]) }));
 ---
-<Base pageClass="kanji-deck-page" title="Illustrated Kanji Field Guide | JLPT Zero to N1" description="Learn 20 foundation kanji through visual mnemonics, readings, useful words, audio, and review practice.">
-  <header class="kanji-deck-hero">
-    <div><p class="kanji-eyebrow"><span>漢</span> Illustrated field guide / N5</p><h1>See the picture.<br /><em>Remember the Kanji.</em></h1><p>Twenty foundation characters organized into three visual chapters. Study one at a time, hear it, then save it for review.</p><a href="#study-deck">Start with 日</a></div>
-    <aside class="kanji-hero-collage" aria-label="Preview of four illustrated Kanji mnemonics">
-      <div>{heroVisuals.map((visual) => visual && <img src={visual.src} alt="" width="960" height="600" loading="eager" decoding="async" />)}</div>
-      <p><strong>20</strong><span>integrated visual mnemonics</span><small>3 chapters · audio · examples</small></p>
-    </aside>
+<Base pageClass="japan-page kanji-deck-page guide-hub-page" title="Kanji Memory | JLPT Zero to N1" description="Choose one short illustrated Kanji chapter and study foundation characters with mnemonics, readings, audio, examples, and review.">
+  <GuideSubnav guide="kanji" />
+  <header class="guide-hub-hero kanji-hub-hero">
+    <div class="hero-copy">
+      <p class="japan-kicker"><span>漢</span> Kanji Memory</p>
+      <h1>Choose a chapter.<br /><em>Study fewer at once.</em></h1>
+      <p class="japan-intro">The 20 foundation Kanji are now divided into three shorter study pages with the same audio and review tools.</p>
+    </div>
+    <div class="kanji-hub-collage" role="img" aria-label="Illustrated Kanji chapter preview">
+      {chapters.map((chapter) => chapter.visual && <img src={chapter.visual.src} alt="" width="960" height="600" loading="eager" decoding="async" />)}
+    </div>
   </header>
 
-  <section class="kanji-method" aria-label="Study method"><div><span>01</span><b>See</b><small>Connect shape to picture</small></div><div><span>02</span><b>Hear</b><small>Play the model reading</small></div><div><span>03</span><b>Use</b><small>Read words in context</small></div><div><span>04</span><b>Recall</b><small>Save it for review</small></div></section>
-
-  <section class="kanji-index" aria-labelledby="kanji-index-title">
-    <header><span>Visual index</span><h2 id="kanji-index-title">Choose a chapter.</h2><p>Tap any illustration to make it the active study card.</p></header>
-    {chapters.map((chapter, chapterIndex) => (
-      <div class={`kanji-chapter chapter-${chapterIndex + 1}`}>
-        <div class="chapter-label"><span>{String(chapterIndex + 1).padStart(2, '0')}</span><div><h3>{chapter.name}</h3><small>{chapter.jp}</small></div></div>
-        <div class="kanji-thumbnail-row">
-          {chapter.chars.map((char) => {
-            const item = itemByCharacter.get(char);
-            const visual = visualByCharacter.get(char);
-            const index = foundationKanji.findIndex((entry) => entry.char === char);
-            return item && visual && <button class={index === 0 ? 'active' : ''} type="button" data-kanji-select={String(index)} aria-pressed={index === 0 ? 'true' : 'false'}><img src={visual.src} alt="" width="960" height="600" loading="lazy" decoding="async" /><span><b>{char}</b><small>{item.meaning}</small></span></button>;
-          })}
-        </div>
-      </div>
+  <section class="kanji-chapter-menu" aria-label="Kanji chapters">
+    {chapters.map((chapter) => (
+      <article>
+        {chapter.visual && <img src={chapter.visual.src} alt={chapter.visual.alt} width="960" height="600" loading="lazy" decoding="async" />}
+        <div><span lang="ja">{chapter.japanese}</span><h2>{chapter.title}</h2><p>{chapter.summary}</p><a href={chapter.href}>Study this chapter</a></div>
+      </article>
     ))}
   </section>
-
-  <section id="study-deck" class="kanji-study" aria-labelledby="study-title">
-    <header class="study-header"><div><span>Focused study</span><h2 id="study-title">Learn one character at a time.</h2></div><p data-deck-progress>1 of {foundationKanji.length}</p></header>
-    <div class="study-stage">
-      {foundationKanji.map((kanjiItem, index) => {
-        const visual = visualByCharacter.get(kanjiItem.char);
-        return (
-          <article class="kanji-study-card" data-kanji-card={String(index)} hidden={index !== 0}>
-            <figure>{visual && <img src={visual.src} alt={visual.alt} width="960" height="600" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />}<figcaption><span>Visual link</span><p>{visual?.mnemonic}</p></figcaption></figure>
-            <div class="study-content">
-              <header><button class="study-glyph" type="button" data-speak={kanjiItem.exampleReading} data-rate="0.7">{kanjiItem.char}<span>Tap to hear</span></button><div><p>{kanjiItem.strokes} strokes</p><h3>{kanjiItem.meaning}</h3></div></header>
-              <details class="learning-reveal" open><summary><span>01</span>Readings</summary><div class="reading-pair"><p><b>Onyomi</b><span>{kanjiItem.onyomi}</span></p><p><b>Kunyomi</b><span>{kanjiItem.kunyomi}</span></p></div></details>
-              <details class="learning-reveal"><summary><span>02</span>Words & example</summary><div class="kanji-words">{kanjiItem.words.map((entry) => <button type="button" data-speak={entry.reading} data-rate="0.72" aria-label={`Hear ${entry.word}, ${entry.reading}`}><span class="speaker" aria-hidden="true">♪</span><b>{entry.word}</b><span>{entry.reading}</span><small>{entry.meaning}</small></button>)}</div><div class="kanji-example"><p>{kanjiItem.example}</p><span>{kanjiItem.exampleReading}</span><small>{toRomaji(kanjiItem.exampleReading)}</small></div></details>
-              <div class="study-actions"><button class="kanji-audio-action" type="button" data-speak={kanjiItem.exampleReading} data-rate="0.7">Hear example</button><button class="kanji-review-action" type="button" data-review="kanji" data-item={kanjiItem.char} aria-pressed="false">Add to review</button></div>
-              <p class="card-audio-status" data-card-status>Tap a speaker control to hear Japanese.</p>
-            </div>
-          </article>
-        );
-      })}
-    </div>
-    <div class="deck-navigation"><button type="button" data-deck-prev disabled>Previous</button><span data-deck-position>日 · sun / day</span><button type="button" data-deck-next>Next character</button></div>
-  </section>
-  <p class="audio-status visually-hidden" data-audio-status aria-live="polite">Tap a speaker control to hear Japanese.</p>
-
-  <script is:inline>
-    const cards=[...document.querySelectorAll('[data-kanji-card]')];
-    const selectors=[...document.querySelectorAll('[data-kanji-select]')];
-    const prev=document.querySelector('[data-deck-prev]'); const next=document.querySelector('[data-deck-next]');
-    const progress=document.querySelector('[data-deck-progress]'); const position=document.querySelector('[data-deck-position]');
-    let current=0;
-    function showCard(index, shouldScroll=false){ current=Math.max(0,Math.min(cards.length-1,index)); cards.forEach((card,i)=>card.hidden=i!==current); selectors.forEach((button)=>{const active=Number(button.dataset.kanjiSelect)===current;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));}); const card=cards[current]; const glyph=card?.querySelector('.study-glyph')?.childNodes[0]?.textContent?.trim()||''; const meaning=card?.querySelector('.study-content h3')?.textContent||''; if(progress)progress.textContent=`${current+1} of ${cards.length}`; if(position)position.textContent=`${glyph} · ${meaning}`; if(prev)prev.disabled=current===0; if(next){next.disabled=current===cards.length-1;next.textContent=current===cards.length-1?'Deck complete':'Next character';} if(shouldScroll)document.querySelector('#study-deck')?.scrollIntoView({behavior:'smooth',block:'start'}); }
-    selectors.forEach((button)=>button.addEventListener('click',()=>showCard(Number(button.dataset.kanjiSelect),true))); prev?.addEventListener('click',()=>showCard(current-1)); next?.addEventListener('click',()=>showCard(current+1));
-    try { const queue=JSON.parse(localStorage.getItem('reviewQueue')||'[]'); document.querySelectorAll('[data-review="kanji"]').forEach((button)=>{if(queue.some((entry)=>entry.item===button.dataset.item&&entry.result==='kanji')){button.textContent='In review';button.setAttribute('aria-pressed','true');}}); } catch {}
-    showCard(0);
-  </script>
 </Base>
