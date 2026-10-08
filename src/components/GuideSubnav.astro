@@ -10,3 +10,13 @@ const currentPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replac
     <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>
   ))}
 </nav>
+<script is:inline>
+  (() => {
+    const nav = document.currentScript?.previousElementSibling;
+    const current = nav?.querySelector('[aria-current="page"]');
+    if (!nav || !current) return;
+    requestAnimationFrame(() => {
+      nav.scrollLeft = Math.max(0, current.offsetLeft - (nav.clientWidth - current.clientWidth) / 2);
+    });
+  })();
+</script>

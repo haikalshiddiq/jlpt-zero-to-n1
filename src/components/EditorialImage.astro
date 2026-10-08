@@ -15,17 +15,21 @@ const {
   label,
   className = '',
   loading = 'lazy',
-  position = 'center'
+  position = 'center',
+  srcset,
+  sizes
 } = Astro.props as {
   image: ImageCredit;
   label: string;
   className?: string;
   loading?: 'eager' | 'lazy';
   position?: string;
+  srcset?: string;
+  sizes?: string;
 };
 ---
 <figure class={`editorial-image ${className}`} style={`--image-position:${position}`}>
-  <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading={loading} decoding="async" />
+  <img src={image.src} srcset={srcset} sizes={sizes} alt={image.alt} width={image.width} height={image.height} loading={loading} decoding="async" />
   <figcaption>
     <span>{label}</span>
     <span>Photo: <a href={image.source} target="_blank" rel="noreferrer">{image.creator}</a> · {image.license_url ? <a href={image.license_url} target="_blank" rel="noreferrer">{image.license}</a> : image.license}</span>

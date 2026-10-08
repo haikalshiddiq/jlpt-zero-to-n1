@@ -8,7 +8,7 @@ import japanImages from '../../data/japan-image-credits.json';
 import '../../styles/japan-life.css';
 
 export function getStaticPaths() {
-  return workNavigation.slice(1).map((page) => ({ params: { section: page.href.split('/').pop() }, props: { page } }));
+  return workNavigation.slice(1).filter((page) => !page.href.endsWith('/cv')).map((page) => ({ params: { section: page.href.split('/').pop() }, props: { page } }));
 }
 
 const { page } = Astro.props;
@@ -60,6 +60,6 @@ const slug = page.href.split('/').pop();
   )}
 
   {slug === 'application' && <script is:inline>
-    const storageKey='jlpt-work-japan-checklist';const checks=[...document.querySelectorAll('[data-work-check]')];const count=document.querySelector('[data-checklist-count]');const number=document.querySelector('[data-checklist-number]');const bar=document.querySelector('[data-checklist-bar]');function saved(){try{const value=JSON.parse(localStorage.getItem(storageKey)||'[]');return Array.isArray(value)?value.map(String):[];}catch{return[];}}function render(){const completed=checks.filter((box)=>box.checked).length;const percent=checks.length?Math.round(completed/checks.length*100):0;if(count)count.textContent=`${completed} of ${checks.length} complete`;if(number)number.textContent=`${percent}%`;if(bar)bar.style.width=`${percent}%`;}const restored=saved();checks.forEach((box)=>{box.checked=restored.includes(box.dataset.workCheck);box.addEventListener('change',()=>{localStorage.setItem(storageKey,JSON.stringify(checks.filter((item)=>item.checked).map((item)=>item.dataset.workCheck)));render();});});document.querySelector('[data-reset-checklist]')?.addEventListener('click',()=>{checks.forEach((box)=>{box.checked=false;});localStorage.removeItem(storageKey);render();});render();
+    const storageKey='jlpt-work-japan-checklist';const checks=[...document.querySelectorAll('[data-work-check]')];const count=document.querySelector('[data-checklist-count]');const number=document.querySelector('[data-checklist-number]');const bar=document.querySelector('[data-checklist-bar]');function saved(){try{const value=JSON.parse(localStorage.getItem(storageKey)||'[]');return Array.isArray(value)?value.map(String):[];}catch{return[];}}function render(){const completed=checks.filter((box)=>box.checked).length;const percent=checks.length?Math.round(completed/checks.length*100):0;if(count)count.textContent=`${completed} of ${checks.length} complete`;if(number)number.textContent=`${percent}%`;if(bar)bar.style.transform=`scaleX(${percent/100})`;}const restored=saved();checks.forEach((box)=>{box.checked=restored.includes(box.dataset.workCheck);box.addEventListener('change',()=>{localStorage.setItem(storageKey,JSON.stringify(checks.filter((item)=>item.checked).map((item)=>item.dataset.workCheck)));render();});});document.querySelector('[data-reset-checklist]')?.addEventListener('click',()=>{checks.forEach((box)=>{box.checked=false;});localStorage.removeItem(storageKey);render();});render();
   </script>}
 </Base>

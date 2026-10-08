@@ -20,6 +20,7 @@ export const workNavigation: GuideNavItem[] = [
   { label: 'Overview', href: '/work-in-japan' },
   { label: 'Visa routes', href: '/work-in-japan/routes', title: 'Choose a legal route', summary: 'Compare Specified Skilled Worker and professional work statuses before applying.', imageId: 'work-routes', japanese: '在留' },
   { label: 'Application', href: '/work-in-japan/application', title: 'Application journey', summary: 'Complete and save the eight evidence-based steps from route selection to departure.', imageId: 'work-checklist', japanese: '応募' },
+  { label: 'CV Studio', href: '/work-in-japan/cv', title: 'Build your Japan-ready CV', summary: 'Draft, review, save, and print a Japanese application CV without sending personal data to a server.', imageId: 'work-documents', japanese: '履歴書' },
   { label: 'Documents', href: '/work-in-japan/documents', title: 'Document pack', summary: 'Organize application, eligibility, protection, and departure records.', imageId: 'work-documents', japanese: '書類' },
   { label: 'Safety', href: '/work-in-japan/safety', title: 'Recruitment safety', summary: 'Pause when job, employer, visa, or payment claims cannot be verified.', imageId: 'work-fraud', japanese: '確認' },
   { label: 'Sources', href: '/work-in-japan/sources', title: 'Official sources', summary: 'Start from Japanese and Indonesian authorities, not promotional claims.', imageId: 'work-sources', japanese: '公的' }

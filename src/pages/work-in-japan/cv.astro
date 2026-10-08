@@ -1,0 +1,367 @@
+---
+import Base from '../../layouts/Base.astro';
+import EditorialImage from '../../components/EditorialImage.astro';
+import GuideSubnav from '../../components/GuideSubnav.astro';
+import japanImages from '../../data/japan-image-credits.json';
+import '../../styles/japan-life.css';
+import '../../styles/cv-studio.css';
+
+const imageById = Object.fromEntries(japanImages.map((image) => [image.id, image]));
+---
+<Base pageClass="japan-page work-page cv-studio-page" title="CV Studio | Work in Japan Guide" description="Draft and review a Japanese rirekisho and work history locally in your browser, then print or save it as PDF.">
+  <GuideSubnav guide="work" />
+
+  <header class="cv-studio-header">
+    <div>
+      <a class="guide-back" href="/work-in-japan">Work in Japan overview</a>
+      <span lang="ja">履歴書スタジオ</span>
+      <h1>Build a clearer Japan-ready CV.</h1>
+      <p>Draft your application, check missing evidence, and print a clean copy. Your entries stay in this browser unless you choose to remove them.</p>
+    </div>
+    <EditorialImage
+      image={imageById['work-documents']}
+      label="Preparing application documents"
+      className="cv-studio-image"
+      loading="eager"
+      position="center"
+      srcset="/images/japan-editorial/work-documents-640.webp 640w, /images/japan-editorial/work-documents-960.webp 960w, /images/japan-editorial/work-documents.webp 1216w"
+      sizes="(max-width: 720px) calc(100vw - 2rem), (max-width: 1200px) 42vw, 700px"
+    />
+  </header>
+
+  <aside class="cv-privacy-note" aria-label="Privacy notice">
+    <strong>Local-first privacy</strong>
+    <p>No CV field is submitted to the JLPT API. Saving is optional, stores an unencrypted draft in this browser for 30 days, and may be visible to other people using the same browser profile. Avoid passport and national identification numbers.</p>
+  </aside>
+
+  <section class="cv-workspace" aria-labelledby="cv-form-title">
+    <div class="cv-editor">
+      <div class="cv-editor-head">
+        <div><span>Application workspace</span><h2 id="cv-form-title">Write in focused sections.</h2></div>
+        <p data-save-status aria-live="polite">Not saved on this device</p>
+      </div>
+
+      <nav class="cv-step-nav" aria-label="CV form sections">
+        <button type="button" aria-current="step" aria-controls="cv-panel-target" data-cv-step-button="0"><span>1</span>Target</button>
+        <button type="button" aria-controls="cv-panel-profile" data-cv-step-button="1"><span>2</span>Profile</button>
+        <button type="button" aria-controls="cv-panel-experience" data-cv-step-button="2"><span>3</span>Experience</button>
+        <button type="button" aria-controls="cv-panel-writing" data-cv-step-button="3"><span>4</span>Writing</button>
+      </nav>
+
+      <form id="cv-form" novalidate>
+        <section id="cv-panel-target" class="cv-form-panel" data-cv-panel="0" aria-labelledby="target-title">
+          <header><p>Start with the vacancy, not a generic CV.</p><h3 id="target-title">Target role</h3></header>
+          <div class="cv-field-grid">
+            <label><span>Target occupation</span><select name="targetRole" required><option value="">Choose a role</option><option>Specified Skilled Worker</option><option>Engineer / IT</option><option>Hospitality</option><option>Manufacturing</option><option>Caregiving</option><option>General professional role</option></select><small>Used to review relevance, not to determine visa eligibility.</small></label>
+            <label><span>Japanese level</span><select name="japaneseLevel"><option value="">Not selected</option><option>Beginner / Pre-N5</option><option>JLPT N5</option><option>JLPT N4</option><option>JLPT N3</option><option>JLPT N2</option><option>JLPT N1</option><option>Other evidence</option></select><small>Only state a level you can support with evidence.</small></label>
+          </div>
+          <fieldset><legend>Documents to prepare</legend><label class="cv-choice"><input type="radio" name="documentType" value="both" checked /> <span><b>Both documents</b><small>Rirekisho plus detailed work history</small></span></label><label class="cv-choice"><input type="radio" name="documentType" value="rirekisho" /> <span><b>Rirekisho only</b><small>Concise personal, education, and employment record</small></span></label></fieldset>
+          <label><span>Vacancy requirements</span><textarea name="jobRequirements" rows="5" placeholder="Paste only the skills and duties from the vacancy. Do not paste recruiter contact details."></textarea><small>The review compares these terms with your skills and experience.</small></label>
+        </section>
+
+        <section id="cv-panel-profile" class="cv-form-panel" data-cv-panel="1" aria-labelledby="profile-title" hidden>
+          <header><p>Use the same spelling as your application records.</p><h3 id="profile-title">Personal profile</h3></header>
+          <div class="cv-field-grid">
+            <label><span>Full name</span><input name="fullName" autocomplete="name" required /></label>
+            <label><span>Furigana / name reading</span><input name="furigana" autocomplete="off" placeholder="ハイカル シディック" /></label>
+            <label><span>Email</span><input name="email" type="email" autocomplete="email" required /></label>
+            <label><span>Phone</span><input name="phone" type="tel" autocomplete="tel" /></label>
+            <label><span>Date of birth</span><input name="birthDate" type="date" autocomplete="bday" /><small>Optional. Include only when the employer requests it.</small></label>
+            <label><span>Sex</span><select name="sex"><option value="">Prefer not to state</option><option>Female</option><option>Male</option><option>Other / self-described</option></select><small>Optional in the MHLW model. Omit when unnecessary.</small></label>
+            <label><span>Postal code</span><input name="postalCode" autocomplete="postal-code" placeholder="123-4567" /></label>
+            <label><span>City and country</span><input name="location" autocomplete="address-level2" placeholder="Batam, Indonesia" /></label>
+            <label class="cv-wide-field"><span>Full address</span><input name="address" autocomplete="street-address" placeholder="Street, city, province, country" /></label>
+            <label class="cv-wide-field"><span>Alternate contact</span><input name="alternateContact" autocomplete="off" placeholder="Optional address or contact requested by the employer" /></label>
+            <label><span>Availability</span><input name="availability" placeholder="Available after visa approval" /></label>
+          </div>
+          <label><span>Professional summary</span><textarea name="summary" rows="5" maxlength="700" placeholder="State your field, years or depth of experience, strongest relevant capability, and the work you want to contribute."></textarea><small><span data-count-for="summary">0</span>/700 characters</small></label>
+        </section>
+
+        <section id="cv-panel-experience" class="cv-form-panel" data-cv-panel="2" aria-labelledby="experience-title" hidden>
+          <header><p>Keep names exact and describe evidence, not personality claims.</p><h3 id="experience-title">Education and experience</h3></header>
+          <label><span>Education</span><textarea name="education" rows="5" placeholder="2018-09 | University name | Degree and field&#10;2014-07 | School name | Qualification"></textarea><small>One entry per line: date | institution | qualification.</small></label>
+          <label><span>Employment and results</span><textarea name="experience" rows="8" placeholder="2021-04 - Present | Company | Role | Main duty and measurable result&#10;2019-01 - 2021-03 | Company | Role | Main duty"></textarea><small>Use official company names. Add numbers only when they are accurate and explainable.</small></label>
+          <div class="cv-field-grid">
+            <label><span>Relevant skills</span><textarea name="skills" rows="5" placeholder="Network administration&#10;Python&#10;Technical documentation"></textarea><small>One skill per line.</small></label>
+            <label><span>Certificates and licenses</span><textarea name="certifications" rows="5" placeholder="2026 | JLPT N3&#10;2025 | Certification name"></textarea><small>Include year and exact credential name.</small></label>
+          </div>
+        </section>
+
+        <section id="cv-panel-writing" class="cv-form-panel" data-cv-panel="3" aria-labelledby="writing-title" hidden>
+          <header><p>Connect your evidence to the employer's needs.</p><h3 id="writing-title">Motivation and self-promotion</h3></header>
+          <label><span>Reason for applying / 志望動機</span><textarea name="motivation" rows="7" maxlength="1000" placeholder="Why this work and employer? Which past evidence supports the choice? What can you contribute?"></textarea><small><span data-count-for="motivation">0</span>/1000 characters. Aim for a specific reason, evidence, and contribution.</small></label>
+          <label><span>Self-promotion / 自己PR</span><textarea name="selfPromotion" rows="7" maxlength="1000" placeholder="Describe one relevant strength, a concrete situation where you used it, and the result."></textarea><small><span data-count-for="selfPromotion">0</span>/1000 characters. Do not claim a language or skill level you cannot demonstrate.</small></label>
+          <aside class="cv-writing-frame"><strong>A useful structure</strong><ol><li>Name the capability relevant to the vacancy.</li><li>Give a concrete example and your responsibility.</li><li>State a verifiable result or lesson.</li><li>Explain how it applies to the target role.</li></ol></aside>
+        </section>
+
+        <p class="cv-form-error" data-cv-error aria-live="assertive"></p>
+        <div class="cv-form-actions">
+          <button type="button" class="cv-button secondary" data-cv-previous disabled>Previous</button>
+          <button type="button" class="cv-button primary" data-cv-next>Continue to profile</button>
+        </div>
+      </form>
+
+      <div class="cv-data-actions">
+        <button type="button" class="cv-text-action" data-cv-save>Save on this device</button>
+        <button type="button" class="cv-text-action" data-cv-review>Review draft</button>
+        <button type="button" class="cv-text-action danger" data-cv-clear>Clear CV data</button>
+      </div>
+    </div>
+
+    <details class="cv-output" aria-label="CV readiness and print preview">
+      <summary class="cv-output-toggle"><span>Review and document preview</span><small>Readiness checks, rirekisho, and work history</small></summary>
+      <div class="cv-output-inner">
+      <section class="cv-review" aria-labelledby="review-title" tabindex="-1">
+        <div><span>Readiness review</span><h2 id="review-title"><b data-review-count>0</b> of 10 checks ready</h2></div>
+        <ul data-review-list><li>Complete the form to receive evidence-based checks.</li></ul>
+      </section>
+
+      <section class="cv-enhancement" aria-labelledby="enhancement-title">
+        <div><span>Draft adjustment</span><h2 id="enhancement-title">Enhancement plan</h2><p>Specific edits based only on the vacancy and evidence you entered. The tool never invents experience or credentials.</p></div>
+        <ol data-enhancement-list><li>Complete the form to receive targeted editing notes.</li></ol>
+      </section>
+
+      <article class="cv-paper" id="cv-print-preview" lang="ja" aria-label="Printable rirekisho preview">
+        <header><div><small>応募書類</small><h2>履歴書</h2></div><p><span data-preview-date></span> 現在</p></header>
+        <section class="cv-identity"><div><small>ふりがな</small><span data-preview="furigana" data-fallback="Name reading">Name reading</span><strong data-preview="fullName" data-fallback="Your name">Your name</strong></div><dl><div><dt>生年月日</dt><dd data-preview="birthDate" data-fallback="Optional">Optional</dd></div><div><dt>性別</dt><dd data-preview="sex" data-fallback="Not stated">Not stated</dd></div><div><dt>希望職種</dt><dd data-preview="targetRole" data-fallback="Target role">Target role</dd></div><div><dt>日本語</dt><dd data-preview="japaneseLevel" data-fallback="Level">Level</dd></div></dl><div class="cv-photo-placeholder" aria-label="Photo placeholder">写真<br /><small>Attach if requested</small></div></section>
+        <section class="cv-contact"><p><span data-preview="postalCode" data-fallback="Postal code">Postal code</span> · <span data-preview="location" data-fallback="City and country">City and country</span></p><p data-preview="address" data-fallback="Full address">Full address</p><p data-preview="email" data-fallback="Email">Email</p><p data-preview="phone" data-fallback="Phone">Phone</p><p data-preview="alternateContact" data-fallback="Alternate contact, if requested">Alternate contact, if requested</p></section>
+        <section><h3>職務要約 <small lang="en">Professional summary</small></h3><p class="cv-preview-copy" data-preview="summary" data-fallback="Your concise professional summary appears here.">Your concise professional summary appears here.</p></section>
+        <section><h3>学歴 <small>Education</small></h3><div class="cv-preview-lines" data-preview-lines="education"><p>Add dated education entries.</p></div></section>
+        <section data-work-history><h3>職歴 <small>Work history</small></h3><div class="cv-preview-lines" data-preview-lines="experience"><p>Add dated work entries and evidence.</p></div></section>
+        <section><h3>免許・資格・スキル <small lang="en">Credentials and skills</small></h3><div class="cv-preview-columns"><p class="cv-preview-copy" data-preview="certifications" data-fallback="Credentials">Credentials</p><p class="cv-preview-copy" data-preview="skills" data-fallback="Relevant skills">Relevant skills</p></div></section>
+        <section><h3>志望動機 <small lang="en">Reason for applying</small></h3><p class="cv-preview-copy" data-preview="motivation" data-fallback="Your role-specific motivation appears here.">Your role-specific motivation appears here.</p></section>
+        <section><h3>自己PR <small lang="en">Self-promotion</small></h3><p class="cv-preview-copy" data-preview="selfPromotion" data-fallback="Your evidence-based self-promotion appears here.">Your evidence-based self-promotion appears here.</p></section>
+        <footer><p>本人希望: <span data-preview="availability" data-fallback="Discuss according to company conditions">Discuss according to company conditions</span></p></footer>
+      </article>
+
+      <article class="cv-paper cv-work-paper" data-detailed-document lang="ja" aria-label="Printable shokumukeirekisho preview">
+        <header><div><small>応募書類</small><h2>職務経歴書</h2></div><p><span data-preview-date></span> 現在</p></header>
+        <section class="cv-work-name"><strong data-preview="fullName" data-fallback="Your name">Your name</strong><span data-preview="targetRole" data-fallback="Target role">Target role</span></section>
+        <section><h3>職務要約 <small lang="en">Professional summary</small></h3><p class="cv-preview-copy" data-preview="summary" data-fallback="Add a concise professional summary.">Add a concise professional summary.</p></section>
+        <section><h3>職務経歴 <small lang="en">Detailed work history</small></h3><div class="cv-preview-lines" data-preview-lines="experience"><p>Add dated work entries and evidence.</p></div></section>
+        <section><h3>活かせる経験・知識・技術 <small lang="en">Relevant skills</small></h3><p class="cv-preview-copy" data-preview="skills" data-fallback="List relevant skills.">List relevant skills.</p></section>
+        <section><h3>資格・免許 <small lang="en">Credentials</small></h3><p class="cv-preview-copy" data-preview="certifications" data-fallback="List credentials.">List credentials.</p></section>
+        <section><h3>自己PR <small lang="en">Self-promotion</small></h3><p class="cv-preview-copy" data-preview="selfPromotion" data-fallback="Add evidence-based self-promotion.">Add evidence-based self-promotion.</p></section>
+      </article>
+
+      <div class="cv-print-actions"><button type="button" class="cv-button primary" data-cv-print>Print or save PDF</button><div><a href="https://www.hellowork.mhlw.go.jp/member/career_doc01.html" target="_blank" rel="noreferrer">MHLW application guidance</a><a href="https://www.hellowork.mhlw.go.jp/doc/kouroushourirekisho.pdf" target="_blank" rel="noreferrer">MHLW rirekisho model PDF</a></div></div>
+      <p class="cv-disclaimer">This tool follows general MHLW application guidance. It is not an official government document, certified translation, job-placement service, or guarantee of acceptance. Employers may request a different format.</p>
+      </div>
+    </details>
+  </section>
+
+  <dialog class="cv-clear-dialog" data-clear-dialog aria-labelledby="clear-title"><form method="dialog"><h2 id="clear-title">Clear this CV?</h2><p>This removes the current form and any saved CV data from this browser.</p><div><button value="cancel" class="cv-button secondary">Keep data</button><button value="confirm" class="cv-button danger">Clear data</button></div></form></dialog>
+
+  <script is:inline>
+    (() => {
+      const storageKey = 'jlpt-cv-studio-v1';
+      const form = document.querySelector('#cv-form');
+      const panels = [...document.querySelectorAll('[data-cv-panel]')];
+      const stepButtons = [...document.querySelectorAll('[data-cv-step-button]')];
+      const previous = document.querySelector('[data-cv-previous]');
+      const next = document.querySelector('[data-cv-next]');
+      const save = document.querySelector('[data-cv-save]');
+      const review = document.querySelector('[data-cv-review]');
+      const clear = document.querySelector('[data-cv-clear]');
+      const print = document.querySelector('[data-cv-print]');
+      const status = document.querySelector('[data-save-status]');
+      const error = document.querySelector('[data-cv-error]');
+      const clearDialog = document.querySelector('[data-clear-dialog]');
+      const reviewPanel = document.querySelector('.cv-review');
+      const outputPanel = document.querySelector('.cv-output');
+      const maxDraftAge = 30 * 24 * 60 * 60 * 1000;
+      let currentStep = 0;
+
+      const values = () => Object.fromEntries(new FormData(form).entries());
+      const field = (name) => form.elements.namedItem(name);
+      const text = (name) => String(values()[name] || '').trim();
+      const safeSet = (selector, value, fallback) => {
+        document.querySelectorAll(selector).forEach((node) => { node.textContent = value || fallback; });
+      };
+      const splitLines = (value) => value.split('\n').map((line) => line.trim()).filter(Boolean);
+
+      function updatePreview() {
+        const data = values();
+        document.querySelectorAll('[data-preview]').forEach((node) => {
+          const name = node.dataset.preview;
+          const value = String(data[name] || '').trim();
+          node.textContent = value || node.dataset.fallback || '';
+          node.classList.toggle('is-empty', !value);
+        });
+        document.querySelectorAll('[data-preview-lines]').forEach((container) => {
+          const lines = splitLines(String(data[container.dataset.previewLines] || ''));
+          container.replaceChildren(...(lines.length ? lines : ['Add dated entries.']).map((line) => {
+            const p = document.createElement('p');
+            const parts = line.split('|').map((part) => part.trim()).filter(Boolean);
+            if (parts.length > 1) {
+              const date = document.createElement('time'); date.textContent = parts.shift(); p.append(date);
+              const detail = document.createElement('span'); detail.textContent = parts.join(' | '); p.append(detail);
+            } else { p.textContent = line; }
+            return p;
+          }));
+        });
+        document.querySelector('[data-detailed-document]').hidden = data.documentType === 'rirekisho';
+        document.querySelectorAll('[data-count-for]').forEach((node) => { node.textContent = String(text(node.dataset.countFor).length); });
+        const now = new Intl.DateTimeFormat('ja-JP', { dateStyle: 'long' }).format(new Date());
+        safeSet('[data-preview-date]', now, '');
+      }
+
+      function getChecks() {
+        const data = values();
+        const experience = text('experience');
+        const vacancy = text('jobRequirements').normalize('NFKC').toLowerCase();
+        const requirements = [...new Set(vacancy.match(/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}ー々]{2,}|[\p{L}\p{N}+#.]{3,}/gu) || [])];
+        const evidence = `${text('skills')} ${experience} ${text('summary')}`.normalize('NFKC').toLowerCase();
+        const matched = requirements.length > 0 && requirements.some((term) => evidence.includes(term));
+        return [
+          { ok: Boolean(text('targetRole')), pass: 'Target occupation selected', fail: 'Select the target occupation.' },
+          { ok: Boolean(text('fullName')), pass: 'Applicant name included', fail: 'Add the applicant name.' },
+          { ok: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text('email')), pass: 'Contact email looks valid', fail: 'Add a valid contact email.' },
+          { ok: splitLines(text('education')).some((line) => /\d{4}/.test(line) && line.includes('|')), pass: 'Education has a dated entry', fail: 'Add a dated education entry using separators.' },
+          { ok: data.documentType === 'rirekisho' || splitLines(experience).some((line) => /\d{4}/.test(line) && line.includes('|')), pass: 'Work history has a dated entry', fail: 'Add a dated work entry using separators.' },
+          { ok: splitLines(text('skills')).length >= 3, pass: 'At least three relevant skills listed', fail: 'List at least three relevant skills.' },
+          { ok: text('motivation').length >= 80, pass: 'Motivation contains enough context to review', fail: 'Expand the motivation with a reason, evidence, and contribution.' },
+          { ok: text('selfPromotion').length >= 80, pass: 'Self-promotion contains a concrete narrative', fail: 'Expand self-promotion with a capability, example, and result.' },
+          { ok: /\d/.test(`${experience} ${text('selfPromotion')}`), pass: 'At least one result includes a truthful number', fail: 'Add a truthful number such as scope, duration, volume, or result.' },
+          { ok: matched, pass: 'Draft overlaps with the pasted vacancy requirements', fail: requirements.length ? 'Connect at least one vacancy requirement to your evidence.' : 'Paste relevant vacancy duties or skills for a relevance check.' }
+        ];
+      }
+
+      function getEnhancements() {
+        const vacancy = text('jobRequirements').normalize('NFKC').toLowerCase();
+        const terms = [...new Set(vacancy.match(/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}ー々]{2,}|[\p{L}\p{N}+#.]{3,}/gu) || [])];
+        const summary = text('summary');
+        const experienceLines = splitLines(text('experience'));
+        const evidence = `${text('skills')} ${text('experience')} ${summary}`.normalize('NFKC').toLowerCase();
+        const matchedTerms = terms.filter((term) => evidence.includes(term)).slice(0, 4);
+        const quantifiedLines = experienceLines.filter((line) => /\d/.test(line.split('|').slice(3).join(' '))).length;
+        const motivation = text('motivation').normalize('NFKC').toLowerCase();
+        const motivationMatches = terms.filter((term) => motivation.includes(term)).slice(0, 3);
+        const selfPromotion = text('selfPromotion');
+        return [
+          {
+            label: 'Professional summary',
+            note: summary.length >= 120
+              ? 'Keep the opening concise. Verify that its strongest capability also appears in the work-history evidence.'
+              : 'Add your field, strongest relevant capability, supporting experience, and intended contribution in three or four sentences.'
+          },
+          {
+            label: 'Vacancy relevance',
+            note: matchedTerms.length
+              ? `Evidence currently covers: ${matchedTerms.join(', ')}. Keep only terms you can explain in an interview.`
+              : terms.length
+                ? 'Connect at least one vacancy duty or skill to a dated example in your experience.'
+                : 'Paste the vacancy duties and skills to receive a relevance comparison.'
+          },
+          {
+            label: 'Work evidence',
+            note: experienceLines.length
+              ? `${experienceLines.length} work entries found; ${quantifiedLines} include numerical scope or results. Add numbers only when accurate and explainable.`
+              : 'Add dated work entries with your responsibility, action, and verifiable result.'
+          },
+          {
+            label: 'Reason for applying',
+            note: motivationMatches.length
+              ? `The motivation connects to: ${motivationMatches.join(', ')}. Add why this employer and what you can contribute.`
+              : 'Link one vacancy need to one piece of past evidence, then state the contribution you intend to make.'
+          },
+          {
+            label: 'Self-promotion',
+            note: selfPromotion.length >= 80 && /\d/.test(selfPromotion)
+              ? 'A concrete example and numerical scope are present. Confirm the number and prepare to explain your role.'
+              : 'Use one relevant capability, a concrete situation, your action, and a result you can defend.'
+          }
+        ];
+      }
+
+      function renderReview(focus = false) {
+        const checks = getChecks();
+        const ready = checks.filter((item) => item.ok).length;
+        safeSet('[data-review-count]', String(ready), '0');
+        const list = document.querySelector('[data-review-list]');
+        list.replaceChildren(...checks.map((item) => {
+          const li = document.createElement('li');
+          li.className = item.ok ? 'ready' : 'needs-work';
+          const mark = document.createElement('span'); mark.textContent = item.ok ? 'Ready' : 'Check';
+          const copy = document.createElement('p'); copy.textContent = item.ok ? item.pass : item.fail;
+          li.append(mark, copy); return li;
+        }));
+        const enhancementList = document.querySelector('[data-enhancement-list]');
+        enhancementList.replaceChildren(...getEnhancements().map((item) => {
+          const li = document.createElement('li');
+          const title = document.createElement('strong'); title.textContent = item.label;
+          const copy = document.createElement('p'); copy.textContent = item.note;
+          li.append(title, copy); return li;
+        }));
+        if (focus) { outputPanel.open = true; reviewPanel.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); reviewPanel.focus({ preventScroll: true }); }
+      }
+
+      function showStep(index, focus = false) {
+        currentStep = Math.max(0, Math.min(panels.length - 1, index));
+        panels.forEach((panel, panelIndex) => { panel.hidden = panelIndex !== currentStep; });
+        stepButtons.forEach((button, buttonIndex) => {
+          if (buttonIndex === currentStep) button.setAttribute('aria-current', 'step'); else button.removeAttribute('aria-current');
+        });
+        previous.disabled = currentStep === 0;
+        next.textContent = currentStep === panels.length - 1 ? 'Review draft' : ['Continue to profile', 'Continue to experience', 'Continue to writing'][currentStep];
+        error.textContent = '';
+        if (focus) { const heading = panels[currentStep].querySelector('h3'); heading?.setAttribute('tabindex', '-1'); heading?.focus({ preventScroll: true }); panels[currentStep].scrollIntoView({ behavior: 'auto', block: 'start' }); }
+      }
+
+      function validateCurrentPanel() {
+        const required = [...panels[currentStep].querySelectorAll('[required]')];
+        const invalid = required.find((input) => !input.checkValidity());
+        panels[currentStep].querySelectorAll('[aria-invalid="true"]').forEach((input) => input.removeAttribute('aria-invalid'));
+        if (invalid) { invalid.setAttribute('aria-invalid', 'true'); invalid.reportValidity(); error.textContent = 'Complete the required field before continuing.'; return false; }
+        return true;
+      }
+
+      function validateForPrint() {
+        const invalid = [...form.querySelectorAll('[required]')].find((input) => !input.checkValidity());
+        if (!invalid) return true;
+        const panelIndex = panels.findIndex((panel) => panel.contains(invalid));
+        showStep(panelIndex, true); invalid.setAttribute('aria-invalid', 'true'); invalid.reportValidity(); error.textContent = 'Complete required fields before printing.'; return false;
+      }
+
+      function restore() {
+        try {
+          const stored = JSON.parse(localStorage.getItem(storageKey) || 'null');
+          if (!stored || typeof stored !== 'object' || !stored.savedAt || !stored.data) return;
+          if (Date.now() - stored.savedAt > maxDraftAge) { localStorage.removeItem(storageKey); status.textContent = 'Expired saved draft removed'; return; }
+          Object.entries(stored.data).forEach(([name, value]) => {
+            const control = field(name);
+            if (!control) return;
+            if (control instanceof RadioNodeList) {
+              [...control].forEach((radio) => { radio.checked = radio.value === value; });
+            } else { control.value = String(value); }
+          });
+          const savedDate = new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(new Date(stored.savedAt));
+          status.textContent = `Saved draft restored · ${savedDate}`;
+        } catch { status.textContent = 'Saved data could not be read'; }
+      }
+
+      form.addEventListener('input', () => { updatePreview(); renderReview(); status.textContent = 'Changes not saved'; });
+      stepButtons.forEach((button) => button.addEventListener('click', () => { const target = Number(button.dataset.cvStepButton); if (target > currentStep && !validateCurrentPanel()) return; showStep(target, true); }));
+      previous.addEventListener('click', () => showStep(currentStep - 1, true));
+      next.addEventListener('click', () => {
+        if (!validateCurrentPanel()) return;
+        if (currentStep === panels.length - 1) renderReview(true); else showStep(currentStep + 1, true);
+      });
+      save.addEventListener('click', () => {
+        try { localStorage.setItem(storageKey, JSON.stringify({ savedAt: Date.now(), data: values() })); status.textContent = 'Saved on this device for 30 days'; }
+        catch { status.textContent = 'Browser storage is unavailable'; }
+      });
+      review.addEventListener('click', () => renderReview(true));
+      print.addEventListener('click', () => { if (validateForPrint()) { outputPanel.open = true; window.print(); } });
+      clear.addEventListener('click', () => clearDialog.showModal());
+      clearDialog.addEventListener('close', () => {
+        if (clearDialog.returnValue !== 'confirm') return;
+        form.reset(); localStorage.removeItem(storageKey); status.textContent = 'CV data cleared'; showStep(0); updatePreview(); renderReview();
+      });
+      clearDialog.addEventListener('click', (event) => { if (event.target === clearDialog) clearDialog.close('cancel'); });
+
+      if (!matchMedia('(max-width: 1040px)').matches) outputPanel.open = true;
+      restore(); showStep(0); updatePreview(); renderReview();
+    })();
+  </script>
+</Base>
