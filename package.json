@@ -12,23 +12,23 @@
   "devDependencies": {
     "@astrojs/check": "0.9.10",
     "@tailwindcss/vite": "4.3.3",
-    "astro": "7.3.7",
+    "astro": "7.3.8",
     "axe-core": "4.14.0",
     "playwright": "1.64.0",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3",
     "workbox-build": "7.4.1",
-    "wrangler": "4.148.0"
+    "wrangler": "4.149.0"
   },
   "overrides": {
     "esbuild": "^0.28.2",
     "ws": "^8.22.0",
-    "js-yaml": "^4.3.2",
+    "js-yaml": "^5.4.3",
     "fast-uri": "^4.2.1",
     "http-cache-semantics": "^4.3.0",
     "source-map-js": "^1.2.2",
     "undici": "^8.11.2",
-    "yaml": "^2.9.0",
+    "yaml": "^2.9.1",
     "sharp": "^0.35.5"
   },
   "allowScripts": {
